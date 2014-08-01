@@ -1,0 +1,70 @@
+\chapter{Porting a \gls{ble} platform to Contiki \gls{os}}
+\todo{ 5to10 pages}
+\section{\gls{ble} Hardware Platform}
+What is meant by hardware platform?
+
+\subsection{Requirements of the hardware platform}
+The \emph{mandatory} requirements for the platform would be:
+\begin{easylist}[itemize]
+& Must have a well supported and documented processor with good specifications.
+& For a open source project such as Contiki, a free (and preferably open source) development toolchain must support the platform.
+& Availability of well documented datasheet and user manual.
+& Availability of an evaluation/development kit.
+& Enough memory to accommodate Contiki and \gls{ble} stack’s requirements.
+& Presence of basic peripherals such as timers and serial port required for Contiki.
+\end{easylist}
+\vspace{10pt}
+\noindent
+The non-mandatory, although \emph{nice to have} requirements for the platform would be:
+\begin{easylist}[itemize]
+& Presence of flexible power modes with low active and sleep power consumption.
+& Availability of a good set of peripherals.
+& Availability of \gls{ble} stack from the vendor, preferably with source code.
+\end{easylist}
+\vspace{10pt}
+
+\subsection{Comparison and selection of the hardware platform}
+
+With these requirements, based on the comparison \todo{(Appendix A)} of the available (\gls{ble} + \gls{mcu}) solutions available today, a platform based on nRF51822 from Nordic-Semiconductors would be a suitable option. 
+DA14580 and BCM20732 would also require mention here since from a technical point of view they meet the requirements, but since they are released recently they are not supported well in terms of availability of the \gls{ic}, evaluation kit, tool-chain and \gls{ble} stack.
+
+\subsection{Overview of nrf51822 \gls{soc}}
+
+\section{Porting PCA10000 platform of nrf51822 to Contiki}
+Contiki was initially developed in a Linux based operating system, although Windows is also supported now. The porting of PCA10000 platform to Contiki was done in Ubuntu 13.10. The compiler used is \todo{ ... explain all the other details of the development setup}
+
+\subsection{Folder structure of Contiki}
+When porting a new platform to Contiki, the three folders inside a Contiki distribution where additions need to be made are cpu, examples and platform. The content in these folders are as described below. The path of the Contiki distribution is in the path CONIKI.
+
+\paragraph{CONTIKI/cpu}In this folder, all the files contain implementation which is solely dependent on the \gls{soc} is present. This includes the code for the processor abstraction, the drivers of the peripherals of the \gls{soc}, makefile with commands for compiling and linking the code, linker file and the documentation of these implementation. The boot-loader  or start-up code, if required is also present here. The peripheral drivers for peripherals such as timers and serial port must use the API format of Contiki so that the modules of Contiki using these peripherals can operate correctly. The exact implementations of these drivers is explained in section \ref{peripheralsContiki}. 
+
+\paragraph{CONTIKI/platform} An \gls{soc} over time has increasing number of boards or systems that are based on it and these are referred as platforms in this folder. Every board has its own folder in this platform folder which contains files which contain implementation which is dependant on the particular board. These include the specification of the connections to the LEDs, buttons, sensors and serial ports power system, the clock sources, memories present and any other board specific details. Any peripheral driver implementation specific to the board is present here. The default project specifications such as the serial baud-rate and source and frequency of clock are defined here. The main function where the execution of the program starts and initialization of all the peripherals and modules used by Contiki happens is present here.
+
+\paragraph{CONTIKI/examples} The examples folder contains all the files related to projects that are implemented using Contiki with any of the supported hardware platforms. The makefile where the make command is executed is present here. The compiled object and binary files are also stored here.
+
+\subsection{Peripherals required for Contiki}\label{peripheralsContiki}
+\subsubsection{Contiki Clock}
+\subsubsection{R-Timer}
+\subsubsection{LED(s)}
+\subsubsection{Radio}
+\subsubsection{Button(s)}
+\subsubsection{Serial Port}
+
+\subsection{Makefile structure of Contiki}
+
+\textbf{Introduction to makefile and include.}
+There are multiple makefiles present across different folders that are included in each other to form the complete makefile. In the most basic form these are the makefile in the example folder, `makefile.include' in the Contiki root folder, `makefile.TARGET' in the specific platform folder and `makefile.CPU' in the specific cpu folder, where TARGET and CPU are specific to the project. This structure by which this inclusion happens is illustrated better in \textbf{figure}.
+
+Makefile where the project is present i.e. in the example folder
+-Makefile.include in root CONTIKI directory
+--Makefile indicating the target (if not already specified)
+--Makefile of applications, if any are required
+--Makefile of the target, present in the platform directory
+---Makefile of the \gls{soc}, present in the cpu directory
+
+The makefile in the example folder is where the make command is called. The operations that can be performed with this make command depends on the makefile. Usually the operations are cleaning (removing the object and binary files), compiling the source files into object files , linking these object files to create an executable file, creating a binary file from this executable file, uploading the binary to the \gls{soc} to start execution and so on. 
+
+The makefile in the project specific example folder, the different project source files are specified and the `makefile.include' present in the root CONTIKI folder is added. `makefile.inlcude' glues together all the required components of Contiki and provides the default implementation of compiling and linking. The target makefile in the specific platform directory is included here. In `makefile.TARGET' the source files present in this directory are added, any Contiki modules required are added and the \gls{soc} makefile in the specific directory is added. The \gls{soc} 
+
+
+

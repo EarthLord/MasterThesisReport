@@ -1,0 +1,71 @@
+\documentclass[a4paper,12pt]{report}
+\usepackage[margin=1in]{geometry}
+\usepackage[T1]{fontenc}
+\usepackage[utf8]{inputenc}
+\setcounter{secnumdepth}{3}
+
+\usepackage[long,nodayofweek]{datetime}
+
+\usepackage{siunitx}
+\usepackage[ampersand]{easylist}
+
+% % % % % % % % % % Helpers
+\usepackage{easy-todo}
+
+% % % % % % % % % % Figure
+\usepackage{graphicx}
+\usepackage{wrapfig}
+\graphicspath{ {Images/} }
+
+\bibliographystyle{ieeetr}  
+\usepackage{url}
+
+\usepackage[nonumberlist,acronym,toc,shortcuts]{glossaries}
+\robustify{\gls}% Make \gls not fragile
+\loadglsentries[main]{Abbreviations}
+\makeglossaries
+
+\renewcommand*{\thefootnote}{\fnsymbol{footnote}}
+
+\usepackage[hidelinks]{hyperref}
+
+% % % % % % % % % %Chapter Title Encoding
+\usepackage{titlesec, blindtext, color}	
+\definecolor{gray75}{gray}{0.75}
+\newcommand{\hsp}{\hspace{10pt}}
+\titleformat{\chapter}[hang]{\huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
+
+% % % % % % % % % % Symbols for footnotes
+
+
+% Title Page
+\title{Master Thesis Report}
+\author{PrithviRaj Narendra}
+
+
+\begin{document}
+
+\maketitle
+
+\begin{abstract}
+Hello Abstract. \todo{Switch to biblatex.}
+\end{abstract}
+
+\tableofcontents
+
+\printglossary[title=List of Abbreviations,type=\acronymtype]
+
+\input{Introduction.tex}
+\input{Background.tex}
+\input{Methodology.tex}
+\input{LiteratureStudy.tex}
+\input{Porting.tex}
+\input{TestCases.tex}
+\input{ResultsAnalysis.tex}
+\input{Contributions.tex}
+\input{ConclusionsFutureWork.tex}
+\input{Appendix.tex}
+
+\bibliography{./Bibliography/Thesis.bib}
+
+\end{document}          
