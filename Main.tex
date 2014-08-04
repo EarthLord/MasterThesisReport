@@ -17,8 +17,14 @@
 \usepackage{wrapfig}
 \graphicspath{ {Images/} }
 
-\bibliographystyle{ieeetr}  
-\usepackage{url}
+\usepackage[backend=biber,citestyle=ieee,doi=false,isbn=false]{biblatex} 
+\addbibresource{./Bibliography/Thesis.bib}
+
+\AtEveryBibitem{\ifentrytype{misc}{}{
+    \clearfield{url}
+    \clearfield{urldate}
+  }
+}
 
 \usepackage[nonumberlist,acronym,toc,shortcuts]{glossaries}
 \robustify{\gls}% Make \gls not fragile
@@ -48,7 +54,7 @@
 \maketitle
 
 \begin{abstract}
-Hello Abstract. \todo{Switch to biblatex.}
+Hello Abstract.
 \end{abstract}
 
 \tableofcontents
@@ -66,6 +72,6 @@ Hello Abstract. \todo{Switch to biblatex.}
 \input{ConclusionsFutureWork.tex}
 \input{Appendix.tex}
 
-\bibliography{./Bibliography/Thesis.bib}
+\printbibliography[title={References}]
 
 \end{document}          

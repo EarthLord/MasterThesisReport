@@ -126,7 +126,9 @@ Where,
 
 \emph{Supervision Timeout}: A \gls{ble} connection is said to be lost if there is no bi-directional communication between the master and the slave for the duration specified by supervision timeout. After a tiemout the master will not send a packet to the slave in every connection event.
 
-\emph{Indication}: A packet containing an (attribute) value sent from a GATT server to a GATT client, which the client should acknowledge (ACK). This packet is sent without the client requesting this data.
+\emph{\gls{gatt} Read}: A packet containing an (attribute) value sent from a GATT server to a GATT client in response to a request from the client.
+
+\emph{\gls{gatt} Indication}: A packet containing an (attribute) value sent from a GATT server to a GATT client, which the client should acknowledge (ACK). This packet is sent without the client requesting this data.
 
 In the case of 802.15.4, one node is configured to send unicast messages and another is configured to receive these and send a response. The latency using both ContikiMAC and NullRDC will be measured. The latency is measured as the time difference between sending a unicast message and receiving its response.
 
