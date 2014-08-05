@@ -58,11 +58,11 @@ Metrics evaluated
 
 The objectives of the tests are to compare the link layer of \gls{ble} and 802.15.4 in the aspects mentioned in the following sections. 
 
-The \gls{ll} of 802.15.4 consists of \gls{mac} layer on top of a \gls{rdc} layer. For the RDC layer the Null-RDC and ContikiMAC driver will be tested in each of the test with \gls{csma} as the \gls{mac} layer. In case of Contiki-MAC the receiving node switches on periodically to sense if there are any packets that need to be received. The default time of this period is 125 ms. In case of null-RDC the radio receiver is never switched off, as the name suggests.
+The link layer of 802.15.4 consists of \gls{mac} layer on top of a \gls{rdc} layer. For the RDC layer the Null-RDC and ContikiMAC driver will be tested in each of the test with \gls{csma} as the \gls{mac} layer. In case of Contiki-MAC the receiving node switches on periodically to sense if there are any packets that need to be received. The default time of this period is 125 ms. In case of null-RDC the radio receiver is never switched off, as the name suggests.
 
 For \gls{ble}, communication will be done at the Generic Attribute (GATT) layer because the binary from Nordic Semiconductor used in this project does not provide APIs to access the lower layers in both peripheral and central devices. In all the tests the packet structure in 802.15.4 will be same as in \gls{ble} above the link layer.
 In this test, to measure the various performance criteria in an environment with interference, WiFi interference will be introduced using the tool 'iperf'. The interference pattern generated will simulate streaming of large data over WiFi. \todo{Explain the exact configuration of UDP packets sent}
-In \gls{ble}, the devices can assume different roles in the different layers of the protocol. In the \gls{ll} a device can be a 'Master' or a 'Slave'. In the \gls{att} layer, a device can be a 'Client' and/or 'Server'. A server contains data and the client can request data from the server.
+In \gls{ble}, the devices can assume different roles in the different layers of the protocol. In the link layer a device can be a 'Master' or a 'Slave'. In the \gls{att} layer, a device can be a 'Client' and/or 'Server'. A server contains data and the client can request data from the server.
 
 In some of the tests, to measure the various performance criteria in an environment with interference, WiFi interference will be introduced using the tool 'iperf'. The interference pattern generated will simulate streaming of large data over WiFi.
 
