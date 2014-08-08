@@ -1,7 +1,11 @@
-\documentclass[a4paper,12pt]{report}
+\documentclass[a4paper,11pt]{report}
 \usepackage[margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
+%\usepackage{lmodern}
+\renewcommand{\familydefault}{\sfdefault}
+\usepackage{helvet}
+%\usepackage[latin1]{inputenc}
 \setcounter{secnumdepth}{3}
 
 \usepackage[long,nodayofweek]{datetime}
@@ -13,6 +17,7 @@
 \usepackage{easy-todo}
 
 % % % % % % % % % % Figure
+
 \usepackage{graphicx}
 \usepackage{wrapfig}
 \graphicspath{ {Images/} }

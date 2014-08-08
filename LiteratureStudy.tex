@@ -1,7 +1,9 @@
 \chapter{Literature Study}
 
-\section{Porting Contiki \gls{os} to a new platform}
-Contiki \gls{os} project originating in 2002 has been ported to an increasing number of hardware platforms\cite{contikiHw}. Since Contiki is an open-source BSD Clause-3 licensed project, there are many projects in various hardware platforms based on a fork from the Contiki repository.
+This chapter provides a brief overview of the related work being done in the research community. Research articles involving the process of porting of Contiki \gls{os} to a hardware platform are presented in section \ref{4Porting}. Performance evaluation of \gls{ble}, 802.15.4 and their comparison are presented in section \ref{4ble}, \ref{4802} and \ref{4ble802} respectively.
+
+\section{Porting Contiki \gls{os} to a new platform} \label{4Porting}
+Contiki \gls{os} project originating in 2002 has been ported to an increasing number of hardware platforms \cite{contikiHw}. Since Contiki is an open-source BSD Clause-3 licensed project, there are many projects in various hardware platforms based on a fork from the Contiki repository.
 
 These hardware platforms' processors range across a spectrum of 8-bit (8051 and AVR), 16-bit (MSP430) to 32-bit (ARM Cortex-M, PIC32). Contiki has support for 802.15.4 based wireless communication with various external transceivers and \glspl{soc} with built in radio transceiver. Various common features of many platforms such as \glspl{led}, buttons and serial port have modules in Contiki for common \gls{api} across platforms.
 
@@ -13,7 +15,7 @@ Contiki has been ported into platform based on a ARM Cortex M3 processor to crea
 
 There are many unofficial ports of Contiki to various hardware platforms, including ones based on ARM Cortex M3 based processors. This can be seen in the port to STM32F10x based platform \cite{Padrah} and LPC1768 based platform \cite{Tanyingyong2013}, both having Cortex M3 processor.
 
-\section{Evaluating the performance of \gls{ble}}
+\section{Evaluating the performance of \gls{ble}} \label{4ble}
 In a paper \cite{Gomez2012} providing an overview and evaluation of \gls{ble}, its various parameters such as energy consumption, latency, maximum piconet size and throughput have been evaluated. Theoretical calculations were done to predict the lifetime of a \gls{ble} slave device running of a 230 mAh coin cell battery for different values of connection interval and slave latency. The average current consumption of a TI CC2540 \gls{ble} platform was plotted for the entire range of connection interval keeping the slave latency as zero. The estimate of the lifetime was also done with respect to various \gls{ber}. \todo{Talk about latency (676us) wrt Gomez2012, is what they are talking about called latency?}
 
 The same experimental setup \cite{Gomez2012} shows the maximum throughput between two CC2540 devices as 58.48 kbps considering a payload of 20 bytes. This is attributed to the fact that in each connection event with an interval of 7.5 ms four packets are not transmitted as in an ideal case. An analytical model of the throughput \cite{Gomez2011} has been developed for different \gls{ber} and connection interval. Simulation results validate this model developed. This model show that the maximum throughput in case the \gls{ber} is zero is 236.7 kbps, independent of the connection interval. An assumption made in this paper is that the master and slave device do not have any limit on the number of packets communicated in a connection interval. 
@@ -24,7 +26,7 @@ The current consumption in different phases of operation, namely waking up, pre-
 
 Based on the model developed and evaluated, a set of guidelines are provided for developers of \gls{ble} system to reduce energy consumption \cite{Kindt2014}. In the unconnected mode, the scanner is recommended to be continuously scanning in case the advertisers is expected to be found soon. In case of where a lot of time is spent scanning idly, the parameters of advertising interval and duty cycle of the scanner can be tweaked to minimize both the energy consumption and latency of discovery. In the connected mode, the recommendation is to completely fill the payload as possible and communicate as much data as possible within a connection event. In both modes, it was noted that although reducing the transmission power appropriate to the the distance transmitted helped in reducing energy consumption, it was not as significant as the other factors.
 
-\section{Evaluating the performance of 802.15.4}
+\section{Evaluating the performance of 802.15.4} \label{4802}
 
 \cite{Dunkels2011}
 Adam Dunkels. “The ContikiMAC Radio Duty Cycling Protocol”. In: (Dec. 2011).
@@ -34,7 +36,7 @@ Adam Dunkels. “The ContikiMAC Radio Duty Cycling Protocol”. In: (Dec. 2011).
 \cite{Uwase2014} M.-P. Uwase, M. Bezunartea, T.L. Nguyen, et al. “Experimental evaluation of message latency and power usage in WSNs”. In: 2014 IEEE International Black Sea Conference on Communications and Networking (BlackSeaCom). IEEE, May 2014,
 pp. 69–72.
 
-\section{Comparison of \gls{ble} and 802.15.4}
+\section{Comparison of \gls{ble} and 802.15.4} \label{4ble802}
 
 \gls{ble} is relatively new protocol compared to 802.15.4, due to which there are few studies conducted comparing the two low power wireless protocols. The energy consumption of \gls{ble} and 802.15.4 was compared in terms of the amount of payload can be communicated per Joule of energy i.e. the energy utility measured with unit kByte/J \cite{Siekkinen2012}. It was found that for \gls{ble} the energy utility was independent of the throughput and depended on the number of packets communicated per connection event. The energy utility varied from around 325 to 525 kByte/J when the packets per connection event rose from one to four respectively. In case of 802.15.4, the energy utility did depend on the throughput. Until 1 kBps the energy utility increased with respect to the throughput, then plateaued at 300 kByte/J. 
 

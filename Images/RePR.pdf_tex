@@ -1,0 +1,76 @@
+%% Creator: Inkscape inkscape 0.48.4, www.inkscape.org
+%% PDF/EPS/PS + LaTeX output extension by Johan Engelen, 2010
+%% Accompanies image file 'RePR.pdf' (pdf, eps, ps)
+%%
+%% To include the image in your LaTeX document, write
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics{<filename>.pdf}
+%% To scale the image, write
+%%   \def\svgwidth{<desired width>}
+%%   \input{<filename>.pdf_tex}
+%%  instead of
+%%   \includegraphics[width=<desired width>]{<filename>.pdf}
+%%
+%% Images with a different path to the parent latex file can
+%% be accessed with the `import' package (which may need to be
+%% installed) using
+%%   \usepackage{import}
+%% in the preamble, and then including the image with
+%%   \import{<path to file>}{<filename>.pdf_tex}
+%% Alternatively, one can specify
+%%   \graphicspath{{<path to file>/}}
+%% 
+%% For more information, please see info/svg-inkscape on CTAN:
+%%   http://tug.ctan.org/tex-archive/info/svg-inkscape
+%%
+\begingroup%
+  \makeatletter%
+  \providecommand\color[2][]{%
+    \errmessage{(Inkscape) Color is used for the text in Inkscape, but the package 'color.sty' is not loaded}%
+    \renewcommand\color[2][]{}%
+  }%
+  \providecommand\transparent[1]{%
+    \errmessage{(Inkscape) Transparency is used (non-zero) for the text in Inkscape, but the package 'transparent.sty' is not loaded}%
+    \renewcommand\transparent[1]{}%
+  }%
+  \providecommand\rotatebox[2]{#2}%
+  \ifx\svgwidth\undefined%
+    \setlength{\unitlength}{419.01708984bp}%
+    \ifx\svgscale\undefined%
+      \relax%
+    \else%
+      \setlength{\unitlength}{\unitlength * \real{\svgscale}}%
+    \fi%
+  \else%
+    \setlength{\unitlength}{\svgwidth}%
+  \fi%
+  \global\let\svgwidth\undefined%
+  \global\let\svgscale\undefined%
+  \makeatother%
+  \begin{picture}(1,0.80569506)%
+    \put(0,0){\includegraphics[width=\unitlength]{RePR.pdf}}%
+    \put(0.43810654,0.662238){\makebox(0,0)[lb]{\smash{Choose a BLE hardware platform}}}%
+    \put(0.2620826,0.61265778){\makebox(0,0)[lb]{\smash{— Define the criteria that the platform must satisfy}}}%
+    \put(0.2620826,0.58598812){\makebox(0,0)[lb]{\smash{— Make an exhaustive list of available platforms to choose one}}}%
+    \put(0.4701291,0.49995345){\makebox(0,0)[lb]{\smash{Port the platform to Contiki}}}%
+    \put(0.2620826,0.45037322){\makebox(0,0)[lb]{\smash{— Develop the peripheral drivers as required by Contiki}}}%
+    \put(0.2620826,0.42370357){\makebox(0,0)[lb]{\smash{— Integrate these drivers in the Contiki project structure}}}%
+    \put(0.2620826,0.3970341){\makebox(0,0)[lb]{\smash{— Evaluate the port with an example}}}%
+    \put(0.37568923,0.30903045){\makebox(0,0)[lb]{\smash{Compare BLE and 802.15.4 at the link layer}}}%
+    \put(0.2620826,0.25945025){\makebox(0,0)[lb]{\smash{— Define the performance metrics evaluated}}}%
+    \put(0.2620826,0.23278057){\makebox(0,0)[lb]{\smash{— Develop the test suite}}}%
+    \put(0.2620826,0.20611113){\makebox(0,0)[lb]{\smash{— Perform the tests to collect the data}}}%
+    \put(0.32238372,0.11810745){\makebox(0,0)[lb]{\smash{Find pros, cons and applications of BLE and 802.15.4}}}%
+    \put(0.2620826,0.06852725){\makebox(0,0)[lb]{\smash{— Summarize the data acquired with graphical representations}}}%
+    \put(0.2620826,0.04185757){\makebox(0,0)[lb]{\smash{— Draw conclusions }}}%
+    \put(0.46690156,0.75385126){\makebox(0,0)[lb]{\smash{Study of state of the art}}}%
+    \put(0.06056165,0.71950898){\makebox(0,0)[lb]{\smash{Literature}}}%
+    \put(0.07551857,0.69283952){\makebox(0,0)[lb]{\smash{Review}}}%
+    \put(0.0875028,0.25664729){\makebox(0,0)[lb]{\smash{Testing}}}%
+    \put(-0.00224857,0.40577838){\makebox(0,0)[lb]{\smash{Implementation}}}%
+    \put(0.09245515,0.54162125){\makebox(0,0)[lb]{\smash{Design}}}%
+    \put(0.09034985,0.09685794){\makebox(0,0)[lb]{\smash{Analysis}}}%
+    \put(0.0890634,0.07018844){\makebox(0,0)[lb]{\smash{\& Result}}}%
+  \end{picture}%
+\endgroup%
