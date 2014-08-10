@@ -5,6 +5,8 @@
 %\usepackage{lmodern}
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{helvet}
+\usepackage{pdflscape}
+\usepackage{pdfpages}
 %\usepackage[latin1]{inputenc}
 \setcounter{secnumdepth}{3}
 
@@ -12,13 +14,14 @@
 
 \usepackage{siunitx}
 \usepackage[ampersand]{easylist}
+\usepackage{csvsimple}
 
 % % % % % % % % % % Helpers
 \usepackage{easy-todo}
 
 % % % % % % % % % % Figure
-
-\usepackage{graphicx}
+\usepackage[abs]{overpic}
+\usepackage{graphicx,tikz}
 \usepackage{wrapfig}
 \graphicspath{ {Images/} }
 
@@ -57,7 +60,33 @@
 
 \begin{document}
 
-\maketitle
+%\maketitle
+
+\begin{titlepage}
+\thispagestyle{empty}
+\begin{center}
+%  \includegraphics[height=6cm]{kth_cmyk_info_comm_tech}\\
+  \vspace{.5cm}
+  \huge{\sc KTH Royal Institute of Technology}\\
+  \vspace{.5cm}
+%  \Large{\sc Dept. of Software and Computer Systems}\\
+  \vspace{3.5cm}
+  \large Master Thesis Report\\
+  \vspace{2cm}		
+  \LARGE{Title involving \{BLE, 802.15.4, Contiki\}}
+  \vspace{4.5cm} 
+
+\begin{tabular}{ll} 
+\noindent Author: & PrithviRaj Narendra \\
+					& \\
+\noindent Supervisors: & Simon Duquennoy \\ 
+					   & \\
+													
+\indent Examiner:  & Prof. Mats Brorsson, KTH, Sweden\\ 
+
+\end{tabular}
+\end{center} 
+\end{titlepage}
 
 \begin{abstract}
 Hello Abstract.
@@ -65,7 +94,10 @@ Hello Abstract.
 
 \tableofcontents
 
-\printglossary[title=List of Abbreviations,type=\acronymtype]
+\glsnogroupskiptrue
+\renewcommand{\glsnamefont}[1]{\textbf{#1}}
+\setlength{\glsdescwidth}{0.8\hsize}
+\printglossary[style=long,title=List of Abbreviations,type=\acronymtype]
 
 \input{Introduction.tex}
 \input{Background.tex}
@@ -76,8 +108,10 @@ Hello Abstract.
 \input{ResultsAnalysis.tex}
 \input{Contributions.tex}
 \input{ConclusionsFutureWork.tex}
-\input{Appendix.tex}
+
 
 \printbibliography[title={References}]
 
+\appendix
+\input{Appendix.tex}
 \end{document}          
