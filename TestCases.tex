@@ -1,16 +1,38 @@
 \chapter{Test Cases} \label{6Testing}
 
-\section{Performance Metrics Definition}
+This chapter details the reasoning and design of the test cases used in this thesis. To provide a common platform for comparing \gls{ble} and 802.15.4¸ Contiki was ported to a platform supporting \gls{ble} as described in chapter \ref{5bleContiki}. \todo{Section }
 
-\paragraph{Data Rate}
+\section{Performance Metrics Definition} \label{6Metrics}
+The aim of this thesis is to compare the key characteristics of the link layer of BLE and 802.15.4. Note that as explained in \todo{section}, 802.15.4 here means the physical layer of 802.15.4 standard. The 802.15.4 standard \gls{mac} later is not used, rather Null-RDC and ContikiMAC, both with \gls{csma} will be used. In this section the four key performance metrics measured for both the wireless protocols are defined in the context of this thesis.
+
+\paragraph{Data rate}
+Data rate at the link layer is defined as the maximum amount of data transmitted per second for a protocol with packets containing the maximum allowed payload for the link layer. The data rate is expressed as both kilobits per second and packets per second.
 
 \paragraph{Latency}
+In tests for latency, one node needs data from another node, hence as soon as possible it sends a packet requesting the data from the other node and receives the data. Latency is defined as the time from the `\emph{need for data}' arises to the time the requested data is received.
 
 \paragraph{Reliability}
+Two criteria will be used for measuring reliability when two nodes are communicating. \gls{prr} is defined as the ratio of the number of packets successfully received to the number of packets sent, both by the link layer. \gls{pdr} is defined as the ratio of the number of packets delivered to the number of packets sent, by the layer above the link layer in both the sender and receiver. While \gls{prr} measures the reliability of transfer of a single transfer of a packet, \gls{pdr} measures the reliability of the link layer to communicate a packet as seen by the layer above it.
 
 \paragraph{Energy Consumption}
+The energy consumption in this project is indirectly measured as the \acrfull{rdc}, which is the ratio of the time for which the radio is switched on to the total time of the experiment. Measuring the energy consumption as \gls{rdc} for different scenarios will be more useful to developers as this information will change little across platforms for the same protocol, whereas the actual energy consumed is reducing with every new platform introduced in the market. The processor time utilized by the protocol stack is not considered as this information could not be extracted from the SoftDevice \glspl{api} and also because of the different processor types in the two platforms (32-bit vs 16 bit). 
 
-\section{Data Dump Test Design}
+\section{Test setup} \label{6TestPlatforms}
+
+\subsection{\gls{ble} platform}
+The platform used for \gls{ble} is PCA10000, which is described in section \ref{5nrfPCA}. Since BLE is has an asymmetric architecture, a master device is required to communicate with a slave device. In all the tests the slave device is a PCA10000 board running on Contiki and peripheral BLE stack provided by the SoftDevice \emph{S110}. Depending on the test, the master device varied between either a PCA10000 board or an Android device. When a PCA10000 was used as master device, it ran on bare-metal code with central BLE stack provided by the SoftDevice \emph{S120}.
+
+\subsection{802.15.4 platform}
+
+\begin{figure}[h]
+    \centering
+    \includegraphics[width=\textwidth]{TmoteSky}
+	\caption{TmoteSky platform}
+    \label{fig:TmoteSky}
+\end{figure}
+
+
+\section{\acrfull{ht} Test Design} \label{6HTdesign}
 
 \begin{figure}[h]
     \centering
@@ -40,8 +62,8 @@ Metrics evaluated
 & Energy Consumption
 \end{easylist}
 
-\section{Request Response Test Design}
-
+\section{\acrfull{rr} Test Design} \label{6RRdesign}
+\gls{rr} 
 \begin{easylist}[itemize]
 & Explain what is meant by request response
 & Different cases in \gls{ble} and 802.15.4

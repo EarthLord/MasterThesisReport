@@ -1,6 +1,6 @@
-\chapter{Porting a \gls{ble} platform to Contiki \gls{os}}
-\todo{ 5to10 pages} 
-This chapter describes the initial task of choosing the hardware platform supporting \gls{ble} and porting Contiki \gls{os} to this platform. This task was a pre-requisite to the next task of testing detailed in chapter \ref{6Testing}. Section \ref{5HwPlt} explains the process of choosing a hardware platform and describes the chosen one. 
+\chapter{Porting a \gls{ble} platform to Contiki \gls{os}} \label{5bleContiki}
+
+This chapter describes the initial task of choosing the hardware platform supporting \gls{ble} and porting Contiki \gls{os} to this platform. This task was a pre-requisite to the next task of testing detailed in chapter \ref{6Testing}. Section \ref{5HwPlt} explains the process of choosing a hardware platform and describes the chosen one. Section \ref{5Porting} describes the different aspects of porting Contiki to a new platform, with details of the specific port done in this project.
 
 \section{\gls{ble} Hardware Platform} \label{5HwPlt}
 
@@ -37,11 +37,11 @@ With these requirements, based on the exhaustive comparison in \hyperref[Appendi
 
 As shown in the table in \hyperref[AppendixA]{Appendix A}, recently many new promising \gls{ble} based \glspl{soc} have be released such as Quintic 9020, Dialog Semiconductor DA14580, Lapis MLA7105 and Broadcom BCM20732. From the limited technical information available about them, their technical specifications would be suitable for a project like this. But because of the limited documentation about them, scarce availability and nascent support they are not suitable.
 
-\subsection{Overview of nrf51822 \gls{soc}}
+\subsection{Overview of nrf51822 \gls{soc} and its platform} \label{5nrfPCA}
 
 nrf51822 is a \gls{soc} made by Nordic Semiconductor for developing \gls{ble} and 2.4 GHz based wireless systems \cite{nrf51822page}. Most of the specification of this \gls{soc} can be found in the table in \hyperref[AppendixA]{Appendix A}. The ARM Cortex M0 present is a 32 bit, 3 stage pipeline processor with Von Neumann architecture. It is designed for low silicon die size, low cost and power. It has an integrated \gls{nvic}  responsible for handling processor exceptions and peripheral interrupts. 
 
-The development boards in the form of a USB dongle used for this thesis are called PCA10000. As seen in the figure \ref{pca10000}, the top side of PCA10000 contains nrf51822 at the centre, powered from the USB port through a regulator. This \gls{soc} is connected to a RGB led, a 16 MHz crystal, a 32.768  kHz crystal and a PCB antenna with its matching network. On the other side of the PCB is the SEGGER JLink Lite Cortex M unit. This can program and debug using the Serial Wire Debug (SWD) port of nrf51822. Another useful feature of this board is that the SEGGER JLink unit provides a serial port over USB with hardware flow control (HWFC) to the computer that this dongle is connected to. This serial port is connected to the UART port of nrf51822 \cite{PrithviR}.
+The development boards in the form of a USB dongle used for this thesis are called PCA10000. As seen in the figure \ref{pca10000}, the top side of PCA10000 contains nrf51822 at the centre, powered from the USB port through a voltage regulator. This \gls{soc} is connected to a tri-colour RGB led, a 16 MHz crystal, a 32.768  kHz crystal and a PCB antenna with its matching network. On the other side of the PCB is the SEGGER JLink Lite Cortex M unit. This can program and debug using the Serial Wire Debug (SWD) port of nrf51822. Another useful feature of this board is that the SEGGER JLink unit provides a serial port over USB with hardware flow control (HWFC) to the computer that this dongle is connected to. This serial port is connected to the \gls{uart} port of nrf51822 \cite{PrithviR}.
 
 \begin{figure}[h]
 \includegraphics[width=\textwidth]{PCA10000}
@@ -49,14 +49,11 @@ The development boards in the form of a USB dongle used for this thesis are call
 \label{pca10000}
 \end{figure} 
 
-Nordic Semiconductor provides \gls{ble} stack as a precompiled and linked binary file called \emph{SoftDevices}. The SoftDevice is stored in a protected area in the flash memory and has access to a protected section of \gls{ram} memory, preventing unauthorized access by the application code. The SoftDevice can be accessed through a specified set of \gls{api} calls. These \glspl{api} are accessed by making a supervisor call to the processor causing a exception handler to run the SoftDevice. All calls are non-blocking, which means that the call will not stall the application making the call. And there are synchronous and non-synchronous calls, where the synchronous calls immediately return the result while the asynchronous calls start an operation that will send the result as an event to the application. A \gls{sdk} is also provided for nrf51822 which contains the peripheral drivers, examples, the interface header files for the SoftDevices and their documentation.
- 
+Nordic Semiconductor provides \gls{ble} stack as a precompiled and linked binary file called \emph{SoftDevices}. The SoftDevice is stored in a protected area in the flash memory and has access to a protected section of \gls{ram} memory, preventing unauthorized access by the application code. The SoftDevice can be accessed through a specified set of \gls{api} calls. These \glspl{api} are accessed by making a supervisor call to the processor causing a exception handler to run the SoftDevice. All calls are non-blocking, which means that the call will not stall the application making the call. And there are synchronous and non-synchronous calls, where the synchronous calls immediately return the result while the asynchronous calls start an operation that will send the result as an event to the application. The SoftDevice is used for accessing the \gls{ble} stack as it was out of the scope of this thesis project to implement a \gls{ble} stack from scratch.
 
+A \gls{sdk} is provided for nrf51822 which contains the peripheral drivers, examples, the interface header files for the SoftDevices and their documentation. Two tools provided by Nordic Semiconductor has been extensively used in this thesis. \emph{nRF Sniffer} is a tool used with the PCA10000 board and \emph{Wireshark} application to capture, view and save the information of \gls{ble} packets being sent between two devices. This greatly helps in learning about \gls{ble} packets and debugging problems. This tool is capable of providing detailed information about almost all the segments of the captured packets. It was found in during the thesis project that the nRF-Sniffer is not entirely capable of capture each and every packet being communicated, which does limit its use as tool to get feedback as one develops low level \gls{ble} drivers. Another invaluable tool provided by Nordic Semiconductor is \emph{Master Control Panel}. It is an Android application which acts a generic \gls{ble} application capable of discovering \gls{ble} devices, connect and communicate with them while providing an overview of their Attribute database. 
 
- 
-\todo{ development board, sniffer, master control panel, devzone}
-
-From actively using this platform for many months, the subjective pros and cons of this platform would be as follows.
+From actively using this platform for many months, the subjective pros and cons of this platform are stated below.
 
 \noindent Pros:
 \begin{easylist}[itemize]
@@ -67,47 +64,77 @@ From actively using this platform for many months, the subjective pros and cons 
 & Support in mbed, an online open source development platform
 & Support of supplementary tools such as nRF-Sniffer and android application 'Master Control Panel'
 \end{easylist}
-\vspace{10 pt} \noindent Cons:
+\vspace{5 pt} \noindent Cons:
 \begin{easylist}[itemize]
 & The \gls{ble} stack available as binary reducing flexibility
 & \gls{sdk} not open for distribution
 \end{easylist}
 
-\section{Porting PCA10000 platform of nrf51822 to Contiki} \label{5Porting}
-Contiki was initially developed in a Linux based operating system, although Windows is also supported now. The porting of PCA10000 platform to Contiki was done in Ubuntu 13.10. The compiler used is \todo{ ... explain all the other details of the development setup}
+\section[Porting PCA10000 platform of nrf51822 to Contiki]{Porting PCA10000 platform of nrf51822 to Contiki\footnote{Available at \url{https://github.com/EarthLord/contiki} with complete Doxygen documentation}} \label{5Porting}
+
+\subsection{Development Setup}
+Contiki was initially developed in a Linux based operating system, although Windows is also supported now. The porting of PCA10000 platform to Contiki was done in Ubuntu 13.10 and 14.04. The compiler suite used is GNU Tools for ARM Embedded Processors Version 4.8.3. The program used for programming the binary files compiled was SEGGER J-Link Commander V4.90 using the Segger JLink programmer on PCA10000. The front end used to write the code is the Eclipse IDE for C/C++ Developers Version Kepler Service Release 1 and Sublime Text.
 
 \subsection{Folder structure of Contiki}
-When porting a new platform to Contiki, the three folders inside a Contiki distribution where additions need to be made are cpu, examples and platform. The content in these folders are as described below. The path of the Contiki distribution is in the path CONIKI.
+When porting a new platform to Contiki, the three folders inside a Contiki distribution where additions need to be made are cpu, examples and platform. The content in these folders are as described below. The location of the Contiki distribution is represented by the path `CONIKI'. The port of nrf51822 \gls{soc} with its PCA10000 board also follows this convention.
 
-\paragraph{CONTIKI/cpu}In this folder, all the files contain implementation which is solely dependent on the \gls{soc} is present. This includes the code for the processor abstraction, the drivers of the peripherals of the \gls{soc}, makefile with commands for compiling and linking the code, linker file and the documentation of these implementation. The boot-loader  or start-up code, if required is also present here. The peripheral drivers for peripherals such as timers and serial port must use the API format of Contiki so that the modules of Contiki using these peripherals can operate correctly. The exact implementations of these drivers is explained in section \ref{peripheralsContiki}. 
+\paragraph{CONTIKI/cpu}In this folder, all the files contain implementation which is solely dependent on the \gls{soc} is present. This includes the code for the processor abstraction, the drivers of the peripherals of the \gls{soc}, makefile with commands for compiling and linking the code, linker file and the documentation of these implementation. The boot-loader  or start-up code, if required is also present here. The peripheral drivers for peripherals such as timers and serial port must use the \gls{api} format of Contiki so that the libraries of Contiki using these peripherals can operate correctly. The exact implementations of these drivers is explained in section \ref{peripheralsContiki}. 
 
-\paragraph{CONTIKI/platform} An \gls{soc} over time has increasing number of boards or systems that are based on it and these are referred as platforms in this folder. Every board has its own folder in this platform folder which contains files which contain implementation which is dependant on the particular board. These include the specification of the connections to the LEDs, buttons, sensors and serial ports power system, the clock sources, memories present and any other board specific details. Any peripheral driver implementation specific to the board is present here. The default project specifications such as the serial baud-rate and source and frequency of clock are defined here. The main function where the execution of the program starts and initialization of all the peripherals and modules used by Contiki happens is present here.
+\paragraph{CONTIKI/platform} An \gls{soc} over time has increasing number of boards or systems that are based on it and these are referred as platforms in this folder. Every board has its own folder in this platform folder which contains files which contain implementation which is dependant on the particular board. These include the specification of the connections to the LEDs, buttons, sensors and serial ports, power sources, the clock sources, memories present and any other board specific details. Any peripheral driver implementation specific to the board is present here. The default project specifications such as the source and frequency of clock and serial baud-rate are defined here. The main function where the execution of the program starts and initialization of all the peripherals and libraries used by Contiki happens is present here.
 
-\paragraph{CONTIKI/examples} The examples folder contains all the files related to projects that are implemented using Contiki with any of the supported hardware platforms. The makefile where the make command is executed is present here. The compiled object and binary files are also stored here.
+\paragraph{CONTIKI/examples} The examples folder contains all the files related to projects that are implemented using Contiki with any of the supported hardware platforms. The makefile where the make command is executed is present here. The compiled object and binary files are also stored here. The default specifications of the platform can be overridden by creating a \texttt{project-conf.h} in the specific example.
 
 \subsection{Peripherals required for Contiki}\label{peripheralsContiki}
-\subsubsection{Contiki Clock}
-\subsubsection{R-Timer}
-\subsubsection{LED(s)}
-\subsubsection{Radio}
-\subsubsection{Button(s)}
-\subsubsection{Serial Port}
+\paragraph{Contiki clock}
+Contiki clock, which is the source for all the timers, except the rtimer, is provided by the RTC1 peripheral of nrf51822. RTC1 is chosen because when a SoftDevice is used, RTC0 will not be accessible for the user application. The \gls{rtc} peripheral uses the \gls{lfclk} of nrf51822, which can be generated by a crystal or RC oscillator to produce 32.768 kHz. For Contiki clock, there are two implementations made, namely Tickless and Ticks which are described below. 
+
+\subparagraph{Ticks}
+For this implementation the RTC1 peripheral is configured such that an interrupt is called for its every increment or \emph{tick}, hence the name. This happens at 64 Hz, which is the default value of \texttt{CLOCK\_SECOND}. In the interrupt routine, the current clock tick is incremented, an etimer poll is requested if an etimer has expired and every \texttt{CLOCK\_SECOND}\textsuperscript{th} interrupt the second count is incremented. The variable storing the clock `ticks' and `seconds' is returned upon their request from any other process.
+
+\subparagraph{Tickless}
+In this implementation, the processor will not be woken up at every tick of the \gls{rtc} peripheral, hence the name. To enable this, a small addition is required to the etimer and clock module present at \texttt{CONTIKI/core/sys}. Every time the next etimer expiration is computed, the clock module is informed of it. With this additional information the \gls{rtc} can configure a compare interrupt to poll the etimer upon its expiry. The RTC1 peripheral is also configured to provide an interrupt only on its overflow so that it can be accounted for when calculating the seconds elapsed. For the 24-bit timer of RTC1, with \texttt{CLOCK\_SECOND} as 64, the overflow interrupt would happen only once every $(2^{24}/64)$ second, that is almost every three days as compared to interrupt happening few times a second in the `Ticks' case. 
+
+With a Tickless implementation, both keeping track of the value of `clock ticks' and polling the etimer upon its expiry is handled by the \gls{rtc} peripheral rather than the processor, which would significantly reduce the power consumption without sacrificing any performance. The only additional development task is the addition in the core Contiki library as mentioned above.
+
+\paragraph{Rtimer}
+An rtimer is implemented in Contiki's port to nrf51822 by using the \emph{TIMER1} peripheral, which runs on the \gls{hfclk} of 16 MHz. TIMER1 was chosen as TIMER0 is required by SoftDevice, in case it is used. Since RTimer is required with higher granularity than Contiki Clock, rtimer increments at rate of 62.5 kHz in its current implementation, which is every 16 \si{\micro \second}. This is achieved by TIMER1 is configured as a 8-bit timer providing an interrupt on overflow where the rtimer count is incremented. In the interrupt routine there is also a check to see if the scheduled rtimer task needs to be run by comparing the current rtimer count. It should be noted that Rtimer being run by TIMER1 peripheral requires the \gls{hfclk} to be active, consuming power.
+
+\paragraph{\glspl{led}}
+The PCA10000 board has a RGB \gls{led} unit on it. The port allows it to be controlled by the Contiki \gls{api}. This is done through reading and writing to the \gls{gpio} port when the \gls{led}'s status is read and \gls{led}'s state is changed respectively. This implementation is present in \texttt{CONTIKI/platform/dev/led-arch.c} file since the \glspl{led} are not a property of the nrf51822 \gls{soc} but the PCA10000 platform.
+
+\paragraph{Button(s)}
+The PCA10000 board does not have any buttons. In case of porting a platform with physical buttons, its implementation would be in the same location as the \glspl{led} i.e. the platform folder.
+
+\paragraph{Serial Port}
+The port of Contiki to PCA10000 platform offers abstraction of the \gls{uart} peripheral of nrf51822, which will communicate with the serial port of the computer to which PCA10000 is connected to. Writing to the serial port is achieved by using the \texttt{printf()} function present in the \texttt{stdio.h} library by redirecting \texttt{printf} call's character stream to the \gls{uart} peripheral. Instead of the default NewLib library, the Newlib-nano library is used so that the amount of memory required is reduced.
+
+For receiving the data from the the \emph{serial-line} module of Contiki is used. This module broadcasts an event when a series of characters are received ending with a `newline' (\textbackslash n) character. To use this module, it is initialized on boot and all the characters received by the \gls{uart} port is sent to this module in the \gls{uart} receive interrupt routine.
+
+\paragraph{Radio}
+Since the radio peripheral is completely controlled by the SoftDevice for implementing the \gls{ble} stack, it is untouched in this port. To use the radio peripheral, the \glspl{api} provided by the SoftDevice is used.
 
 \subsection{Makefile structure of Contiki}
 
 \textbf{Introduction to makefile and include.}
-There are multiple makefiles present across different folders that are included in each other to form the complete makefile. In the most basic form these are the makefile in the example folder, `makefile.include' in the Contiki root folder, `makefile.TARGET' in the specific platform folder and `makefile.CPU' in the specific cpu folder, where TARGET and CPU are specific to the project. This structure by which this inclusion happens is illustrated better in \textbf{figure}.
+There are multiple makefiles present across different folders that are included in the way shown in figure \ref{MakefileLevel} to form the complete makefile. In the most basic form these are the makefile in the example folder, `makefile.include' in the Contiki root folder, `makefile.TARGET' in the specific platform folder and `makefile.CPU' in the specific cpu folder, where TARGET and CPU are specific to the project. The port of Contiki to nrf51822's platform follows this convention too.
 
-Makefile where the project is present i.e. in the example folder
--Makefile.include in root CONTIKI directory
---Makefile indicating the target (if not already specified)
---Makefile of applications, if any are required
---Makefile of the target, present in the platform directory
----Makefile of the \gls{soc}, present in the cpu directory
+\begin{figure}[h]
+\centering
+\def\svgwidth{0.93\columnwidth}
+\input{./Images/MakefileLevel.pdf_tex}
+\vspace{-10pt}
+\caption{Structure of Makefile inclusion in Contiki \gls{os} to form an example specific one}
+\label{MakefileLevel}
+\end{figure}
 
-The makefile in the example folder is where the make command is called. The operations that can be performed with this make command depends on the makefile. Usually the operations are cleaning (removing the object and binary files), compiling the source files into object files , linking these object files to create an executable file, creating a binary file from this executable file, uploading the binary to the \gls{soc} to start execution and so on. 
+%Makefile where the project is present i.e. in the example folder
+%-Makefile indicating the target platform (if not already specified)
+%-Makefile.include in root CONTIKI directory
+%--Makefile of applications, if any are required
+%--Makefile of the target, present in the platform directory
+%---Makefile of the \gls{soc}, present in the cpu directory
 
-The makefile in the project specific example folder, the different project source files are specified and the `makefile.include' present in the root CONTIKI folder is added. `makefile.inlcude' glues together all the required components of Contiki and provides the default implementation of compiling and linking. The target makefile in the specific platform directory is included here. In `makefile.TARGET' the source files present in this directory are added, any Contiki modules required are added and the \gls{soc} makefile in the specific directory is added. The \gls{soc} 
+The makefile in the project specific example folder, the different project source files are specified and the `makefile.include' present in the root CONTIKI folder is added. `makefile.inlcude' glues together all the required components of Contiki and provides the default implementation of compiling and linking. The target makefile in the specific platform directory is included here. In `makefile.TARGET' the source files present in this directory are added, any Contiki modules required are added and the \gls{soc} or \gls{mcu} makefile in the specific directory is added. The \gls{soc} or \gls{mcu} makefile adds all the source files present in the CPU directory, specifies the command for compiling the code, linking the objects generated, uploading the executable binary or hex file.
 
-
+The makefile in the example folder is where the make command is called. The operations that can be performed with this make command depends on the makefile. Usually the operations are cleaning (removing the object and binary files), compiling the source files into object files , linking these object files to create an executable file, creating a binary file from this executable file, uploading the binary to the \gls{soc} to start execution and so on. For the nrf51822 \gls{soc} additional operations of uploading the SoftDevice and erasing the flash are supported.
 
