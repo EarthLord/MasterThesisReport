@@ -34,6 +34,10 @@ Explain host and controller division. More details about link layer.
 
 \textbf{Image of the stack}
 
+The link layer of 802.15.4 consists of \gls{mac} layer on top of a \gls{rdc} layer. For the RDC layer the Null-RDC and ContikiMAC driver will be tested in each of the test with \gls{csma} as the \gls{mac} layer. In case of Contiki-MAC the receiving node switches on periodically to sense if there are any packets that need to be received. The default time of this period is 125 ms. In case of null-RDC the radio receiver is never switched off, as the name suggests.
+
+In \gls{ble}, the devices can assume different roles in the different layers of the protocol. In the link layer a device can be a 'Master' or a 'Slave'. In the \gls{att} layer, a device can be a 'Client' and/or 'Server'. A server contains data and the client can request data from the server.
+
 \paragraph{Physical layer}
 \paragraph{Link layer}
 \paragraph{\gls{l2cap}}
