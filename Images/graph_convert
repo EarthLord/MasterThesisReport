@@ -1,0 +1,7 @@
+#!/bin/bash
+
+inkscape -z -D -f HT-ec.svg -e HT-ec.png -d 300
+inkscape -z -D -f HT-dr.svg -e HT-dr.png -d 300
+inkscape -z -D -f HT-r.svg -e HT-r.png -d 300
+inkscape -z -D -f RR-ec.svg -e RR-ec.png -d 300
+inkscape -z -D -f RR-l.svg -e RR-l.png -d 300
