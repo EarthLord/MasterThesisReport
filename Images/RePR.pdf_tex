@@ -53,7 +53,7 @@
     \put(0.43810654,0.662238){\makebox(0,0)[lb]{\smash{Choose a BLE hardware platform}}}%
     \put(0.2620826,0.61265778){\makebox(0,0)[lb]{\smash{— Define the criteria that the platform must satisfy}}}%
     \put(0.2620826,0.58598812){\makebox(0,0)[lb]{\smash{— Make an exhaustive list of available platforms to choose one}}}%
-    \put(0.4701291,0.49995345){\makebox(0,0)[lb]{\smash{Port the platform to Contiki}}}%
+    \put(0.4701291,0.49995345){\makebox(0,0)[lb]{\smash{Port Contiki to the chosen platform}}}%
     \put(0.2620826,0.45037322){\makebox(0,0)[lb]{\smash{— Develop the peripheral drivers as required by Contiki}}}%
     \put(0.2620826,0.42370357){\makebox(0,0)[lb]{\smash{— Integrate these drivers in the Contiki project structure}}}%
     \put(0.2620826,0.3970341){\makebox(0,0)[lb]{\smash{— Evaluate the port with an example}}}%
@@ -64,7 +64,7 @@
     \put(0.32238372,0.11810745){\makebox(0,0)[lb]{\smash{Find pros, cons and applications of BLE and 802.15.4}}}%
     \put(0.2620826,0.06852725){\makebox(0,0)[lb]{\smash{— Summarize the data acquired with graphical representations}}}%
     \put(0.2620826,0.04185757){\makebox(0,0)[lb]{\smash{— Draw conclusions }}}%
-    \put(0.46690156,0.75385126){\makebox(0,0)[lb]{\smash{Study of state of the art}}}%
+    \put(0.46690156,0.75385126){\makebox(0,0)[lb]{\smash{Study of the state of the art}}}%
     \put(0.06056165,0.71950898){\makebox(0,0)[lb]{\smash{Literature}}}%
     \put(0.07551857,0.69283952){\makebox(0,0)[lb]{\smash{Review}}}%
     \put(0.0875028,0.25664729){\makebox(0,0)[lb]{\smash{Testing}}}%
