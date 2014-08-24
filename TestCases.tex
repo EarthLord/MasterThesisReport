@@ -5,7 +5,7 @@ This chapter details the reasoning and design of the test cases used in this the
 % % % % % % % % % % % % SECTION % % % % % % % % % % % % 
 
 \section{Performance Metrics Definition} \label{6Metrics}
-The aim of this thesis is to compare the key characteristics of the link layer of \gls{ble}  and 802.15.4. Note that as explained in \todo{background}, 802.15.4 here means the physical layer of 802.15.4 standard. The 802.15.4 standard \gls{mac} later is not used, rather Null-RDC and ContikiMAC, both with \gls{csma} will be used. In this section the four key performance metrics measured for both the wireless protocols are defined in the context of this thesis.
+The aim of this thesis is to compare the key characteristics of the link layer of \gls{ble}  and 802.15.4. Note that as explained in \todo{background}, 802.15.4 here means the physical layer of 802.15.4 standard. The 802.15.4 standard \gls{mac} layer is not used, rather Null-RDC and ContikiMAC was used, both with \gls{csma} layer. In this section the four key performance metrics measured for both the wireless protocols are defined in the context of this thesis.
 
 \paragraph{Data rate}
 Data rate at the link layer is defined as the maximum amount of data transmitted per second for a protocol with packets containing the maximum allowed payload for the link layer. The data rate is expressed as both kilobits per second and packets per second.
@@ -22,7 +22,7 @@ Data rate at the link layer is defined as the maximum amount of data transmitted
 In this test the aim is to measure the effect of the link layer architecture and configuration on the latency observed by an layer on top when requesting data from another node. Latency is defined as the time from which the layer(s) above the link layer provides it the packet which asks for data from another node to the time the data from the other node is received. This is better understood by a generic illustration in figure \ref{fig:LatencyDef}.
 
 \paragraph{Reliability}
-Two criteria will be used for measuring reliability when two nodes are communicating. \gls{prr} is defined as the ratio of the number of packets successfully received to the number of packets sent, both by the link layer. \gls{pdr} is defined as the ratio of the number of packets delivered to the number of packets sent, by the layer above the link layer in both the sender and receiver. While \gls{prr} measures the reliability of transfer of a single transfer of a packet, \gls{pdr} measures the reliability of the link layer to communicate a packet as seen by the layer above it.
+Two criteria was used for measuring reliability when two nodes are communicating. \gls{prr} is defined as the ratio of the number of packets successfully received to the number of packets sent, both by the link layer. \gls{pdr} is defined as the ratio of the number of packets delivered to the number of packets sent, by the layer above the link layer in both the sender and receiver. While \gls{prr} measures the reliability of transfer of a single transfer of a packet, \gls{pdr} measures the reliability of the link layer to communicate a packet as seen by the layer above it.
 
 \paragraph{Energy Consumption}
 The energy consumption in this project is indirectly measured as the \acrfull{rdc}, which is the ratio of the time for which the radio is switched on to the total time of the experiment. Measuring the energy consumption as \gls{rdc} for different scenarios will be more useful to developers as this information will change little across platforms for the same protocol, whereas the actual energy consumed is reducing with every new platform introduced in the market. The processor time utilized by the protocol stack is not considered as this information could not be extracted from the SoftDevice \glspl{api} and also because of the different processor types in the two platforms (32-bit vs 16 bit). 
@@ -32,13 +32,11 @@ The energy consumption in this project is indirectly measured as the \acrfull{rd
 \section{Test setup} \label{6TestPlatforms}
 
 \subsection{\gls{ble} platform}
-The platform used for \gls{ble} is PCA10000, which is described in section \ref{5nrfPCA}. Since \gls{ble}  is has an asymmetric architecture, a master device is required to communicate with a slave device. In all the tests the slave device is a PCA10000 board running on Contiki and peripheral \gls{ble}  stack provided by the SoftDevice \emph{S110}. Depending on the test, the master device varied between either a PCA10000 board or an Android device. When a PCA10000 was used as master device, it ran on bare-metal code with central \gls{ble}  stack provided by the SoftDevice \emph{S120}. Nexus 7 and Nexus 4, both at Android version 4.4.4 were the Android devices used for performing certain tests.
+The platform used for \gls{ble} is PCA10000, which is described in section \ref{5nrfPCA}. Since \gls{ble}  is has an asymmetric architecture, a master device is required to communicate with a slave device. In all the tests the slave device is a PCA10000 board running on Contiki and peripheral \gls{ble}  stack provided by the SoftDevice \emph{S110}. Depending on the test, the master device varied between either a PCA10000 board or an Android device. When a PCA10000 was used as master device, it ran on bare-metal code with central \gls{ble} stack provided by the SoftDevice \emph{S120} \todo{why}. The transmission power was 0 dBm for all the tests using PCA10000. Nexus 7 and Nexus 4, both at Android version 4.4.4 were the Android devices used for performing certain tests.
 
-Communication will be done at the Generic Attribute (GATT) layer because the binary from Nordic Semiconductor used in this project does not provide APIs to access the lower layers in both peripheral and central devices, hence evaluation at the link layer will be done indirectly based on the inferences from the collected data. 
+Communication was done at the Generic Attribute (GATT) layer because the binary from Nordic Semiconductor used in this project does not provide APIs to access the lower layers in both peripheral and central devices, hence evaluation at the link layer was done indirectly based on the inferences from the collected data. The default transmission power of 0 dBm was used. The radio state change notification event in the SoftDevice was enabled. This allowed logging of a timer to measure the energy consumption in terms of \gls{rdc}.
 
 \subsection{802.15.4 platform}
-
-Tmote-Sky platform, which is widely used and supports all the features of Contiki was used as the platform to test 802.15.4 performance. Shown in figure \ref{fig:TmoteSky}, Tmote-Sky is based on MSP430-F1611 \gls{mcu} and  CC2420 2.4 GHz transceiver. It has a USB to serial converter on board to allow the MSP430 \gls{mcu} to communicate with the serial port of a computer. It has additional sensors, buttons and memory which are not used in this project.
 
 \begin{figure}[h]
     \centering
@@ -46,6 +44,10 @@ Tmote-Sky platform, which is widely used and supports all the features of Contik
 	\caption{TmoteSky platform}
     \label{fig:TmoteSky}
 \end{figure}
+
+Tmote-Sky platform, which is widely used and supports all the features of Contiki was used as the platform to test 802.15.4 performance. Shown in figure \ref{fig:TmoteSky}, Tmote-Sky is based on MSP430-F1611 \gls{mcu} and  CC2420 2.4 GHz transceiver. It has a USB to serial converter on board to allow the MSP430 \gls{mcu} to communicate with the serial port of a computer. It has additional sensors, buttons and memory which are not used in this project. The transmission power was unchanged from the default value of 0 dBm. The `energest' module of Contiki was used to log the radio on and total time to calculate the energy consumption in terms of \gls{rdc}. 
+
+
 
 \subsection{WiFi Interference}
 In some of the tests described in the following sections, WiFi interference needed to be created to test the reliability of the wireless protocols with external interference. A open-source tool called \texttt{iperf} was used for creating this interference by sending \gls{udp} packets to the IP address of a router. The computer and router used are ThinkPad T420 and Netgear N300 router respectively, both supporting WiFi 802.11b/g/n standard. The aim of the interference pattern is to simulate streaming of large amount of data over WiFi. This was achieved by this command:
@@ -76,7 +78,7 @@ To verify that the interference was created and to know which frequency range wa
 % % % % % % % % % % % % SECTION % % % % % % % % % % % % 
 
 \section{\acrfull{ht} Test Design} \label{6HTdesign}
-\gls{ht} test aims to measure the maximum possible data rate of \gls{ble} and 802.15.4 at the LL with and without WiFi interference. For both protocols, the link layer contains the maximum payload allowed. Each run of the test will last for one minute to collect enough data to calculate the mean data rate. In each of the tests, the amount of time the radio is switched on (\gls{rdc}), either transmitting or receiving, is logged to measure the energy consumption. The metrics measured in this test are data rate, reliability and energy consumption. The two nodes were kept one metre apart and in case of environment with interference, the router to which the \gls{udp} packets were sent over WiFi was about 3 metre from these nodes.
+\gls{ht} test aims to measure the maximum possible data rate of \gls{ble} and 802.15.4 at the LL with and without WiFi interference. For both protocols, the link layer contains the maximum payload allowed. Each run of the test will last for one minute to collect enough data to calculate the mean data rate. In each of the tests, the amount of time the radio is switched on (\gls{rdc}), either transmitting or receiving, is logged to measure the energy consumption. The metrics measured in this test are data rate, reliability and energy consumption. The two nodes were kept 1 m apart and in case of environment with interference, the router to which the \gls{udp} packets were sent over WiFi was about 3 m from these nodes.
 
 \begin{wrapfigure}{r}{0.53\textwidth}
 	\vspace{-15pt}
@@ -87,11 +89,11 @@ To verify that the interference was created and to know which frequency range wa
    	\vspace{-15pt}
 \end{wrapfigure}
 
-\paragraph{\gls{ble} } As shown in figure \ref{fig:DataRateSetup}, the data rate is measured by sending data from the server to the client using \emph{Notifications}, which are packets which are not acknowledged in the \gls{att} layer. Since the link layer is not accessible with the SoftDevice used, a 20 byte payload was sent at the \gls{gatt} layer as notification so that 27 byte data for the link layer will be achieved. The data rate is measured at the receiver i.e the Master device. 
+\paragraph{\gls{ble} } As shown in figure \ref{fig:DataRateSetup}, the data rate is measured by sending data from the server to the client using \emph{Notifications}, which are packets which are not acknowledged in the \gls{att} layer. Since the link layer is not accessible with the SoftDevice used, a 20 byte payload was sent at the \gls{gatt} layer as notification so that 27 byte data for the link layer's playload is achieved. The data rate is measured at the receiver i.e the Master device. 
 
 The number of packets sent and received at the \gls{att} layer in the two nodes are logged to calculate the \gls{pdr}. Also by logging the number of times the radio was switched on, the number of packets actually transmitted can be inferred, by which the \gls{prr} can be calculated.
 
-\gls{ble}  specification tells that a master device must change the channel map of a connection according the 2.4 GHz environment so as to not face any interference. This is the \emph{adaptive} part of \gls{afh}, which requires the master device to have information about the activity in the frequency spectrum used by \gls{ble} . S120 SoftDevice used for the central \gls{ble}  stack by default uses the complete channel map and has an option for configuring it manually, but the channel map does not change automatically based on external interference. So in the tests without WiFi interference, the channel map consisted of all the channels. When WiFi interference was introduced, one test had the complete channel map and another had a \emph{WiFi free} map of channels (0 to 6) and (20 to 36), which is 2404 to 2416 MHZ and 2446 to 2478 MHz. This map was based on the interference noticed in figure \ref{fig:Intf}.
+\gls{ble}  specification tells that a master device must change the channel map of a connection according the 2.4 GHz environment so as to not face any interference. This is the \emph{adaptive} part of \gls{afh}, which requires the master device to have information about the activity in the frequency spectrum used by \gls{ble} . S120 SoftDevice used for the central \gls{ble}  stack by default uses the complete channel map and has an option for configuring it manually, but the channel map does not change automatically based on external interference. So in the tests without WiFi interference, the channel map consisted of all the channels. When WiFi interference was introduced, one test had the complete channel map and another had a \emph{WiFi free} map of channels (0 to 6) and (20 to 36), which is 2404 to 2416 MHz and 2446 to 2478 MHz. This map was based on the interference noticed in figure \ref{fig:Intf}.
 
 \paragraph{802.15.4} In case of 802.15.4, Null-RDC layer was modified to send packets with maximum payload size as soon as possible. One node is configured as transmitter and the other as receiver, with the data rate measured at the receiver. A payload of 110 byte was necessary for the link layer to achieve the maximum 127 byte packet size.
 
@@ -124,7 +126,7 @@ sky = Tmote-Sky;	nrf = nrf51822;	N4 = Nexus4; 		N7 = Nexus7;
 
 % % % % % % % % % % % % SECTION % % % % % % % % % % % % 
 \section{\acrfull{rr} Test Design} \label{6RRdesign}
-The \gls{rr} test aims to determine the latency for reading data from another node as explained in the latency paragraph in section \ref{6Metrics}. In this tests also the time the radio is switched on is logged in both the nodes to calculate \gls{rdc} to interpret the energy consumption. The idea is to find the relation between energy consumption and latency based on different link layer configurations. Thus, the metrics evaluated in this test are latency and energy consumption.
+The \gls{rr} test aims to determine the latency for reading data from another node as explained in the latency paragraph in section \ref{6Metrics}. In all the tests the nodes were kept at a distance less than 10 cm from one another, since the tests we aimed to reflect an error-free environment. In this tests also the time the radio is switched on is logged in both the nodes to calculate \gls{rdc} to interpret the energy consumption. The idea is to find the relation between energy consumption and latency based on different link layer configurations. Thus, the metrics evaluated in this test are latency and energy consumption.
 
 \begin{figure}[h]
 \centering
@@ -133,7 +135,7 @@ The \gls{rr} test aims to determine the latency for reading data from another no
 \label{fig:RRTest}
 \end{figure}
 
-The design of the test for both the protocols is shown in a generic diagram in figure \ref{fig:RRTest}. A latency measurement is done in every 1.5 second period, repeated thousand times. The link layer will be sent a `read-request' packet from its upper layer after a random time in the first 0.5 second slot of this 1.5 second period, represented by `\#' in figure \ref{fig:RRTest}. This randomization of the issuing of the read request (`\#' event) ensures that is there is any periodic communication between the nodes, the thousand measurements of latency will provide the range of values that can expected with a particular scenario along with the power consumption. As explained in the latency paragraph in section \ref{6Metrics}, the latency measurement is the difference of the time between the `\&' and `\#' events shown in figure \ref{fig:RRTest}.
+The design of the test for both the protocols is shown in a generic diagram in figure \ref{fig:RRTest}. A latency measurement is done in every 1.5 second period, repeated thousand times. The link layer is sent a `read-request' packet from its upper layer after a random time in the first 0.5 second slot of this 1.5 second period, represented by `\#' in figure \ref{fig:RRTest}. This randomization of the issuing of the read request (`\#' event) ensures that is there is any periodic communication between the nodes, the thousand measurements of latency will provide the range of values that can expected with a particular scenario along with the power consumption. As explained in the latency paragraph in section \ref{6Metrics}, the latency measurement is the difference of the time between the `\&' and `\#' events shown in figure \ref{fig:RRTest}.
 
 
 \paragraph{\gls{ble} }
@@ -156,7 +158,7 @@ In case of \gls{ble} , the use case used for the latency test is a central devic
 	\caption{Test modes for measuring latency using \gls{ble}}
 \end{figure}
 
-In all the tests, the complete payload of 20 bytes for the \gls{att} layer was used, which corresponds to 27 byte in the link layer. Two connection intervals of 7.5 ms and 125 ms were used for the tests. The `supervision timeout' for all the tests was 1.5 second. For each 'connection interval', tests were conducted with two different `slave latency' parameter. The table \ref{tbl:RRTestsBLE} shows these values and the configuration for all the test cases in \gls{rr} test using \gls{ble}  with the intent to find the effect of the link layer configuration on the latency. By using different `slave latency' values, the energy consumption of the asymmetric connecting devices can be evaluated.
+In all the tests, the complete payload of 20 bytes for the \gls{att} layer was used, which corresponds to 27 byte in the link layer. Two connection intervals of 7.5 ms and 125 ms were used for the tests. For each 'connection interval', tests were conducted with two different `slave latency' parameter. The table \ref{tbl:RRTestsBLE} shows these values and the configuration for all the test cases in \gls{rr} test using \gls{ble}. The intent here is to find the effect of the link layer configuration on the latency. By using different `slave latency' values, the energy consumption of the asymmetric connecting devices can be evaluated. The value of the non-zero slave latency value is decided such that the worst case theoretical latency in a error free environment is less than one second. This is the reason for choosing the `supervision timeout' of 1.5 s.
 
 \begin{table}[h]
 \begin{center}
@@ -179,6 +181,6 @@ In all the tests, the complete payload of 20 bytes for the \gls{att} layer was u
 \end{table}
 
 \paragraph{802.15.4}
-In the case of 802.15.4, one node is configured to send unicast messages and another is configured to receive these and send a response. The latency using both ContikiMAC and NullRDC will be measured. ContikiMAC uses the default 125 ms wake up interval for the receiver. For payload size is same as in the test cases with \gls{ble}  for comparing the latency for the same payload. The \gls{ble} test cases are designed such that the 7.5 \si{\milli\second} tests can compare with Null-RDC test of 802.15.4 while the 125 \si{\milli\second} tests can compare with the ContikiMAC test of 802.15.4.
+In the case of 802.15.4, one node is configured to send unicast messages and another is configured to receive these and send a response. The latency was measured using both ContikiMAC and Null-RDC. ContikiMAC uses the default 125 ms wake up interval for the receiver. For payload size is same as in the test cases with \gls{ble}  for comparing the latency for the same payload. The \gls{ble} test cases are designed such that the 7.5 \si{\milli\second} connection interval tests can compare with Null-RDC test of 802.15.4 while the 125 \si{\milli\second} connection interval tests can compare with the ContikiMAC test of 802.15.4.
 
 The sending of the unicast packet and getting its response followed the same thousand iterations of 1.5 s intervals containing a 0.5 s period where the packet was randomly requested to be sent. The latency measurement happens as illustrated by figure \ref{fig:LatencyDef} used to define the term latency in section \ref{6Metrics}.

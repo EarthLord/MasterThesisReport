@@ -11,6 +11,7 @@
 \setcounter{secnumdepth}{3}
 
 \usepackage[long,nodayofweek]{datetime}
+\newdate{date}{25}{08}{2014}
 
 \usepackage{siunitx}
 \usepackage[ampersand]{easylist}
@@ -43,6 +44,7 @@
 \loadglsentries[main]{Abbreviations}
 \makeglossaries
 
+% % % % % % % % % % Symbols for footnotes
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 
 \usepackage[hidelinks]{hyperref}
@@ -54,55 +56,113 @@
 \newcommand{\hsp}{\hspace{10pt}}
 \titleformat{\chapter}[hang]{\huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
 
-% % % % % % % % % % Symbols for footnotes
-
-
-% Title Page
-\title{Master Thesis Report}
-\author{PrithviRaj Narendra}
-
-
 \begin{document}
-
-%\maketitle
 
 \begin{titlepage}
 \thispagestyle{empty}
+\pagenumbering{gobble}
 \begin{center}
-%  \includegraphics[height=6cm]{kth_cmyk_info_comm_tech}\\
+
   \vspace{.5cm}
-  \huge{\sc KTH Royal Institute of Technology}\\
-  \vspace{.5cm}
-%  \Large{\sc Dept. of Software and Computer Systems}\\
-  \vspace{3.5cm}
-  \large Master Thesis Report\\
+  \Huge{Comparison of BLE and 802.15.4}\tiny{}\\
+  \vspace{0.3cm}
+  \begin{tikzpicture}
+	\draw[gray,ultra thick] (0,0) -- (14,0);
+  \end{tikzpicture}\\
+  \vspace{0.2cm}
+  \LARGE{\textit{Running on Contiki OS}}\\
+  \vspace{2cm}
+  \Large{Master Thesis}\\
+  
+
   \vspace{2cm}		
-  \LARGE{Title involving \{BLE, 802.15.4, Contiki\}}
-  \vspace{4.5cm} 
+  \LARGE{PrithviRaj Narendra}
+  \vspace{3.5cm} 
+  
+  \large{\textit{Supervisor}}\\
+  \LARGE{Simon Duquennoy}\\
+  \vspace{0.2cm}
+  \Large{Senior Researcher, SICS}\\
+  \vspace{2cm}
+  
+  \large{\textit{Academic Examiner}}\\
+  \LARGE{Mats Brorsson}\\
+  \vspace{0.2cm}
+  \Large{Professor, KTH}\\
+  \vspace{2cm}
 
-\begin{tabular}{ll} 
-\noindent Author: & PrithviRaj Narendra \\
-					& \\
-\noindent Supervisors: & Simon Duquennoy \\ 
-					   & \\
-													
-\indent Examiner:  & Prof. Mats Brorsson, KTH, Sweden\\ 
-
-\end{tabular}
+\large
+EIT ICT Labs Master School Embedded Systems Program\\
+School of Information and Communication Technology\\
+KTH Royal Institute of Technology\\
+Stockholm, Sweden\\
+\vspace{1cm}
+\displaydate{date}
+\\
 \end{center} 
+
 \end{titlepage}
 
-\begin{abstract}
-Hello Abstract.
-\end{abstract}
+\newpage\null\thispagestyle{empty}\newpage
+
+\thispagestyle{plain}
+\pagenumbering{roman}
+\phantomsection
+\addcontentsline{toc}{chapter}{Abstract}
+\huge{\textbf{Abstract}} \\
+\normalsize \\
+Hello Abstract. 
+\clearpage
+
+\newpage\null\thispagestyle{empty}\newpage
+
+\thispagestyle{plain}
+\phantomsection
+\addcontentsline{toc}{chapter}{Sammanfattning}
+\huge{\textbf{Sammanfattning}} \\
+\normalsize \\
+Hello Sammanfattning.
+\clearpage
+
+\newpage\null\thispagestyle{empty}\newpage
+
+\thispagestyle{plain}
+\phantomsection
+\addcontentsline{toc}{chapter}{Acknowledgment}
+\huge{\textbf{Acknowledgment}} \\
+\normalsize \\
+Hello Acknowledgment
+\clearpage
+
+\newpage\null\thispagestyle{empty}\newpage
 
 \tableofcontents
+\null
+\vfill
+\begin{wrapfigure}{r}{0.25\textwidth}
+\vspace{-30pt}
+  \begin{center}
+	\includegraphics[width=0.22\textwidth]{cc-by}
+  \end{center}
+\end{wrapfigure}
+\noindent
+{\large This work is licensed under a \href{http://creativecommons.org/licenses/by/4.0/}{Creative Commons Attribution 4.0 International License}.}
+
 
 \glsnogroupskiptrue
 \renewcommand{\glsnamefont}[1]{\textbf{#1}}
 \setlength{\glsdescwidth}{0.8\hsize}
 \printglossary[style=long,title=List of Abbreviations,type=\acronymtype]
+\clearpage
 
+\addcontentsline{toc}{chapter}{\listfigurename}
+\listoffigures
+\clearpage
+\addcontentsline{toc}{chapter}{\listtablename}
+\listoftables
+\clearpage
+
+\pagenumbering{arabic}
 \input{Introduction.tex}
 \input{Background.tex}
 \input{Methodology.tex}
