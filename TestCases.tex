@@ -78,7 +78,15 @@ To verify that the interference was created and to know which frequency range wa
 % % % % % % % % % % % % SECTION % % % % % % % % % % % % 
 
 \section{\acrfull{ht} Test Design} \label{6HTdesign}
-\gls{ht} test aims to measure the maximum possible data rate of \gls{ble} and 802.15.4 at the LL with and without WiFi interference. For both protocols, the link layer contains the maximum payload allowed. Each run of the test will last for one minute to collect enough data to calculate the mean data rate. In each of the tests, the amount of time the radio is switched on (\gls{rdc}), either transmitting or receiving, is logged to measure the energy consumption. The metrics measured in this test are data rate, reliability and energy consumption. The two nodes were kept 1 m apart and in case of environment with interference, the router to which the \gls{udp} packets were sent over WiFi was about 3 m from these nodes.
+\gls{ht} test aims to measure the maximum possible data rate of \gls{ble} and 802.15.4 at the LL with and without WiFi interference. For both protocols, the link layer contains the maximum payload allowed. Each run of the test will last for one minute to collect enough data to calculate the mean data rate. In each of the tests, the amount of time the radio is switched on (\gls{rdc}), either transmitting or receiving, is logged to measure the energy consumption. The metrics measured in this test are data rate, reliability and energy consumption. The two nodes were kept 1 m apart and in case of environment with interference, the router to which the \gls{udp} packets were sent over WiFi was about 2.5 m from these nodes.
+
+\begin{figure}[h]
+\def\svgwidth{\columnwidth}
+\input{./Images/layout.pdf_tex}
+%\includegraphics[width=\textwidth]{layout}
+\caption{Test setup for \gls{ht} test cases}
+\label{fig:layout}
+\end{figure}
 
 \begin{wrapfigure}{r}{0.53\textwidth}
 	\vspace{-15pt}
@@ -162,6 +170,7 @@ In all the tests, the complete payload of 20 bytes for the \gls{att} layer was u
 
 \begin{table}[h]
 \begin{center}
+\vspace{5pt}
     \begin{tabular}{|l|l|l|l|}
 \hline Test Case & Connection Interval & Slave Latency & Test Mode \\
 \hline 7.5\_0\_r & 7.5 ms              & 0             & Read      \\
