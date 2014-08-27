@@ -1,0 +1,10 @@
+ digraph scan_interval{
+  start [shape = oval,label ="Function called at the \nbeginning of a scan interval"]
+ 	led_on [shape = box,label ="1. Switch on the red LED
+2. Reset the received packet counter
+3. Cyclically switch the radio to the next advertisement channel
+4. Switch on the radio reception
+5. Start the one shot timer with the length of the scan window"]
+ 	stop [shape = oval, label ="Return"]
+ 	start->led_on->stop;
+ }

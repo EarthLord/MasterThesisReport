@@ -1,0 +1,9 @@
+ digraph scan_window{
+  start [shape = oval,label ="Function called at the \nend of a scan window"]
+ 	led_off [shape = box,label ="1. Disable the radio
+2. Print the information of all the
+packets received based on the counter
+3. Switch off the red LED"]
+ 	stop [shape = oval, label ="Return"]
+ 	start->led_off->stop;
+ }

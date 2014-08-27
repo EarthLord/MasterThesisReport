@@ -1,0 +1,9 @@
+  digraph main_flow {
+ 	a [shape = oval, label = "On restart"]
+ 	b [shape = record, label = <Initiation of the peripherals used<br></br><I>HF and LF clock<br></br>Profile Timer<br></br>Milli-second Timer<br></br>UART peripheral<br></br>Radio for continuously observing</I>>]
+ 	c [shape = parallelogram, label = "Print the welcome message"]
+ 	d [shape = box, label = "Set the UART receive handler"]
+ 	e [shape = oval, label = "Sleep and wait for interrupt"]
+ 
+ 	a -> b -> c -> d -> e;
+   }

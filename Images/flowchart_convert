@@ -1,0 +1,12 @@
+#!/bin/bash
+
+dot -v -Tsvg main_chart.dot -o main_chart.svg
+inkscape -z -D -f main_chart.svg -A main_chart.pdf
+dot -v -Tsvg scanWindow_chart.dot -o scanWindow_chart.svg
+inkscape -z -D -f scanWindow_chart.svg -A scanWindow_chart.pdf
+dot -v -Tsvg scanInterval_chart.dot -o scanInterval_chart.svg
+inkscape -z -D -f scanInterval_chart.svg -A scanInterval_chart.pdf
+dot -v -Tsvg UartISR_chart.dot -o UartISR_chart.svg
+inkscape -z -D -f UartISR_chart.svg -A UartISR_chart.pdf
+dot -v -Tsvg RadioISR_chart.dot -o RadioISR_chart.svg
+inkscape -z -D -f RadioISR_chart.svg -A RadioISR_chart.pdf
