@@ -18,18 +18,19 @@ The execution of the program starts with the main function after reset as depict
 \begin{figure}[h]
 \centering
 \vspace{80pt}
-\includegraphics[scale=0.85]{main_chart}
+\includegraphics[scale=0.8]{main_chart}
 \caption{Main function flowchart}
 \vspace{80pt}
 \label{fig:main_chart}
 \end{figure}
+\clearpage
 
 \subsection{UART String Receive Handler}
 The UART String Receive handler which gets a string sent to the \gls{soc} through an unsigned character pointer checks if the string is either \texttt{START} or \texttt{STOP} so that the scanning of the advertisements can be started or stopped respectively.
 \begin{figure}[h]
 \centering
 \vspace{50pt}
-\includegraphics[scale=0.85]{UartISR_chart}
+\includegraphics[scale=0.8]{UartISR_chart}
 \caption{UART string receive handler flowchart}
 \vspace{51pt}
 \label{fig:UartISR_chart}
@@ -41,7 +42,7 @@ The scan interval timer is a repetitive timer with an interval equal to the scan
 \begin{figure}[h]
 \centering
 \vspace{20pt}
-\includegraphics[scale=0.85]{scanInterval_chart}
+\includegraphics[scale=0.8]{scanInterval_chart}
 \caption{Scan interval timer handler flowchart}
 \label{fig:scanInterval_chart}
 \end{figure}
@@ -51,19 +52,22 @@ The scan window timer is a single shot timer with an interval equal to the scan 
 \begin{figure}[h]
 \centering
 \vspace{20pt}
-\includegraphics[scale=0.85]{scanWindow_chart}
+\includegraphics[scale=0.8]{scanWindow_chart}
 \caption{Scan window timer handler flowchart}
 \label{fig:scanWindow_chart}
 \end{figure}
+\clearpage
 
 \subsection{Radio Interrupt Routine}
-The radio peripheral is configured such that the end of a packet and the end of \acrshort{rssi} measurement trigger the interrupt. At the end of a packet, the packet's data is collected if there is space in the buffer. At the end of the \acrshort{rssi} measurement the \acrshort{rssi} value is saved.
+The radio peripheral is configured such that the end of a packet and the end of \acrshort{rssi} measurement trigger the interrupt. At the end of a packet, the packet's data is collected if there is space in the buffer. At the end of the \acrshort{rssi} measurement the \acrshort{rssi} value is saved. Note that when receiving a packet the `end of RSSI measurement' event happens before the `end of packet' event. 
+
 \begin{figure}[h]
 \centering
-\vspace{10pt}
-\includegraphics[scale=0.85]{RadioISR_chart}
+\vspace{-10pt}
+\includegraphics[scale=0.78]{RadioISR_chart}
 \caption{Radio interrupt routine flowchart}
 \label{fig:RadioISR_chart}
+\vspace{-10pt}
 \end{figure}
 
 \chapter{Appendix | \gls{ble} \gls{soc} Comparison} \label{ApdxSoC}
