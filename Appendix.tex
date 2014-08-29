@@ -1,4 +1,15 @@
-\chapter{Appendix | Advertisement Logger's Implementation} \label{ApdxAdvLog}
+\chapter{Contiki Folder and Makefile Structure}
+
+\section{Folder structure of Contiki}
+When porting a new platform to Contiki, the three folders inside a Contiki distribution where additions need to be made are cpu, examples and platform. The content in these folders are as described below. The location of the Contiki distribution is represented by the path `CONIKI'. The port of nrf51822 \gls{soc} with its PCA10000 board also follows this convention.
+
+\paragraph{CONTIKI/cpu}In this folder, all the files contain implementation which is solely dependent on the \gls{soc} is present. This includes the code for the processor abstraction, the drivers of the peripherals of the \gls{soc}, makefile with commands for compiling and linking the code, linker file and the documentation of these implementation. The boot-loader  or start-up code, if required is also present here. The peripheral drivers for peripherals such as timers and serial port must use the \gls{api} format of Contiki so that the libraries of Contiki using these peripherals can operate correctly. The exact implementations of these drivers is explained in section \ref{peripheralsContiki}. 
+
+\paragraph{CONTIKI/platform} An \gls{soc} over time has increasing number of boards or systems that are based on it and these are referred as platforms in this folder. Every board has its own folder in this platform folder which contains files which contain implementation which is dependant on the particular board. These include the specification of the connections to the LEDs, buttons, sensors and serial ports, power sources, the clock sources, memories present and any other board specific details. Any peripheral driver implementation specific to the board is present here. The default project specifications such as the source and frequency of clock and serial baud-rate are defined here. The main function where the execution of the program starts and initialization of all the peripherals and libraries used by Contiki happens is present here.
+
+\paragraph{CONTIKI/examples} The examples folder contains all the files related to projects that are implemented using Contiki with any of the supported hardware platforms. The makefile where the make command is executed is present here. The compiled object and binary files are also stored here. The default specifications of the platform can be overridden by creating a \texttt{project-conf.h} in the specific example.
+
+\chapter{Advertisement Logger's Implementation} \label{ApdxAdvLog}
 
 \section{Scanning \gls{ble} Advertisements}
 
@@ -82,7 +93,7 @@ NA \hspace{10pt}: The information is not available
 
 \includepdf[pagecommand={\begin{tikzpicture} [remember picture,overlay] \node at (7.4,-17) {}; \end{tikzpicture}}]{BLE_SoCs.pdf}
 
-\chapter{Appendix | Data Acquired} \label{ApdxData}
+\chapter{Data Acquired} \label{ApdxData}
 
 The entire data acquired and results computed for both High-Throughput test and Request-Response test can be found in the tables in the following pages.
 

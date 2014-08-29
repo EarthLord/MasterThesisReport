@@ -2,50 +2,80 @@
 \usepackage[margin=1in]{geometry}
 \usepackage[T1]{fontenc}
 \usepackage[utf8]{inputenc}
-%\usepackage{lmodern}
+
+% Use Helvetica font
 \renewcommand{\familydefault}{\sfdefault}
 \usepackage{helvet}
-\usepackage{fancyhdr}
-\usepackage{pdflscape}
+
+% To include external pdf pages
 \usepackage{pdfpages}
-%\usepackage[latin1]{inputenc}
+% To use landscape mode
+\usepackage{pdflscape}
+
+%To use numbering for section, subsection and subsubsection
 \setcounter{secnumdepth}{3}
 
+%For title page date
 \usepackage[long,nodayofweek]{datetime}
 \newdate{date}{12}{09}{2014}
 
+%To add SI units symbol such as micro-second 
 \usepackage{siunitx}
-\usepackage{tcolorbox}
+
+%To create lists easily to good depth
 \usepackage[ampersand]{easylist}
+
+%Fancy box which can include easylist inside
+\usepackage{tcolorbox}
+
+%To create inline lists
 \usepackage[inline]{enumitem}
+
+%To create multicolumn lists
 \usepackage{multicol}
    
-
-% % % % % % % % % % Helpers
+%To make inline todo markers which can be listed elsewhere
 \usepackage{easy-todo}
 
 % % % % % % % % % % Figure
 \usepackage{graphicx}
 \usepackage{tikz}
+\usetikzlibrary{shapes}
+
+% To make an image come on top of an empty page 
 \makeatletter
 \setlength{\@fptop}{0pt}
 \makeatother
 
+%Use captions and subcaptions in subfigures
 \usepackage{caption}
 \usepackage{subcaption}
-\usetikzlibrary{shapes}
+
+%To insert images taking part of the page, text on the other
 \usepackage{wrapfig}
+
+%Path where includegraphics searches for images
 \graphicspath{ {Images/} }
 
-\usepackage[backend=biber,citestyle=ieee,doi=false,isbn=false]{biblatex} 
+%Citation engine
+\usepackage[backend=biber,citestyle=ieee,urldate=long,doi=false,isbn=false]{biblatex} 
+
+%Source for citation
 \addbibresource{./Bibliography/Thesis.bib}
 
+%Use 'Retrieved on' for webpages cited
+\DefineBibliographyStrings{english}{%
+urlseen = {Retrieved on},
+}
+
+%Include url and url date only for misc entries
 \AtEveryBibitem{\ifentrytype{misc}{}{
     \clearfield{url}
     \clearfield{urldate}
   }
 }
 
+%
 \usepackage[nonumberlist,acronym,toc,shortcuts]{glossaries}
 \robustify{\gls}% Make \gls not fragile
 \loadglsentries[main]{Abbreviations}
@@ -54,14 +84,21 @@
 % % % % % % % % % % Symbols for footnotes
 \renewcommand*{\thefootnote}{\fnsymbol{footnote}}
 
+%Use hyperlink without highlighting
 \usepackage[hidelinks]{hyperref}
+
+%To point to the top of image/table on clicking a reference
 \usepackage[all]{hypcap}
+
+\usepackage[titletoc]{appendix}
+
 
 % % % % % % % % % %Chapter Title Encoding
 \usepackage{titlesec, blindtext, color}	
 \definecolor{gray75}{gray}{0.75}
 \newcommand{\hsp}{\hspace{10pt}}
-\titleformat{\chapter}[hang]{\huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
+\renewcommand\chaptername{}
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\chaptername\hsp\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
 
 \begin{document}
 
@@ -81,6 +118,9 @@
 
 \printbibliography[title={References}]
 
-\appendix
+\renewcommand\chaptername{Appendix}
+%Start appendix mode
+\begin{appendices}
 \input{Appendix.tex}
+\end{appendices}
 \end{document}          

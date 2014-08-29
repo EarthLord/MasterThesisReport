@@ -15,6 +15,7 @@ Data rate at the link layer is defined as the maximum amount of data transmitted
 \begin{wrapfigure}{r}{0.52\textwidth}
 	\vspace{-10pt}
 	\centering
+	\capstart
 	\includegraphics{LatencyDef}
 	\caption{Illustration of latency measurement}
 	\vspace{-10pt}
@@ -47,8 +48,6 @@ Communication was done at the Generic Attribute (GATT) layer because the binary 
 \end{figure}
 
 Tmote-Sky platform, which is widely used and supports all the features of Contiki was used as the platform to test 802.15.4 performance. Shown in figure \ref{fig:TmoteSky}, Tmote-Sky is based on MSP430-F1611 \gls{mcu} and  CC2420 2.4 GHz transceiver. It has a USB to serial converter on board to allow the MSP430 \gls{mcu} to communicate with the serial port of a computer. It has additional sensors, buttons and memory which are not used in this project. The transmission power was unchanged from the default value of 0 dBm. The `energest' module of Contiki was used to log the radio on and total time to calculate the energy consumption in terms of \gls{rdc}. 
-
-
 
 \subsection{WiFi Interference}
 In some of the tests described in the following sections, WiFi interference needed to be created to test the reliability of the wireless protocols with external interference. A open-source tool called \texttt{iperf} was used for creating this interference by sending \gls{udp} packets to the IP address of a router. The computer and router used are ThinkPad T420 and Netgear N300 router respectively, both supporting WiFi 802.11b/g/n standard. The aim of the interference pattern is to simulate streaming of large amount of data over WiFi. This was achieved by this command:
@@ -94,6 +93,7 @@ To verify that the interference was created and to know which frequency range wa
 \begin{wrapfigure}{r}{0.53\textwidth}
 	\vspace{-20pt}
 	\centering
+	\capstart
 	\includegraphics{DataRateSetup.pdf}
 	\caption{Setup to measure data rate with \gls{ble}}
     \label{fig:DataRateSetup}
