@@ -1,19 +1,19 @@
 digraph radio_isr{
- start [shape=oval, label="Start of the Radio's interrupt routine"]
- is_end [shape=diamond, label="Is it a packet end event?"]
- is_rssiend [shape=diamond, label="Is it a RSSI measure end event?"]
- check_ptr [shape=diamond, label="Is there still\nspace in the buffer?"]
+ start [shape=oval, label="Start of the Radio's interrupt routine",fontname = "Helvetica Neue"]
+ is_end [shape=diamond, label="Is it a packet end event?",fontname = "Helvetica Neue"]
+ is_rssiend [shape=diamond, label="Is it a RSSI measure end event?",fontname = "Helvetica Neue"]
+ check_ptr [shape=diamond, label="Is there still\nspace in the buffer?",fontname = "Helvetica Neue"]
  collect [shape = box, label="1. Copy the contents of the received\npacket, RSSI value, Channel number,\nCRC status and time-stamp to the buffer
-2. Increment the received packet pointer"]
- rssi [shape = box, label="Store the measured RSSI value"]
- return [shape = oval, label="Return from the interrupt routine"]
+2. Increment the received packet pointer",fontname = "Helvetica Neue"]
+ rssi [shape = box, label="Store the measured RSSI value",fontname = "Helvetica Neue"]
+ return [shape = oval, label="Return from the interrupt routine",fontname = "Helvetica Neue"]
  start -> is_end;
- is_end -> check_ptr [label ="true"];
- check_ptr -> collect [label ="true"]
- check_ptr -> is_rssiend [label ="false"];
- is_end -> is_rssiend [label ="false"];
- is_rssiend -> rssi [label ="true"];
- is_rssiend -> return [label="false"];
+ is_end -> check_ptr [label ="true",fontname = "Helvetica Neue"];
+ check_ptr -> collect [label ="true",fontname = "Helvetica Neue"]
+ check_ptr -> is_rssiend [label ="false",fontname = "Helvetica Neue"];
+ is_end -> is_rssiend [label ="false",fontname = "Helvetica Neue"];
+ is_rssiend -> rssi [label ="true",fontname = "Helvetica Neue"];
+ is_rssiend -> return [label="false",fontname = "Helvetica Neue"];
  collect -> is_rssiend;
  rssi -> return;
 }

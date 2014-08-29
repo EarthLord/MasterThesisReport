@@ -1,11 +1,61 @@
 \chapter{Other Contributions}
 
-\section{Firmware for demo application}
+\section[Advertisement Logger]{Advertisement Logger\footnote{Available at \url{https://github.com/EarthLord/nrf51AdvLogger} with Doxygen documentation}} \label{8AdvLogger}
 
+During the exploration phase of the thesis, the plan was to implement the required parts of the link layer of \gls{ble} from scratch. This included developing the entire radio driver. After looking into the radio peripheral of nrf51822 and working with it, this plan was abandoned due to lack of time to finish these tasks and the test cases. The work with the radio peripheral did result in developing a full-fledged BLE advertisement packet logger, whose interface (using CuteCom serial terminal) can be seen in figure \ref{fig:UIAdvLogger}. Detailed description can be found in Appendix \ref{ApdxAdvLog}. 
 
-
-\section{Advertisement Logger}
 \begin{figure}[h]
-\includegraphics[width=\textwidth]{AdvLogger}
+\includegraphics[width=0.97\textwidth]{AdvLogger}
 \caption{User Interface of Advertisement Logger}
+\label{fig:UIAdvLogger}
 \end{figure}
+
+\section[Firmware for an Alarm Device]{Firmware for an Alarm Device\footnote{Available at \url{https://github.com/EarthLord/contiki/tree/master/examples/PCA10000-nrf/Pillar}}}
+
+A demonstration application was developed to test the port of Contiki on the nrf51822 platform. This application consisted of an alarm device controlled by a mobile application. The PCA10000 platform was used for this development too. The operations of setting of the next alarm time, canceling the alarm and also silencing the alarm can be done from a mobile application. The \emph{Master Control Panel} application by Nordic Semiconductor was used to test all the functionality.
+
+The functioning of the alarm device with the mobile \emph{App} controlling it from a user's perspective can be seen in the state diagram in figure \ref{fig:AlarmAppDev}
+
+\begin{figure}[h]
+\centering
+\includegraphics[width=0.9\textwidth]{AlarmAppDev}
+\caption{State Diagram of an alarm device from an user's perspective}
+\label{fig:AlarmAppDev}
+\end{figure}
+
+To achieve this a custom \emph{service} was created to contain two custom \emph{characteristics}. One characteristic contained the time to the next alarm and the other characteristic contained the status of whether the alarm is set or not, both with \gls{cccd}. The details of the two characteristics are:
+
+\begin{tcolorbox}[sidebyside,colback=white,colframe=white]
+\textbf{\underline{Next alarm time (§)}}
+\begin{easylist}[itemize]
+\ListProperties(Style1*=--)
+\\• Read, write and notify allowed
+\\• \gls{cccd} to disable/enable notifications
+\\• Open link security mode
+\\• No read/write authorization required
+\\• 32-bit value
+& 0 implies no alarm set
+& Seconds to next alarm, if not 0
+\end{easylist}\tcblower
+\textbf{\underline{Alarm status (¶)}}
+\begin{easylist}[itemize]
+\ListProperties(Style1*=--)
+\\• Read and notify allowed
+\\• \gls{cccd} to disable/enable notifications
+\\• Open link security mode
+\\• No read/write authorization required
+\\• 8-bit value
+& 1 if alarm is set or ringing
+& 0 if alarm is not set
+\end{easylist}
+\end{tcolorbox}
+
+
+\begin{figure}[t!]
+\centering
+\includegraphics[width=\textwidth]{AlarmChar}
+\caption{State Diagram of an alarm appcessory controlled by BLE}
+\label{fig:AlarmChar}
+\end{figure}
+
+Apart from these characteristics, Contiki etimers and Contiki serial-line module from the Contiki port to nrf51822 are used for this alarm. Since the PCA10000 platform is used for this alarm device's development, the `ringing' of the alarm is done by flashing the \gls{led} on board and `silencing' the alarm is done by sending a string through the serial port. The state diagram in figure \ref{fig:AlarmChar} shows the implementation done for this alarm device. Note that (§) and (¶) represent the characteristics described above.

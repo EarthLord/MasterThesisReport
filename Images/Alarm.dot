@@ -1,0 +1,26 @@
+digraph fsm{
+
+    rankdir=LR;
+
+	z [shape=point];
+	a [label="Alarm not set"];
+	b [label="Alarm set,\nnot expired"];
+	c [label="Alarm expired"];
+
+	{
+		rank=source; z;
+	}
+
+	{
+		rank=same; b; c;
+	}
+
+	a->a [label="0 write to §"]
+	a->b [label="(Non-zero write to §)/\n(Start timer,\nNotify ¶ as 1)"];
+	b->b [label="(Non-zero write to §)/\n(Restart timer)"]
+	b->a [label="(0 write to §)/\n(Stop timer,\n¶ notify as 0)"];
+	c->a [label="(Serial write)/\n(LED off,\n¶ notify as 0)"];
+	b->c [label="(Timer expires)/\n(LED flashing,\n§ notify as 0)"];
+	c->c [label="(Write to §)/\n(Ignore the write,\n§ notified back as 0)"]
+	z->a [label="¶=0,§=0"];
+}

@@ -1,5 +1,3 @@
-% !TeX document-id = {9858fc54-50df-497f-b26d-1e668e0d1604}
-% !TeX TXS-program:compile = txs:///pdflatex/[--shell-escape] 
 \documentclass[a4paper,11pt]{report}
 \usepackage[margin=1in]{geometry}
 \usepackage[T1]{fontenc}
@@ -17,6 +15,7 @@
 \newdate{date}{12}{09}{2014}
 
 \usepackage{siunitx}
+\usepackage{tcolorbox}
 \usepackage[ampersand]{easylist}
 \usepackage[inline]{enumitem}
 \usepackage{multicol}
@@ -26,7 +25,12 @@
 \usepackage{easy-todo}
 
 % % % % % % % % % % Figure
-\usepackage{graphicx,tikz}
+\usepackage{graphicx}
+\usepackage{tikz}
+\makeatletter
+\setlength{\@fptop}{0pt}
+\makeatother
+
 \usepackage{caption}
 \usepackage{subcaption}
 \usetikzlibrary{shapes}

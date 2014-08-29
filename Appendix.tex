@@ -1,8 +1,8 @@
-\chapter{Appendix | Advertisement Logger's Implementation} \label{AppendixC}
+\chapter{Appendix | Advertisement Logger's Implementation} \label{ApdxAdvLog}
 
 \section{Scanning \gls{ble} Advertisements}
 
-According to the Bluetooth 4.0 Core specifications, an advertisement event consists of an advertising device periodically send advertisement packets. The interval of these advertising events can range from 20 ms to 10 s. In each of these advertising events an advertiser sends an advertising packet in each channel in an interval of 10 ms starting with channel 37. The objective of a BLE advertisement scanner would be to be able to receive the packets from at least one channel in an advertisement event, while saving power. To achieve this trade off, the radio duty cycles between receiving and disabled state, while being in the next advertising channel every time it is switched on. The total time of this periodic event is known as the \emph{Scan Interval}, while the time the radio is on is known as \emph{Scan Window}. The figure\footnote{https://devzone.nordicsemi.com/question/2535/what-is-the-minimum-time-for-a-app-and-a-peripheral-to-create-a-connection/} \ref{fig:AdvScanBLE} depicts this process.
+According to the Bluetooth 4.0 Core specifications, an advertisement event consists of an advertising device periodically send advertisement packets. The interval of these advertising events can range from 20 ms to 10 s. In each of these advertising events an advertiser sends an advertising packet in each channel in an interval of 10 ms starting with channel 37. The objective of a BLE advertisement scanner would be to be able to receive the packets from at least one channel in an advertisement event, while saving power. To achieve this trade off, the radio duty cycles between receiving and disabled state, while being in the next advertising channel every time it is switched on. The total time of this periodic event is known as the \emph{Scan Interval}, while the time the radio is on is known as \emph{Scan Window}. The figure\footnote{\href{https://devzone.nordicsemi.com/question/2535/what-is-the-minimum-time-for-a-app-and-a-peripheral-to-create-a-connection/}{https://devzone.nordicsemi.com/question/2535/what-is-the-minimum-time-for-a-app-and-a-peripheral-to-create-a-connection/}} \ref{fig:AdvScanBLE} depicts this process.
 
 \begin{figure}[h]
 \centering
@@ -66,7 +66,7 @@ The radio peripheral is configured such that the end of a packet and the end of 
 \label{fig:RadioISR_chart}
 \end{figure}
 
-\chapter{Appendix | \gls{ble} \gls{soc} Comparison} \label{AppendixA}
+\chapter{Appendix | \gls{ble} \gls{soc} Comparison} \label{ApdxSoC}
 The dense table in the next page compares many different parameters of the \gls{ble} \glspl{soc} available. This table was compiled in the first half of 2014. Because of the high pace at which the industry around \gls{ble} is progressing, many details here might not be accurate as time progresses.
 
 The legend for the table is
@@ -76,9 +76,9 @@ NA \hspace{10pt}: The information is not available
 
 - \hspace{22pt}: The feature is not available
 
-\includepdf[pagecommand={\begin{tikzpicture} [remember picture,overlay] \node at (7.4,-17) {}; \end{tikzpicture}},page=1]{BLE_SoCs.pdf}
+\includepdf[pagecommand={\begin{tikzpicture} [remember picture,overlay] \node at (7.4,-17) {}; \end{tikzpicture}}]{BLE_SoCs.pdf}
 
-\chapter{Appendix | Data Acquired} \label{AppendixB}
+\chapter{Appendix | Data Acquired} \label{ApdxData}
 
 The entire data acquired and results computed for both High-Throughput test and Request-Response test can be found in the tables in the following pages.
 

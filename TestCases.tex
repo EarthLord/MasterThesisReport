@@ -1,11 +1,12 @@
 \chapter{Test Cases} \label{6Testing}
 
-This chapter details the reasoning and design of the test cases used in this thesis. To provide a common platform for comparing \gls{ble} and 802.15.4, Contiki was ported to a platform supporting \gls{ble} as described in chapter \ref{5bleContiki}. This chapter starts off with section\ \ref{6Metrics} explaining all the metrics measured in the experiments performed. Section \ref{6TestPlatforms} follows  by explaining the test platforms and tools used. Section \ref{6HTdesign} and \ref{6RRdesign} explains the two test suite designed to measure the metrics defined.
+This chapter details the reasoning and design of the test cases used in this thesis. To provide a common platform for comparing \gls{ble} and 802.15.4, Contiki was ported to a platform supporting \gls{ble} as described in chapter \ref{5bleContiki}. This chapter starts off with section \ref{6Metrics} explaining all the metrics measured in the experiments performed. Section \ref{6TestPlatforms} follows by explaining the test platforms and tools used. Section \ref{6HTdesign} and \ref{6RRdesign} explains the two test suite designed to measure the metrics defined.
 
 % % % % % % % % % % % % SECTION % % % % % % % % % % % % 
 
 \section{Performance Metrics Definition} \label{6Metrics}
-The aim of this thesis is to compare the key characteristics of the link layer of \gls{ble}  and 802.15.4. Note that as explained in \todo{background}, 802.15.4 here means the physical layer of 802.15.4 standard. The 802.15.4 standard \gls{mac} layer is not used, rather Null-RDC and ContikiMAC was used, both with \gls{csma} layer. In this section the four key performance metrics measured for both the wireless protocols are defined in the context of this thesis.
+The aim of this thesis is to compare the key characteristics of the link layer of \gls{ble}  and 802.15.4. Note that as explained in \todo{background}, 802.15.4 here means the physical layer of 802.15.4 standard. The 802.15.4 standard \gls{mac} layer is not used, rather Null-RDC and ContikiMAC was used, both with \gls{csma} layer. The scenario looked into in this thesis is of the case where there is communication between two device, one constrained in terms of power and the other not. This is typical of \emph{appcessories}, where one device is a powerful mobile device and the other is a battery operated single purpose device.
+In this section the four key performance metrics measured for both the wireless protocols are defined in the context of this thesis.
 
 \paragraph{Data rate}
 Data rate at the link layer is defined as the maximum amount of data transmitted per second for a protocol with packets containing the maximum allowed payload for the link layer. The data rate is expressed as both kilobits per second and packets per second.
@@ -32,7 +33,7 @@ The energy consumption in this project is indirectly measured as the \acrfull{rd
 \section{Test setup} \label{6TestPlatforms}
 
 \subsection{\gls{ble} platform}
-The platform used for \gls{ble} is PCA10000, which is described in section \ref{5nrfPCA}. Since \gls{ble}  is has an asymmetric architecture, a master device is required to communicate with a slave device. In all the tests the slave device is a PCA10000 board running on Contiki and peripheral \gls{ble}  stack provided by the SoftDevice \emph{S110} version 6.0.0. Depending on the test, the master device varied between either a PCA10000 board or an Android device. When a PCA10000 was used as master device, it ran on bare-metal code with central \gls{ble} stack provided by the SoftDevice \emph{S120} version 1.0.0 \todo{why}. The transmission power was 0 dBm for all the tests using PCA10000. Nexus 7 and Nexus 4, both at Android version 4.4.4 were the Android devices used for performing certain tests.
+The platform used for \gls{ble} is PCA10000, which is described in section \ref{5nrfPCA}. Since \gls{ble}  is has an asymmetric architecture, a master device is required to communicate with a slave device. In all the tests the slave device is a PCA10000 board running on Contiki and peripheral \gls{ble}  stack provided by the SoftDevice \emph{S110} version 6.0.0. Depending on the test, the master device varied between either a PCA10000 board or an Android device. When a PCA10000 was used as master device, it ran on bare-metal code with central \gls{ble} stack provided by the SoftDevice \emph{S120} version 1.0.0. This choice of use of Contiki for slave and bare-metal code for master is consistent with the assumption that the master is unconstrained and slave is not. The transmission power was 0 dBm for all the tests using PCA10000. Nexus 7 and Nexus 4, both at Android version 4.4.4 were the Android devices used for performing certain tests.
 
 Communication was done at the Generic Attribute (GATT) layer because the binary from Nordic Semiconductor used in this project does not provide APIs to access the lower layers in both peripheral and central devices, hence evaluation at the link layer was done indirectly based on the inferences from the collected data. The default transmission power of 0 dBm was used. The radio state change notification event in the SoftDevice was enabled. This allowed logging of a timer to measure the energy consumption in terms of \gls{rdc}.
 
@@ -56,8 +57,6 @@ In some of the tests described in the following sections, WiFi interference need
 
 Where `-c 192.168.1.1' specifies that the packets are sent to the IP address specified (router's IP), `-u' to use \gls{udp} packets, `-P 1' specifies one client thread to run, `-i 1' specifies the bandwidth reporting interval as one second, `-p 5001' specifies the server port to connect to as 5001, `-f M' specifies the reporting format as MegaByte per second, `-b 54.0M' specifies the data rate to be used as 54 Megabit per second, `-t 64' specifies the transmission to happen for 64 second and `-T 1' specifies that only one hop is allowed to reach destination. Although the data rate was specified as 54 Mbps i.e. 6.75 MBps, the actual data rate of transmission reported was around 3 MBps. 
 
-To verify that the interference was created and to know which frequency range was occupied, the `rssi-scanner' project was used\footnote{Available at: http://sourceforge.net/p/contikiprojects/code/HEAD/tree/sics.se/rssi-scanner/}. This project is based on Tmote-Sky platform running on Contiki. The screen-shot of rssi-scanner shows a snapshot of the environment where the test were conducted for the cases of with and without interference in figure \ref{fig:Intf} and \ref{fig:NoIntf} respectively, where y-axis shows the signal strength measured and x-axis is the frequency of the measurement.
-
 \begin{figure}[h]
 	\begin{subfigure}[b]{1\textwidth}
 		\includegraphics[width=\textwidth]{Intf}
@@ -75,10 +74,14 @@ To verify that the interference was created and to know which frequency range wa
 	\vspace{-10pt}
 \end{figure}
 
+
+To verify that the interference was created and to know which frequency range was occupied, the `rssi-scanner' project was used\footnote{Available at: http://sourceforge.net/p/contikiprojects/code/HEAD/tree/sics.se/rssi-scanner/}. This project is based on Tmote-Sky platform running on Contiki. The screen-shot of rssi-scanner shows a snapshot of the environment where the test were conducted for the cases of with and without interference in figure \ref{fig:Intf} and \ref{fig:NoIntf} respectively, where y-axis shows the signal strength measured and x-axis is the frequency of the measurement.
+
+
 % % % % % % % % % % % % SECTION % % % % % % % % % % % % 
 
 \section{\acrfull{ht} Test Design} \label{6HTdesign}
-\gls{ht} test aims to measure the maximum possible data rate of \gls{ble} and 802.15.4 at the LL with and without WiFi interference. For both protocols, the link layer contains the maximum payload allowed. Each run of the test will last for one minute to collect enough data to calculate the mean data rate. In each of the tests, the amount of time the radio is switched on (\gls{rdc}), either transmitting or receiving, is logged to measure the energy consumption. The metrics measured in this test are data rate, reliability and energy consumption. The two nodes were kept 1 m apart and in case of environment with interference, the router to which the \gls{udp} packets were sent over WiFi was about 2.5 m from these nodes.
+\gls{ht} test aims to measure the maximum possible data rate of \gls{ble} and 802.15.4 at the LL with and without WiFi interference. For both protocols, the link layer contains the maximum payload allowed. Each run of the test will last for one minute to collect enough data to calculate the mean data rate. In each of the tests, the amount of time the radio is switched on (\gls{rdc}), either transmitting or receiving, is logged to measure the energy consumption. The metrics measured in this test are data rate, reliability and energy consumption. The two nodes were kept 1 m apart and in case of environment with interference, the router to which the \gls{udp} packets were sent over WiFi was about 2.5 m from these nodes. In the cases where an Android device is not involved, they were conducted for 10 times and the median value of the 10 was used. The test with an Android device could not be automated, so the test was conducted once.
 
 \begin{figure}[h]
 \def\svgwidth{\columnwidth}
@@ -89,12 +92,12 @@ To verify that the interference was created and to know which frequency range wa
 \end{figure}
 
 \begin{wrapfigure}{r}{0.53\textwidth}
-	\vspace{-15pt}
+	\vspace{-20pt}
 	\centering
 	\includegraphics{DataRateSetup.pdf}
 	\caption{Setup to measure data rate with \gls{ble}}
     \label{fig:DataRateSetup}
-   	\vspace{-15pt}
+%   	\vspace{-15pt}
 \end{wrapfigure}
 
 \paragraph{\gls{ble} } As shown in figure \ref{fig:DataRateSetup}, the data rate is measured by sending data from the server to the client using \emph{Notifications}, which are packets which are not acknowledged in the \gls{att} layer. Since the link layer is not accessible with the SoftDevice used, a 20 byte payload was sent at the \gls{gatt} layer as notification so that 27 byte data for the link layer's playload is achieved. The data rate is measured at the receiver i.e the Master device. 

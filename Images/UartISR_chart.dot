@@ -1,18 +1,18 @@
  digraph uart_handler_flow {
-	a [shape = oval, label = "Called with unsigned char pointer as argument"]
-	b [shape = diamond, label ="Is the received\nstring 'START?"]
-	c [shape = diamond, label ="Is the received\nstring 'STOP?"]
-	d [shape = diamond, label ="Is the\nScan-Window\nTimer running?"]
-	g [shape = box, label ="Start the repetitive timer\nwith duration of scan window"]
-	e [shape = box, label ="1. Disable the Radio\n2. Stop the Scan-Window Timer\n3. Stop the Scan-Interval Timer"]
-	f [shape = oval, label ="Return"]
+	a [shape = oval, label = "Called with unsigned char pointer as argument",fontname = "Helvetica Neue"]
+	b [shape = diamond, label ="Is the received\nstring 'START?",fontname = "Helvetica Neue"]
+	c [shape = diamond, label ="Is the received\nstring 'STOP?",fontname = "Helvetica Neue"]
+	d [shape = diamond, label ="Is the\nScan-Window\nTimer running?",fontname = "Helvetica Neue"]
+	g [shape = box, label ="Start the repetitive timer\nwith duration of scan window",fontname = "Helvetica Neue"]
+	e [shape = box, label ="1. Disable the Radio\n2. Stop the Scan-Window Timer\n3. Stop the Scan-Interval Timer",fontname = "Helvetica Neue"]
+	f [shape = oval, label ="Return",fontname = "Helvetica Neue"]
 	a -> b;
-	b -> c [label ="false"];
-	b -> d [label ="true"];
-	c -> e [label ="true"];
-	c -> f [label ="false"];
-	d -> g [label ="false"];
-	d -> f [label ="true"];
+	b -> c [label ="false",fontname = "Helvetica Neue"];
+	b -> d [label ="true",fontname = "Helvetica Neue"];
+	c -> e [label ="true",fontname = "Helvetica Neue"];
+	c -> f [label ="false",fontname = "Helvetica Neue"];
+	d -> g [label ="false",fontname = "Helvetica Neue"];
+	d -> f [label ="true",fontname = "Helvetica Neue"];
 	e -> f;
 	g -> f;
  }
