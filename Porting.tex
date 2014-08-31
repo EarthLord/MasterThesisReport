@@ -72,7 +72,9 @@ A \gls{sdk} is provided for nrf51822 which contains the peripheral drivers, exam
 
 \section[Porting PCA10000 platform of nrf51822 to Contiki]{Porting PCA10000 platform of nrf51822 to Contiki\footnote{Available at \url{https://github.com/EarthLord/contiki} with complete Doxygen documentation}} \label{5Porting}
 
-\subsection{Development Setup}
+This section describes the process of porting Contiki to a new platform, specifically the nrf51822 based PCA10000. The development setup is described in section \ref{DevSetup} and the implementation of the peripheral drivers is described in section \ref{peripheralsContiki}. Additional information of the folder and makefile structure of Contiki can be found in section \ref{ApdxFolder} and \ref{ApdxMakefile} in Appendix \ref{ApdxContiki}
+
+\subsection{Development Setup} \label{DevSetup}
 Contiki was initially developed in a Linux based operating system, although Windows is also supported now. The porting of PCA10000 platform to Contiki was done in Ubuntu 13.10 and 14.04. The compiler suite used is GNU Tools for ARM Embedded Processors Version 4.8.3. The program used for programming the binary files compiled was SEGGER J-Link Commander V4.90 using the Segger JLink programmer on PCA10000. The front end used to write the code is the Eclipse IDE for C/C++ Developers Version Kepler Service Release 1 and Sublime Text. The porting was done to Contiki version 3.x, which is under active development.
 
 \subsection{Peripherals required for Contiki}\label{peripheralsContiki}
@@ -105,29 +107,3 @@ For receiving the data from the the \emph{serial-line} module of Contiki is used
 \paragraph{Radio} 
 
 Since the radio peripheral is completely controlled by the SoftDevice for implementing the \gls{ble} stack, it is untouched in this port. To use the radio peripheral, the \glspl{api} provided by the SoftDevice is used. To see the work done in this thesis regarding the radio peripheral, refer section \ref{8AdvLogger}.
-
-%\subsection{Makefile structure of Contiki}
-%
-%\textbf{Introduction to makefile and include.}
-%There are multiple makefiles present across different folders that are included in the way shown in figure \ref{MakefileLevel} to form the complete makefile. In the most basic form these are the makefile in the example folder, `makefile.include' in the Contiki root folder, `makefile.TARGET' in the specific platform folder and `makefile.CPU' in the specific cpu folder, where TARGET and CPU are specific to the project. The port of Contiki to nrf51822's platform follows this convention too.
-%
-%\begin{figure}[h]
-%\centering
-%\def\svgwidth{0.93\columnwidth}
-%\input{./Images/MakefileLevel.pdf_tex}
-%\vspace{-10pt}
-%\caption{Structure of Makefile inclusion in Contiki \gls{os} to form an example specific one}
-%\label{MakefileLevel}
-%\end{figure}
-%
-%%Makefile where the project is present i.e. in the example folder
-%%-Makefile indicating the target platform (if not already specified)
-%%-Makefile.include in root CONTIKI directory
-%%--Makefile of applications, if any are required
-%%--Makefile of the target, present in the platform directory
-%%---Makefile of the \gls{soc}, present in the cpu directory
-%
-%The makefile in the project specific example folder, the different project source files are specified and the `makefile.include' present in the root CONTIKI folder is added. `makefile.inlcude' glues together all the required components of Contiki and provides the default implementation of compiling and linking. The target makefile in the specific platform directory is included here. In `makefile.TARGET' the source files present in this directory are added, any Contiki modules required are added and the \gls{soc} or \gls{mcu} makefile in the specific directory is added. The \gls{soc} or \gls{mcu} makefile adds all the source files present in the CPU directory, specifies the command for compiling the code, linking the objects generated, uploading the executable binary or hex file.
-%
-%The makefile in the example folder is where the make command is called. The operations that can be performed with this make command depends on the makefile. Usually the operations are cleaning (removing the object and binary files), compiling the source files into object files , linking these object files to create an executable file, creating a binary file from this executable file, uploading the binary to the \gls{soc} to start execution and so on. For the nrf51822 \gls{soc} additional operations of uploading the SoftDevice and erasing the flash are supported.
-%

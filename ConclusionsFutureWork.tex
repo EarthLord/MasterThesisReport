@@ -1,2 +1,25 @@
 \chapter{Conclusion and Future Work}
 
+\section{Conclusion}
+
+Contiki is ported to a BLE based platform, namely nrf51822 \gls{soc} based PCA10000. nrf51822 was chosen as the \gls{soc} to work with after comparing various commercially available \glspl{soc} in many criteria based on the formulated requirements of the platform. The port allowed all the basic peripherals of nrf51822 to be controlled by Contiki's libraries such as etimer, rtimer, serial-line and LEDs.  The radio was not included in the port since the radio was controlled by a SoftDevice binary for BLE operations and also since the Contiki radio \glspl{api} are not compatible with BLE operations. The test cases and the alarm application developed with the Contiki verify its working.
+
+Two test suites were designed to compare four metrics of the link layer of BLE and 802.15.4, where 802.15.4 refers to use fof 802.15.4 physical layer and used of ContikMAC and Null-RDC \gls{mac} layers. The conducted test cases resulted in the following insights:
+
+\begin{easylist}[itemize]
+& The absolute data rate achievable with 802.15.4 is higher than BLE on the account of the greater link-layer payload size, which is 110 byte for 802.15.4 and 27 byte for BLE.
+& The highest data rate achieved with 802.15.4 is when \gls{cca} wasn't used (155 kbps), followed by communicating with a channel not overlapping with external interference using \gls{cca} (148 kbps) and the case where the channel was interfered with WiFi signals was where the data rate recorded was least for 802.15.4 (61 kbps).
+& In case of BLE, the highest data rate was recorded when communicating with an Android device (86 kbps), since the master device allowed multiple packets to be communicated in a connection interval. The data rate achieved between PCA10000 nodes was in-line with the theoretically calculated data rate when there was no external interference and when WiFi free channel map was used (29 kbps). Seen here is that if \gls{afh} is implemented, there is no degradation in the data rate in the presence of external interference. When there was WiFi interference and the complete channel map was used, the data rate dropped to 23 kbps.
+& The data rate achieved in BLE communication depends highly on the stack, which limits the deciding parameters of connection interval and packets communicated consistently in each connection interval.
+& \gls{cca} operation in 802.15.4 has greater efficiency in case of low external interference (99\% \gls{prr}) as compared to high external interference  (79\% \gls{prr}).
+& The acknowledgment scheme of BLE does result in 100\% \gls{pdr} for the layers above the link layer in all cases. The \gls{prr} with BLE is greater than 99\% when there was no external interference and when WiFi free channel map was used. 80\% \gls{prr} was achieved when all the channel map was used with external interference, which shows that narrow band interference affects only a small portion of the communication.
+& When one packet was communicated per connection interval, the \gls{rdc} was between 26 and 29\%. This value increased to about 44\% when an average of 3 packets were communicated per connection event.
+& Null-RDC and ContikiMAC achieved a latency of 24 ms and 90 ms respectively for a read-response operation. ContikiMAC achieved this latency with the destination node achieving only 1.3\% \gls{rdc}.
+& The latency measurement with BLE nodes ranged from 14 ms to 750 ms depending on the configuration. The variation of the symmetric of the connection can illustrated in the case where the slave devices energy consumption drops drastically without change in the latency when using indication packets. This can result in cases where 14 ms latency can be achieved by a master and slave node consuming only 21.5\% and 0.54\% radio on time.
+& Use cases where low latency is required for data to communicated from the master to slave, the slave latency value used must be close to zero. In other cases large slave latency values can be used. The provision for dynamic update of the link layer parameters of a BLE connection is useful in optimizing these parameters for different scenarios.
+
+\end{easylist}
+
+\section{Future Work}
+
+The lack of availability of a complete and open-source BLE stack is one of the major inhibiting factors faced by researchers working with \gls{ble}. This results in little or no flexibility in developing the test setup as needed for the research projects. Contiki is a mature platform under active development for \gls{iot} projects. This thesis project can provide a start to active development of an open-source BLE stack and support for greater number of BLE sed platforms in Contiki.

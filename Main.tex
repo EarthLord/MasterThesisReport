@@ -93,12 +93,13 @@ urlseen = {Retrieved on},
 \usepackage[titletoc]{appendix}
 
 
-% % % % % % % % % %Chapter Title Encoding
+% % % % % % % % % %For chapter Title Encoding
 \usepackage{titlesec, blindtext, color}	
 \definecolor{gray75}{gray}{0.75}
 \newcommand{\hsp}{\hspace{10pt}}
-\renewcommand\chaptername{}
-\titleformat{\chapter}[hang]{\LARGE\bfseries}{\chaptername\hsp\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
+
+%Chapter title as only 'number | title'
+\titleformat{\chapter}[hang]{\huge\bfseries}{\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
 
 \begin{document}
 
@@ -118,7 +119,8 @@ urlseen = {Retrieved on},
 
 \printbibliography[title={References}]
 
-\renewcommand\chaptername{Appendix}
+%Add chapter tile as 'Appendix x | title'
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{\chaptername\hsp\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
 %Start appendix mode
 \begin{appendices}
 \input{Appendix.tex}
