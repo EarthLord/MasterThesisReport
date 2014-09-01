@@ -1,13 +1,15 @@
-\chapter{Other Contributions}
+\chapter{Other Contributions} \label{8OtherContri}
 
 \section[Advertisement Logger]{Advertisement Logger\footnote{Available at \url{https://github.com/EarthLord/nrf51AdvLogger} with Doxygen documentation}} \label{8AdvLogger}
 
 During the exploration phase of the thesis, the plan was to implement the required parts of the link layer of \gls{ble} from scratch. This included developing the entire radio driver. After looking into the radio peripheral of nrf51822 and working with it, this plan was abandoned due to lack of time to finish these tasks and the test cases. The work with the radio peripheral did result in developing a full-fledged BLE advertisement packet logger, whose interface (using CuteCom serial terminal) can be seen in figure \ref{fig:UIAdvLogger}. Detailed description can be found in Appendix \ref{ApdxAdvLog}. 
 
 \begin{figure}[h]
-\includegraphics[width=0.97\textwidth]{AdvLogger}
+\centering
+\includegraphics[trim = 5mm 15mm 10mm 2mm, clip, width=\textwidth]{AdvLogger}
 \caption{User Interface of Advertisement Logger}
 \label{fig:UIAdvLogger}
+\vspace{-5pt}
 \end{figure}
 
 \section[Firmware for an Alarm Device]{Firmware for an Alarm Device\footnote{Available at \url{https://github.com/EarthLord/contiki/tree/master/examples/PCA10000-nrf/Pillar}}}

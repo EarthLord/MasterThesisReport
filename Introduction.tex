@@ -1,18 +1,51 @@
 \chapter{Introduction}
 
-\section{General introduction to the domain of the thesis}
+\section{General Introduction to the Domain of the Thesis}
 
-What is \gls{ble}? Why was it developed and who/where is it being used?  \cite{Gomez2012}
+%\todo{need more citations in this section?}
+A future is envisioned where objects around us can no only communicate with us but also themselves. These \emph{smart} devices such ranging from simple key-chains and chopping boards to complex bio-implants and automobiles can sense their surroundings, communicate with humans and other objects and react to commands and external environment. There has been a lot of work on the communication protocol aspect of this scenario of \gls{iot}. This Master thesis looks into one such protocols prevalent in the low energy domain, namely \emph{\gls{ble}} and compares it with another one called \emph{802.15.4}. Also this project works with an \gls{os} developed specifically for \gls{iot} devices called \emph{Contiki}.
 
-What is Contiki \gls{os}? Why was it and who/where is it being used? Explain the amount of R\&D done in terms of communication protocols based on 802.15.4 \cite{Contiki}.
+\gls{ble} is an addition to the Bluetooth specification to enable  development of low cost, tiny devices which can communicate wirelessly anywhere in the world while consuming ultra low power\cite{CoreSpec4.0}. Being standardized by Bluetooth \gls{sig} in 2010 with Bluetooth 4.0 version, it has been widely adopted in all the major mobile \glspl{os} and millions of devices capable of \gls{ble} communication have been sold. It has even spawned off a new category of devices called \emph{appcessories}\cite{ubiquityBeyond}, called so because these `accessories' devices are controlled from mobile `applications'. 
+
+Contiki is a permissive open source operating system for resource constrained, networked systems developed for this \gls{iot} vision, especially for \glspl{wsn}\cite{Contiki}. Contiki's design is such that it can work with only 10 kB of \gls{ram} and 30 kB of non-volatile memory for code storage, making it suitable for even 8-bit \glspl{mcu} running at few MHz. Contiki because its free, support to a wide variety of hardware platforms and the mature status of its development, it is used in wide range of projects ranging from commercial thermostats to research on badger behavior. 
+
+802.15.4 based transceivers form the basis for communication in majority of projects running on Contiki. 802.15.4 is a physical and \gls{mac} layer specification for low data rate wireless networks, defined in 2003\cite{IEEE802154}. Contiki's networking stack does not use the standard 802.15.4 \gls{mac}, but in-house developed \gls{mac} layers such as ContikiMAC, Null-RDC and MiCMAC. This layer plays a critical role in determining the power consumption, data rate, latency and resistance to external interference and error in communication. 
 
 
-\section{Problem definition}
-Need for \gls{ble} in Contiki as a platform for \gls{iot}. To understand the characteristics of \gls{ble} and 802.15.4 so that we can identify the applications suitable for these protocols.
+%What is Contiki \gls{os}? Why was it and who/where is it being used? Explain the amount of R\&D done in terms of communication protocols based on 802.15.4 .
 
-\section{Goal}
-To choose and integrate a \gls{ble} hardware platform with Contiki. To compare \gls{ble} and 802 in various performance criteria of data-rate, latency, reliability and energy consumption in environments with and without external interference.
+
+\section{Problem Definition}
+
+Contiki is providing features to facilitate and ease development of \gls{iot} applications such as Coffee flash file system, \gls{mcu} emulation (MSP430 and AVR based), network simulator (Cooja), power usage estimator (Energest), wide range of hardware platforms and a host of networking protocols including full standard IP stack, 6LowPAN, RPL and CoAP. Adding support for \gls{ble} support for Contiki would go a long way in increasing the support Contiki offers for \gls{iot} applications, now that \gls{ble} has been so successful with its adoption in mobile devices. This make even greater sense considering the fact that Bluetooth core specification 4.1 lays the ground framework for inclusion of IPv6 in \gls{ble}\cite{4.0to4.1} and Internet Engineering Task Force (IETF)  has a working draft on transmission of IPv6 packets over \gls{ble}\cite{ieftIPv6Draft}.
+
+For product developers, researchers and hobbyists alike, a comparison of 802.15.4 and \gls{ble}'s link layer would quite helpful for understanding their characteristics, knowing their pros \& cons and finally identifying the suitable applications for these protocols. This would be especially useful in the context of being used in Contiki with the use of Contiki's \gls{mac} layers such as ContikiMAC and Null-RDC. 
+
+%Need for \gls{ble} in Contiki as a platform for \gls{iot}. To understand the characteristics of \gls{ble} and 802.15.4 so that we can identify the applications suitable for these protocols.
+
+\section{Problem Context}
+
+This Master thesis was done in the Networked Embedded Systems (NES) group of Swedish Institute of Computer Science (SICS) to yield greater insight in the \gls{ble} protocol and provide a base for further research in this topic.
+
+\section{Goals}
+
+This thesis project aims to start the process of including \gls{ble} support in Contiki by including a \gls{ble} based platform in the list of hardware platforms supported by Contiki. This is done by studying the BLE standard, comparing and choosing a BLE based hardware platform to Contiki can be ported to, followed by the actual porting and finally using the Contiki port. 
+
+The comparison of Contiki's 802.15.4 based \gls{mac} layers with \gls{ble} link layer starts by defining the performance metrics, namely data rate, latency, reliability and energy consumption. Test cases are then designed to compare these metrics for the two protocols. To study the effect of external interference, these test cases include scenarios with and without external WiFi traffic. This comparison of the two protocols is concluded by summarizing the data acquired, analyzing this information and comparing it with the information from the existing literature in this topic.
+
+%Evaluate and compare the performance of physical and link layer on
+%BLE and 802.15.4 based platforms
+%Compare data rate, latency, energy consumption and reliability
+%(packet reception ratio - PRR)
+%Compare with different energy saving mechanisms in 802.15.4
+%platform i.e. Out of the box MAC, ContikiMAC, NullMAC and
+%multichannel MAC
+%Evaluate in multichannel environment with interference
+
+%To choose and integrate a \gls{ble} hardware platform with Contiki. To compare \gls{ble} and 802 in various performance criteria of data-rate, latency, reliability and energy consumption in environments with and without external interference.
 
 \section{Outline of the report}
 
-\todo{method??}
+This report starts off by providing the necessary background information required to follow this report in chapter \ref{2Back}. Chapter \ref{3Method} provides an overview of the research process and methodology employed in this thesis. The existing literature available in this research topic is explored in chapter \ref{4LitStudy}. The porting of Contiki to a new platform, specifically the nrf51822 based platform is described in chapter \ref{5bleContiki}. The objectives of this research and the test cases designed to reach these objectives are detailed in chapter \ref{6Testing}. Chapter \ref{7ResultsAnalysis} showcases the data acquired from conducting these tests in graphical forms, analyses this information and draws results. Chapter \ref{8OtherContri} briefly describes the additional work done in this thesis, not entirely in-line with the research process of this thesis. This report finishes off with providing the conclusions and recommends the prospective work that can be done in the direction of this research.
+
+%\todo{method??}

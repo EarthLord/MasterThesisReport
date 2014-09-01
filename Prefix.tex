@@ -51,7 +51,20 @@ Stockholm, Sweden\\
 \addcontentsline{toc}{chapter}{Abstract}
 \huge{\textbf{Abstract}} \\
 \normalsize \\
-Hello Abstract. 
+
+
+Internet of Things (IoT) is at the peak of 2014's `Hype Cycle for Emerging Technologies'. Fervent work is being carried out to achieve this vision of billions of interconnected smart devices by researchers, companies and hobbyists. This thesis project focuses on two key technologies fueling the development of IoT devices, namely Bluetooth Low Energy (BLE) and Contiki Operating System (OS). More specifically, this thesis aims to port Contiki OS to a BLE based hardware platform and compare the link layer of BLE with 802.15.4 based Medium Access Control (MAC) layers used in Contiki. 
+
+The process of porting began with compiling a list of `must have' and `nice to have' requirements for the BLE platform to which Contiki would be ported. An exhaustive list of features of the available platforms was aggregated and based on the requirements identified, the nrf51822 System on Chip (SoC) based platform was chosen. The vendor of this platform provided a BLE stack as a binary, which was used in this project. All the basic features of a Contiki port such as the Contiki clock for etimer, rtimer, serial-line and LEDs have implementations for the chosen platform. \todo{The radio peripheral was left out since it was controlled by the stack in the binary, although an additional task of developing an BLE advertisement packet logger has been done from scratch.} This port has been utilized for a demo application and for the test cases described below.
+
+The primary research output of this thesis is the comparison of performance of the link layer of BLE with 802.15.4 based ContikiMAC and Null-RDC layers of Contiki in terms of data rate, reliability, latency and energy consumption. Two test suites were designed to collect data of these four metrics and compare the two protocols. Some test cases also included presence of external interference caused by presence of heavy WiFi traffic. The scenario assumed is where one device is unconstrained with respect to availability of power while the other is not.
+
+In terms of the data rate, the 802.15.4's NullRDC layer achieved the highest at 155 kbps without Clear Channel Assesment (CCA). The effect of WiFi interference overlapping in the channel of communication in case 802.15.4 can be seen when the data rate reduced to 61 kbps from 148 kbps in the case where interference was in a different channel. With 802.15.4 the data rate can be maximized by having Radio Duty Cycle (RDC) of 100\%. The influence of frequency hopping in BLE can be noticed when the data rate decreased to only 23 kbps from 29 kbps when WiFi interference was introduced, both cases having RDC of around 27\%.  In BLE the effect of packets communicated per connection interval can be seen when communicating with an Android device as the data rate increased to 86 kbps, in which RDC was 44\%. 
+
+Use of 802.15.4's CCA delivered a Packet Reception Ratio (PRR) of 99\% and 79\% with and without WiFi interference respectively. In case of BLE, the link layer's the simple acknowledgment scheme achieved a Packet Delivery Ratio (PDR) of 100\%. Without WiFi interference, BLE achieved a PRR of almost 100\%. When WiFi interference was introduced, PRR resurged back to greater than 99\% when WiFi free channel map was used as compared to 80\% when complete channel map, which shows working of Automatic Frequency Hopping (AFH).
+
+802.15.4's latency was measured as 24 ms with Null-RDC and 90 ms with ContikiMAC. With BLE latency values ranging from 14 ms to 750 ms were observed. These tests to measure latency show the influence of link layer parameters such as `connection interval' and `slave latency', as well as whether the data is queried by the master node or the slave node. The change in symmetry of the connection with non-zero slave latency can be seen in case where the latency changes from 16 ms to 736 ms when the test case changes from the slave querying the data to the master querying the data. The master's RDC of 22\% and slave's RDC of 0.6\% also indicates the asymmetry in the connection. With these different configurations, the different use cases are also illustrated.
+
 \clearpage
 
 \newpage\null\thispagestyle{empty}\newpage
@@ -71,6 +84,8 @@ Hello Sammanfattning.
 \addcontentsline{toc}{chapter}{Acknowledgment}
 \huge{\textbf{Acknowledgment}} \\
 \normalsize \\
+
+
 Foremost I would like to earnestly thank my supervisor at Swedish Institute of Computer Science (SICS), Simon Duquennoy, for agreeing to supervise me in a topic that I proposed, guiding me patiently, consistently reviewing and providing constructive feedback for my work. Next I would like to thank Thiemo Voigt and the Networked Embedded Systems group at SICS for their warm inclusiveness and assisting me whenever I needed help. As usual this open source work stands on the shoulders of giants, I'm thankful for their amazing work. For all the resources and guidance that I have received in various forms from my fellow netizens, I'm grateful to them. I thank EIT ICT Labs for believing in me and providing me this opportunity. As always, my family and friends have supported and encouraged me, and for that they have my heartfelt thanks.
 \clearpage
 
