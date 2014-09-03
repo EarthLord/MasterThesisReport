@@ -28,6 +28,7 @@ Research articles involving the process of porting of Contiki \gls{os} to a hard
 
 \begin{table}[htbp]
 \begin{center}
+\setlength{\extrarowheight}{1.5pt}
 \begin{tabular}{|m{2.5cm}|m{1.2cm}|m{11.4cm}|}
 \hline
 \multicolumn{ 2}{|c|}{\textbf{State}} & \textbf{State Description} \\ \hline
@@ -35,7 +36,7 @@ Research articles involving the process of porting of Contiki \gls{os} to a hard
 \multicolumn{ 2}{|c|}{Advertising} & Broadcasts advertisement packets in  advertising channels \\ \hline
 \multicolumn{ 2}{|c|}{Scanning} & Looks for advertisement packets, across advertising channels \\ \hline
 \multicolumn{ 2}{|c|}{Initiating} & Initiates connection to advertiser to get Master role \\ \hline
-\multicolumn{ 1}{|c|}{Connection} & Master & Communicates with device(s) in the \emph{slave} role, defines configuration of the connection \\ \cline{ 2- 3}
+\multicolumn{ 1}{|m{2.0cm}|}{\hspace{42pt} \mbox{Connection}} & Master & Communicates with device(s) in the \emph{slave} role, defines configuration of the connection \\ \cline{ 2- 3}
 \multicolumn{ 1}{|l|}{} & Slave & Communicates with a single device in \emph{master} role \\ \hline
 \end{tabular}
 \end{center}
@@ -76,33 +77,81 @@ A connection can be formed between two BLE devices, with the master node reachin
 
 \section[\gls{ble} stack overview]{\gls{ble} stack overview\cite{Heydon2012}}
 
-To implement the BLE network described in the previous section, the BLE stack used is as shown in figure \ref{fig:StackBLE}. The BLE stack is split into a host section and a controller section. The controller part takes care of the actual interaction with the radio and enforcing the timing requirements. The controller part is implemented in the \gls{ic} where the radio is located, usually the \gls{soc} or the discrete transceiver. On the other hand, the host contains the software required for handling the various kinds of BLE packets. This separation of host and controller allows mixing and matching of these parts from different sources. The communication between the host and controller is done through the Host Controller Interface.
+To implement the BLE network described in the previous section, the BLE stack used is as shown in figure \ref{fig:StackBLE}. The BLE stack is split into a host section and a controller section. The controller part takes care of the actual interaction with the radio and enforcing the timing requirements. The controller part is implemented in the \gls{ic} where the radio is located, usually the \gls{soc} or the discrete transceiver. On the other hand, the host contains the software required for handling the various kinds of BLE packets. This separation of host and controller allows mixing and matching of these parts from different sources. The communication between the host and controller is done through the Host Controller Interface. The rest of this section explains the different layers briefly, with emphasis on the parts used in this thesis.
+
+%\begin{figure}[h]
+%\begin{center}
+%\setlength{\extrarowheight}{1.5pt}
+%\begin{tabular}{|c||c|c|}
+%\cline{2-3}
+%\multicolumn{1}{c|}{} &  \multicolumn{ 2}{c|}{Applications} \\ \hline
+%\multicolumn{ 1}{|c||}{} & \multicolumn{ 2}{c|}{Generic Access Profile} \\ \cline{ 2- 3}
+%\multicolumn{ 1}{|c||}{Host} & \multicolumn{ 2}{c|}{Generic Attribute Profile} \\ \cline{ 2- 3}
+%\multicolumn{ 1}{|l||}{} & \multicolumn{1}{c|}{Attribute Protocol} & \multicolumn{1}{c|}{Security Manager} \\ \cline{ 2- 3}
+%\multicolumn{ 1}{|l||}{} & \multicolumn{ 2}{c|}{Logic Link Control and Adaptation Protocol} \\ \hline \cline{2-3}
+%\multicolumn{1}{c|}{} & \multicolumn{ 2}{c|}{Host Control Interface} \\ \cline{2-3} \hline
+%\multicolumn{ 1}{|c||}{Controller} & \multicolumn{1}{c|}{Link Layer} & \multicolumn{1}{c|}{Direct Test Mode} \\ \cline{ 2- 3}
+%\multicolumn{ 1}{|c||}{} & \multicolumn{ 2}{c|}{Physical Layer} \\ \hline
+%\multicolumn{ 1}{c}{} & \multicolumn{1}{m{4cm}}{} & \multicolumn{1}{m{4cm}}{} \\ 
+%\end{tabular}
+%\end{center}
+%\vspace{-30pt}
+%\caption{BLE Stack}
+%\label{fig:StackBLE}
+%\end{figure}
 
 \begin{figure}[h]
 \begin{center}
+\setlength{\extrarowheight}{1.5pt}
 \begin{tabular}{|c||c|c|}
 \cline{2-3}
 \multicolumn{1}{c|}{} &  \multicolumn{ 2}{c|}{Applications} \\ \hline
-\multicolumn{ 1}{|c||}{} & \multicolumn{ 2}{c|}{Generic Access Profile} \\ \cline{ 2- 3}
-\multicolumn{ 1}{|c||}{Host} & \multicolumn{ 2}{c|}{Generic Attribute Profile} \\ \cline{ 2- 3}
-\multicolumn{ 1}{|l||}{} & \multicolumn{1}{c|}{Attribute Protocol} & \multicolumn{1}{c|}{Security Manager} \\ \cline{ 2- 3}
-\multicolumn{ 1}{|l||}{} & \multicolumn{ 2}{c|}{Logic Link Control and Adaptation Protocol} \\ \hline \cline{2-3}
-\multicolumn{1}{c|}{} & \multicolumn{ 2}{c|}{Host Control Interface} \\ \cline{2-3} \hline
-\multicolumn{ 1}{|c||}{} & \multicolumn{1}{c|}{Link Layer} & \multicolumn{1}{c|}{Direct Test Mode} \\ \cline{ 2- 3}
-\multicolumn{ 1}{|c||}{Controller} & \multicolumn{ 2}{c|}{Physical Layer} \\ \hline
+\multirow{4}{*}{Host} & \multicolumn{ 2}{c|}{Generic Access Profile} \\ \cline{ 2- 3}
+ & \multicolumn{ 2}{c|}{Generic Attribute Profile} \\ \cline{ 2- 3}
+ & \multicolumn{1}{c|}{Attribute Protocol} & \multicolumn{1}{c|}{Security Manager} \\ \cline{ 2- 3}
+ & \multicolumn{ 2}{c|}{Logic Link Control and Adaptation Protocol} \\ \hline 
+\multicolumn{1}{c|}{} & \multicolumn{ 2}{c|}{Host Control Interface} \\ \hline
+\multirow{2}{*}{Controller} & \multicolumn{1}{c|}{Link Layer} & \multicolumn{1}{c|}{Direct Test Mode} \\ \cline{ 2- 3}
+ & \multicolumn{ 2}{c|}{Physical Layer} \\ \hline
 \multicolumn{ 1}{c}{} & \multicolumn{1}{m{4cm}}{} & \multicolumn{1}{m{4cm}}{} \\ 
 \end{tabular}
 \end{center}
 \vspace{-30pt}
 \caption{BLE Stack}
 \label{fig:StackBLE}
+\vspace{-10pt}
 \end{figure}
 
 \paragraph{Physical layer}
 This is layer with the actual task of sending and receiving electromagnetic signals with a 2.4 GHz \gls{ism} radio. The modulation scheme used is \gls{gfsk}. There are 40 channels over which BLE operates, each 2 MHz apart from each other. In these there are 3 advertisement channels for sending advertisement packets. These are spread over the \gls{ism} band, located where overlapping with WiFi signals does not occur. The rest of the channels are used for communicating data when in connection mode.
 
 \paragraph{Link layer}
+The link layer is responsible for advertising and scanning when unconnected, along with creating and maintaining connections. The error detection and encryption are also taken care by this layer. 
 
+The process of connection establishment happens when a advertising device gets a `connection request' packet, which contains the specifications of all the parameters required to maintain the connection. The advertising device becomes the slave and the device which sent the connection request packet becomes the master. The three parameters that are primarily dealt with in this thesis are as follows.
+\begin{easylist}[itemize]
+& \textbf{Connection Interval} \hspace{5pt} After a BLE connection is established, the master device must always send a packet to the slave periodically with a time period specified as connection interval. If there is nothing to communicate, an empty packet is sent. These connection \emph{events} provide an opportunity for the slave to communicate with the master. 
+
+& \textbf{Slave Latency} \hspace{5pt} The maximum number of connection events that a slave can choose not to respond to the master. This is intended to save power on the slave while also providing an opportunity to communicate with the master if necessary. If slave latency is zero, the slave must respond with an empty packet in every connection event even it does not have any reason to communicate.
+
+& \textbf{Hop Increment} \hspace{5pt} BLE employs a frequency hopping mechanism to spread the communication over the entire 2.4 GHz band. This is achieved by the master initiating communication in each connection event in a different data channel, among the 37 data channels. The hopping of the master is synchronized with the slave with the following algorithm.
+
+$f_{n+1}=(f_n + hop) \hspace{2pt} \% \hspace{2pt} 37$ 
+
+Where, `\%' denotes the modulus operation, $f_{n+1}$ is the next channel that will be used, $f_n$ is the current channel used and $hop$ is the hop increment parameter sent when establishing a connection.
+
+& \textbf{Channel Map} \hspace{5pt} This parameter specifies the channels utilized by the frequency hopping algorithm. Usually, the entire channel map of 37 data channels is utilized. If some channels are detected to be unusable because of external interference, the channel map can be updated to utilize only a subset which is free of interference. This mechanism is called \gls{afh}, where the channels used for communication is adapted according to the external conditions, leading to increase in robustness of communication.
+\end{easylist}
+
+Error detection in BLE communication is performed by utilizing 24 bit \gls{crc} in every packet. A simple acknowledgment scheme is used to request retransmission in case an error is detected or packet reception does not happen. This uses two bits called `\gls{sn}' and `\gls{nesn}'. When a device gets a packet with a particular \gls{nesn},  it must use that as \gls{sn} when it transmits a packet. In case a packet is missed, the device does not know \gls{nesn} and uses the old \gls{sn} in its transmitted packet, thus indicating that it did not receive the last packet. This is better illustrated in figure \ref{fig:SeqNum}. When the slave's packet is lost, the master uses the previous \gls{sn}, thus indicating retransmission. After that the \gls{sn} follows \gls{nesn}.
+
+\begin{figure}[h]
+\includegraphics[width=\textwidth]{SeqNum}
+\caption{Illustration of working of BLE link layer's \gls{sn}, \gls{nesn} and \acrshort{md}}
+\label{fig:SeqNum}
+\end{figure}
+ 
+Another important parameter used in maintaining BLE connection is the `\gls{md}' bit. The \gls{md} bit indicates if a device has more data to send, so that more packets can be exchanged in a connection event. In figure \ref{fig:SeqNum}, the master has \gls{md} set to one while slave has it set to zero, indicating that the master has more data to send. In this case the master and slave exchange two packets in a connection event until both master and slave have \gls{md} as zero. In the second connection event, both master and slave have \gls{md} as zero, causing the connection event to end after exchange of one packet. \gls{md} bit allows communication of multiple packets in a connection interval when there is large amount of data to be communicated, thus increasing the throughput.
 
 \paragraph{\gls{l2cap}} This layer is responsible for multiplexing data from different logical channels in BLE, although in Bluetooth 4.0 only three fixed channels are used. 
 
