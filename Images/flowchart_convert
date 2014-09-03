@@ -10,3 +10,5 @@ dot -v -Tsvg UartISR_chart.dot -o UartISR_chart.svg
 inkscape -z -D -f UartISR_chart.svg -A UartISR_chart.pdf
 dot -v -Tsvg RadioISR_chart.dot -o RadioISR_chart.svg
 inkscape -z -D -f RadioISR_chart.svg -A RadioISR_chart.pdf
+dot -v -Tsvg Roles.dot -o Roles.svg
+inkscape -z -D -f Roles.svg -A Roles.pdf

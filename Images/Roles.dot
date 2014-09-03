@@ -1,0 +1,19 @@
+  digraph main_flow {
+  	graph[nodesep=0.4, ranksep=0.5]
+
+   Sb [fontsize=11.0,shape=circle,fixedsize=true,width=0.85,fontname="Helvetica Neue",label="Standby"]
+ 	A [fontsize=11.0,shape=circle,fixedsize=true,width=0.85,fontname="Helvetica Neue",label="Advertising"]
+ 	S [fontsize=11.0,shape=circle,fixedsize=true,width=0.85,fontname="Helvetica Neue",label="Scanning"]
+ 	I [fontsize=11.0,shape=circle,fixedsize=true,width=0.85,fontname="Helvetica Neue",label="Initiating"]
+ 	C [fontsize=11.0,shape=circle,fixedsize=true,width=0.85,fontname="Helvetica Neue",label="Connection"]
+
+ 	{
+ 		rank=same; Sb; A; I;
+ 	}
+
+ 	S -> Sb [dir=both];
+ 	A -> Sb [dir=both];
+ 	Sb -> I [dir=both];
+ 	A -> C [fontsize=11.0,labeldistance=5,labelangle=40,headlabel="To become\na slave",fontname = "Helvetica Neue"];
+ 	I -> C [fontsize=11.0,labeldistance=5,labelangle=-40,headlabel="To become\na master",fontname = "Helvetica Neue"];
+}
