@@ -1,14 +1,9 @@
-\chapter[Background]{Background\footnote{Contains text \& images from the Minor Thesis of the author `Business Ideation for \gls{ble}', derived from this thesis' work}} \label{2Back}
+\chapter[Background]{Background\footnote{Contains text \& images from the author's Minor Thesis `Business Ideation for \gls{ble}', derived from this thesis' work}} \label{2Back}
 
-This chapter aims at providing a succinct background necessary to understanding the rest of the thesis report. 
-
-
-Research articles involving the process of porting of Contiki \gls{os} to a hardware platform are presented in section \ref{2Porting}.
+This chapter aims at providing a succinct background necessary to understanding the rest of the thesis report. Readers are directed to the references for a comprehensive overview. Section \ref{OverviewBLE} provides an overview of the BLE technology required for following this document. Description of Contiki \gls{os} and literature involving the process of porting of Contiki \gls{os} to a hardware platform are presented in section \ref{OverviewContiki}. This chapter ends with presenting the aspects related to the 802.15.4 protocol utilized in this project.
 
 
-\section{\acrlong{ble}}
-
-\subsection{Overview of \gls{ble}}
+\section{Overview of \acrlong{ble}} \label{OverviewBLE}
 
 \acrfull{ble} is a relatively new low power standard incorporated in Bluetooth Core Specification Version 4.0 released by Bluetooth \gls{sig} in 2010\cite{CoreSpec4.0}. This wireless personal area network is marketed as Bluetooth Smart the Bluetooth \gls{sig}. Devices containing only BLE hardware are \emph{single mode} devices, whereas devices containing both classic Bluetooth and BLE are known as \emph{dual mode} devices.   
 
@@ -28,6 +23,7 @@ Research articles involving the process of porting of Contiki \gls{os} to a hard
 
 \begin{table}[htbp]
 \begin{center}
+\vspace{-10pt}
 \setlength{\extrarowheight}{1.5pt}
 \begin{tabular}{|m{2.5cm}|m{1.2cm}|m{11.4cm}|}
 \hline
@@ -123,7 +119,7 @@ To implement the BLE network described in the previous section, the BLE stack us
 \end{figure}
 
 \paragraph{Physical layer}
-This is layer with the actual task of sending and receiving electromagnetic signals with a 2.4 GHz \gls{ism} radio. The modulation scheme used is \gls{gfsk}. There are 40 channels over which BLE operates, each 2 MHz apart from each other. In these there are 3 advertisement channels for sending advertisement packets. These are spread over the \gls{ism} band, located where overlapping with WiFi signals does not occur. The rest of the channels are used for communicating data when in connection mode.
+This is layer with the actual task of sending and receiving electromagnetic signals with a 2.4 GHz \gls{ism} radio. The modulation scheme used is \gls{gfsk}. The bit rate used is 1 Mbps. There are 40 channels over which BLE operates, each 2 MHz apart from each other. In these there are 3 advertisement channels for sending advertisement packets. These are spread over the \gls{ism} band, located where overlapping with WiFi signals does not occur. The rest of the channels are used for communicating data when in connection mode.
 
 \paragraph{Link layer}
 The link layer is responsible for advertising and scanning when unconnected, along with creating and maintaining connections. The error detection and encryption are also taken care by this layer. 
@@ -136,7 +132,7 @@ The process of connection establishment happens when a advertising device gets a
 
 & \textbf{Hop Increment} \hspace{5pt} BLE employs a frequency hopping mechanism to spread the communication over the entire 2.4 GHz band. This is achieved by the master initiating communication in each connection event in a different data channel, among the 37 data channels. The hopping of the master is synchronized with the slave with the following algorithm.
 
-$f_{n+1}=(f_n + hop) \hspace{2pt} \% \hspace{2pt} 37$ 
+\hspace{160pt}$f_{n+1}=(f_n + hop) \hspace{2pt} \% \hspace{2pt} 37$ 
 
 Where, `\%' denotes the modulus operation, $f_{n+1}$ is the next channel that will be used, $f_n$ is the current channel used and $hop$ is the hop increment parameter sent when establishing a connection.
 
@@ -176,14 +172,16 @@ This layer organizes the attributes in a hierarchical manner, so that similar at
 \paragraph{\gls{gap}}
 This layer defines how BLE devices discover, connect and present useful information to the users and each other. A device having peripheral \gls{gap} role advertises and then connects to become a slave at link layer. A \gls{gap} central device initiates connection to a peripheral and becomes a master at link layer once connected.
 
-\section{Overview of Contiki}
-??????????????? Which aspects of Contiki here?
+\section[Overview of Contiki \gls{os}]{Overview of Contiki \gls{os}} \label{OverviewContiki}
+
+Contiki \gls{os} is a lightweight, mature and open source operating systems with extensive networking stack for low cost and low power systems\cite{Contiki}. In this document `Contiki' and `Contiki \gls{os}' have been used interchangeably and mean the same thing. Contiki's networking capabilities include the complete IP stack (IPv4, IPv6, UDP, TCP, HTTP) and the recent \gls{ietf} standardized protocols for IPv6 networking such as RPL multihop routing protocol, 6LowPAN and CoAP RESTful application layer protocol. For the event driven scheduler that Contiki uses, a mechanism called \emph{Protothreads} is used. This results in low memory foot-print and nice flow control in code development. Another tool developed to ease development using Contiki, especially in large distributed systems is \emph{Cooja}. Cooja is a network simulator that has the capability of simulating large scale network on emulated hardware units with fine grained control. Cooja was used in this thesis also to verify designed before actually deploying them. Low power \glspl{wsn} is the typical application scenario of devices running on Contiki, although Contiki has been used in a wide variety of projects.
 
 
-\subsection{Porting the Contiki \gls{os} to a New Platform} \label{2Porting}
-Contiki \gls{os} project originating in 2002 has been ported to an increasing number of hardware platforms \cite{contikiHw}. Since Contiki is an open-source BSD Clause-3 licensed project, there are many projects in various hardware platforms based on a fork from the Contiki repository.
 
-These hardware platforms' processors range across a spectrum of 8-bit (8051 and AVR), 16-bit (MSP430) to 32-bit (ARM Cortex-M, PIC32). Contiki has support for 802.15.4 based wireless communication with various external transceivers and \glspl{soc} with built in radio transceiver. Various common features of many platforms such as \glspl{led}, buttons and serial port have modules in Contiki for common \gls{api} across platforms.
+\subsection{Porting the Contiki to a New Platform} \label{2Porting}
+Contiki \gls{os} has been ported to an increasing number of hardware platforms \cite{contikiHw}. Since Contiki is an open-source BSD Clause-3 licensed project, there are many projects in various hardware platforms based on a fork from the Contiki repository.
+
+These hardware platforms' processors range across a spectrum of 8-bit (8051 and AVR), 16-bit (MSP430) to 32-bit (ARM Cortex-M, PIC32). Contiki has support for 802.15.4 based wireless communication with various external transceivers and \glspl{soc} with radio transceiver built in the same \gls{ic} as the \gls{mcu}. Various common features of many platforms such as \glspl{led}, buttons and serial port have modules in Contiki for common \gls{api} across platforms.
 
 In \cite{Oikonomou2011} the authors describe Contiki's port to a CC2430 based platform manufactured by Sensinode Ltd. CC2430 is an enhanced Intel 8051 processor based \gls{soc} having 802.15.4 physical layer compatible radio transceiver. The authors fully debugged the port which had of a code footprint of about 100 kB, varying based on the compiler mode and the features enabled. Many new features were added to the port including support for \gls{adc} unit, all the sensor available on the platform (accelerometer, light sensor, voltage and temperature sensors), watchdog timer and the general purpose buttons. Because of the limited stack availability of 233 bytes, many optimizations such as moving variables to external \gls{ram} memory space and re-writing the radio driver for CC2430 to prevent stack from overflowing.
 
@@ -191,10 +189,11 @@ Contiki was ported to two new platforms, namely MicaZ and TelosB in a Bachelor t
 
 Contiki has been ported into platform based on a ARM Cortex M3 processor to create a device wired with Ethernet to connected to the Internet \cite{Wilde2013a}. Ethernet based networking with the libraries present in Contiki was developed in this project to demonstrate as a proof of concept. There are many unofficial ports of Contiki to various hardware platforms.
 
-\section{Overview of 802.15.4}
+\section{Overview of 802.15.4} \label{Overview15.4}
 Mention that in this thesis the Contiki specific implementations of the 802.15.4 layers will be tested.
 
 \subsection{Physical layer}
+802.15.4 also uses the 2.4 GHz \gls{ism} band for communication, with this spectrum divided into 16 channels numbered from 11 to 26. The bit rate used for this standard is 250 kbps.
 
 \subsection{\gls{mac} layer}
 
