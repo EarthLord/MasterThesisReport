@@ -1,14 +1,14 @@
-\chapter{Porting Contiki \gls{os} to a \gls{ble} platform} \label{5bleContiki}
+\chapter{Porting Contiki \texorpdfstring{\gls{os}}{OS} to a \texorpdfstring{\gls{ble}}{BLE} Platform} \label{5bleContiki}
 
 This chapter describes the initial task of choosing the hardware platform supporting \gls{ble} and porting Contiki \gls{os} to this platform. This task was a pre-requisite to the next task of testing detailed in chapter \ref{6Testing}. Section \ref{5HwPlt} explains the process of choosing a hardware platform and describes the chosen one. Section \ref{5Porting} describes the different aspects of porting Contiki to a new platform, with details of the specific port done in this project.
 
-\section{\gls{ble} Hardware Platform} \label{5HwPlt}
+\section{\texorpdfstring{\gls{ble}}{BLE} Hardware Platform} \label{5HwPlt}
 
 As mentioned in section \todo{ref{4Porting}} Contiki has been ported to many hardware platforms. Since one of the main feature of Contiki is its communication stack capable of running in resource constrained systems, the primary aspects of a hardware platform are the \gls{mcu} and the communication interface. When choosing a hardware platform there are many other aspects that need to be considered as well. These include the availability of source code for peripheral drivers and examples, development environment (compiler, linker, programmer and debugger), development boards, documentation of the entire system and online forum for discussion.
 
 There are two types of platforms, namely platforms which consist of circuit board with a discrete radio transceiver with a \gls{mcu} controlling it and platforms which consist of a \gls{soc} containing both the \gls{mcu} and radio transceiver in the same \gls{ic}. For including \gls{ble} support in Contiki, a hardware platform needed to be chosen and this process is explained in this section.
 
-\subsection{Requirements of the hardware platform}
+\subsection{Requirements of the Hardware Platform}
 The \emph{mandatory} requirements for the platform would be:
 \vspace{5pt}
 \begin{easylist}[itemize]
@@ -31,13 +31,13 @@ The non-mandatory, although \emph{nice to have} requirements for the platform wo
 \end{easylist}
 \vspace{10pt}
 
-\subsection{Comparison and selection of the hardware platform}
+\subsection{Comparison and Selection of the Hardware Platform}
 
 With these requirements, based on the exhaustive comparison in Appendix \ref{ApdxSoC} of the available \gls{soc} (\gls{ble}+\gls{mcu}) solutions available today, a platform based on nRF51822 from Nordic-Semiconductors would be a suitable option. As seen from the table in Appendix \ref{ApdxSoC}, this platform would satisfy all the requirements mentioned above except for that the \gls{ble} stack would be available as a binary file, without the source code.
 
 As shown in the table in Appendix \ref{ApdxSoC}, recently many new promising \gls{ble} based \glspl{soc} have be released such as Quintic 9020, Dialog Semiconductor DA14580, Lapis MLA7105 and Broadcom BCM20732. From the limited technical information available about them, their technical specifications would be suitable for a project like this. But because of the limited documentation about them, scarce availability and nascent support they are not suitable.
 
-\subsection{Overview of nrf51822 \gls{soc} and its platform} \label{5nrfPCA}
+\subsection{Overview of nrf51822 \texorpdfstring{\gls{soc}}{SoC} and its Platform} \label{5nrfPCA}
 
 nrf51822 is a \gls{soc} made by Nordic Semiconductor for developing \gls{ble} and 2.4 GHz based wireless systems \cite{nrf51822page}. Most of the specification of this \gls{soc} can be found in the table in Appendix \ref{ApdxSoC}. The ARM Cortex M0 present is a 32 bit, 3 stage pipeline processor with Von Neumann architecture. It is designed for low silicon die size, low cost and power. It has an integrated \gls{nvic}  responsible for handling processor exceptions and peripheral interrupts. 
 
@@ -70,7 +70,7 @@ A \gls{sdk} is provided for nrf51822 which contains the peripheral drivers, exam
 %& \gls{sdk} not open for distribution
 %\end{easylist}
 
-\section[Porting PCA10000 platform of nrf51822 to Contiki]{Porting PCA10000 platform of nrf51822 to Contiki\footnote{Available at \url{https://github.com/EarthLord/contiki} with complete Doxygen documentation}} \label{5Porting}
+\section[Porting PCA10000 Platform of nrf51822 to Contiki]{Porting PCA10000 Platform of nrf51822 to Contiki\footnote{Available at \url{https://github.com/EarthLord/contiki} with complete Doxygen documentation}} \label{5Porting}
 
 This section describes the process of porting Contiki to a new platform, specifically the nrf51822 based PCA10000. The development setup is described in section \ref{DevSetup} and the implementation of the peripheral drivers is described in section \ref{peripheralsContiki}. Additional information of the folder and makefile structure of Contiki can be found in section \ref{ApdxFolder} and \ref{ApdxMakefile} in Appendix \ref{ApdxContiki}
 

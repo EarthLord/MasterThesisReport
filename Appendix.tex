@@ -39,7 +39,7 @@ The makefile in the example folder is where the make command is called. The oper
 
 \chapter{Advertisement Logger's Implementation} \label{ApdxAdvLog}
 
-\section{Scanning \gls{ble} Advertisements}
+\section{Scanning \texorpdfstring{\gls{ble}}{BLE} Advertisements}
 
 According to the Bluetooth 4.0 Core specifications, an advertisement event consists of an advertising device periodically send advertisement packets. The interval of these advertising events can range from 20 ms to 10 s. In each of these advertising events an advertiser sends an advertising packet in each channel in an interval of 10 ms starting with channel 37. The objective of a BLE advertisement scanner would be to be able to receive the packets from at least one channel in an advertisement event, while saving power. To achieve this trade off, the radio duty cycles between receiving and disabled state, while being in the next advertising channel every time it is switched on. The total time of this periodic event is known as the \emph{Scan Interval}, while the time the radio is on is known as \emph{Scan Window}. The figure\footnote{\href{https://devzone.nordicsemi.com/question/2535/what-is-the-minimum-time-for-a-app-and-a-peripheral-to-create-a-connection/}{https://devzone.nordicsemi.com/question/2535/what-is-the-minimum-time-for-a-app-and-a-peripheral-to-create-a-connection/}} \ref{fig:AdvScanBLE} depicts this process.
 
@@ -109,7 +109,7 @@ The radio peripheral is configured such that the end of a packet and the end of 
 \vspace{-10pt}
 \end{figure}
 
-\chapter{Appendix | \gls{ble} \gls{soc} Comparison} \label{ApdxSoC}
+\chapter{Appendix | \texorpdfstring{\gls{ble}}{BLE} \texorpdfstring{\glspl{soc}}{SoCs} Comparison} \label{ApdxSoC}
 The dense table in the next page compares many different parameters of the \gls{ble} \glspl{soc} available. This table was compiled in the first half of 2014. Because of the high pace at which the industry around \gls{ble} is progressing, many details here might not be accurate as time progresses.
 
 The legend for the table is

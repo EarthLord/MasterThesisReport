@@ -3,7 +3,7 @@
 This chapter aims at providing a succinct background necessary to understanding the rest of the thesis report. Readers are directed to the references for a comprehensive overview. Section \ref{OverviewBLE} provides an overview of the BLE technology required for following this document. Description of Contiki \gls{os} and literature involving the process of porting of Contiki \gls{os} to a hardware platform are presented in section \ref{OverviewContiki}. This chapter ends with presenting the aspects related to the 802.15.4 protocol utilized in this project.
 
 
-\section{Overview of \acrlong{ble}} \label{OverviewBLE}
+\section{Overview of \texorpdfstring{\acrlong{ble}}{Bluetooth Low Energy}} \label{OverviewBLE}
 
 \acrfull{ble} is a relatively new low power standard incorporated in Bluetooth Core Specification Version 4.0 released by Bluetooth \gls{sig} in 2010\cite{CoreSpec4.0}. This wireless personal area network is marketed as Bluetooth Smart the Bluetooth \gls{sig}. Devices containing only BLE hardware are \emph{single mode} devices, whereas devices containing both classic Bluetooth and BLE are known as \emph{dual mode} devices.   
 
@@ -19,7 +19,7 @@ This chapter aims at providing a succinct background necessary to understanding 
 %\paragraph{Low Cost} Lower power requirements mean that the batteries in \gls{ble} devices need to smaller and have to be replaced less frequently, both resulting in a reduction of cost for both the manufacturer and the customer. The use of the \gls{ism} band for communication levels removes the licensing entry barrier for start-ups to develop \gls{ble} devices. \gls{ble} embraces simplicity in its pursuit to lower the cost. \gls{ble} supports only single-hop communication in a star network, which reduces the memory and processor requirement for supporting the protocol. Simplicity was the key factor for the choosing of \gls{gfsk} as the modulation scheme for \gls{ble} to result in low cost, simple implementation of the radio in the \glspl{ic} for \gls{ble}. 
 %\paragraph{Robustness} The 2.4~\si{\GHz} space is crowded with devices communicating with various standards as well as spurious noise making the robustness a key criteria in developing \gls{ble} standard. \gls{ble} uses a multi-channel hopping mechanism called \gls{afh} to detect, avoid and recover from interference. In addition to \gls{afh}, \gls{ble} uses \gls{crc} to detect and recover from bit-errors due to background noise.
 
-\subsection[\gls{ble} Network Architecture]{\gls{ble} Network Architecture\cite{BLE101}}
+\subsection[\texorpdfstring{\gls{ble}}{BLE} Network Architecture]{\texorpdfstring{\gls{ble}}{BLE} Network Architecture\cite{BLE101}}
 
 \begin{table}[htbp]
 \begin{center}
@@ -52,7 +52,7 @@ Table \ref{tbl:BLEstates} shows the possible states of a BLE device and figure \
 \vspace{-10pt}
 \end{wrapfigure}
 
-A connection can be formed between two BLE devices, with the master node reaching from the initiating state and the slave node from the advertising state. This master and slave roles follows an asymmetric design philosophy. A slave is a simple device that can be connected with at most one master at a time and are usually single purpose devices. A master on the other hand is a more complex device which is responsible for coordinating the connections and activities of all the slaves connected to it. A master is usually a multi-purpose device such as a mobile phone, tablet or a laptop. A master connected with multiple slaves employs a star topology. The slaves cannot directly communicate with each other. An example of a BLE network is shown in figure \ref{fig:TopoBLE}. Here a master can be seen connected to multiple slaves. The bidirectional continuous lines show data communicated in both directions when in a connection. The dashed lines show the data from the advertisements being sent broadcast. A master or slave can be an advertiser simultaneously as seen in the figure \ref{fig:TopoBLE}.  
+A connection can be formed between two BLE devices, with the master node reaching from the initiating state and the slave node from the advertising state. This master and slave roles follows an asymmetric design philosophy. A slave is a simple device that can be connected with at most one master at a time and are usually single purpose devices. A master on the other hand is a more complex device which is responsible for coordinating the connections and activities of all the slaves connected to it. A master is usually a multi-purpose device such as a mobile phone, tablet or a laptop. A master connected with multiple slaves employs a star topology. The slaves cannot directly communicate with each other. An example of a BLE network is shown in figure \ref{fig:TopoBLE}. Here a master can be seen connected to multiple slaves. The bidirectional continuous lines show data communicated in both directions when in a connection. The dashed lines show the data from the advertisements being sent broadcast. A master or slave can be an advertiser simultaneously as seen in the figure \ref{fig:TopoBLE}. Note that in this figure, since the advertisers are at the two ends, their signals are not able to reach both the master and the scanner device.
 
 \begin{figure}[h]
 \centering
@@ -71,7 +71,7 @@ A connection can be formed between two BLE devices, with the master node reachin
 %\label{devicesBLE}
 %\end{figure}
 
-\section[\gls{ble} stack overview]{\gls{ble} stack overview\cite{Heydon2012}}
+\section[\texorpdfstring{\gls{ble}}{BLE} Stack Overview]{\texorpdfstring{\gls{ble}}{BLE} stack overview\cite{Heydon2012}}
 
 To implement the BLE network described in the previous section, the BLE stack used is as shown in figure \ref{fig:StackBLE}. The BLE stack is split into a host section and a controller section. The controller part takes care of the actual interaction with the radio and enforcing the timing requirements. The controller part is implemented in the \gls{ic} where the radio is located, usually the \gls{soc} or the discrete transceiver. On the other hand, the host contains the software required for handling the various kinds of BLE packets. This separation of host and controller allows mixing and matching of these parts from different sources. The communication between the host and controller is done through the Host Controller Interface. The rest of this section explains the different layers briefly, with emphasis on the parts used in this thesis.
 
@@ -118,10 +118,10 @@ To implement the BLE network described in the previous section, the BLE stack us
 \vspace{-10pt}
 \end{figure}
 
-\paragraph{Physical layer}
+\paragraph{Physical Layer}
 This is layer with the actual task of sending and receiving electromagnetic signals with a 2.4 GHz \gls{ism} radio. The modulation scheme used is \gls{gfsk}. The bit rate used is 1 Mbps. There are 40 channels over which BLE operates, each 2 MHz apart from each other. In these there are 3 advertisement channels for sending advertisement packets. These are spread over the \gls{ism} band, located where overlapping with WiFi signals does not occur. The rest of the channels are used for communicating data when in connection mode.
 
-\paragraph{Link layer}
+\paragraph{Link Layer}
 The link layer is responsible for advertising and scanning when unconnected, along with creating and maintaining connections. The error detection and encryption are also taken care by this layer. 
 
 The process of connection establishment happens when a advertising device gets a `connection request' packet, which contains the specifications of all the parameters required to maintain the connection. The advertising device becomes the slave and the device which sent the connection request packet becomes the master. The three parameters that are primarily dealt with in this thesis are as follows.
@@ -167,12 +167,12 @@ Attributes can be accessed from the attribute database in six ways as listed bel
 \end{easylist}
 
 \paragraph{\gls{gatt}}
-This layer organizes the attributes in a hierarchical manner, so that similar attributes can be encapsulated together.
+This layer organizes the attributes in a hierarchical manner, so that similar attributes can be encapsulated together. The hierarchical order from the top is as \emph{profile}, \emph{service}, and \emph{characteristic} i.e a profile contains one or more services, a service contains one or more characteristics and a characteristic contains one value and one or more descriptor. For example, a Time profile contains Current Time service, Next DST Change service and Reference Time Update Service. The Current Time service contains current time, local time and reference time characteristics. 
 
 \paragraph{\gls{gap}}
 This layer defines how BLE devices discover, connect and present useful information to the users and each other. A device having peripheral \gls{gap} role advertises and then connects to become a slave at link layer. A \gls{gap} central device initiates connection to a peripheral and becomes a master at link layer once connected.
 
-\section[Overview of Contiki \gls{os}]{Overview of Contiki \gls{os}} \label{OverviewContiki}
+\section[Overview of Contiki \texorpdfstring{\gls{os}}{OS}]{Overview of Contiki \texorpdfstring{\gls{os}}{OS}} \label{OverviewContiki}
 
 Contiki \gls{os} is a lightweight, mature and open source operating systems with extensive networking stack for low cost and low power systems\cite{Contiki}. In this document `Contiki' and `Contiki \gls{os}' have been used interchangeably and mean the same thing. Contiki's networking capabilities include the complete IP stack (IPv4, IPv6, UDP, TCP, HTTP) and the recent \gls{ietf} standardized protocols for IPv6 networking such as RPL multihop routing protocol, 6LowPAN and CoAP RESTful application layer protocol. For the event driven scheduler that Contiki uses, a mechanism called \emph{Protothreads} is used. This results in low memory foot-print and nice flow control in code development. Another tool developed to ease development using Contiki, especially in large distributed systems is \emph{Cooja}. Cooja is a network simulator that has the capability of simulating large scale network on emulated hardware units with fine grained control. Cooja was used in this thesis also to verify designed before actually deploying them. Low power \glspl{wsn} is the typical application scenario of devices running on Contiki, although Contiki has been used in a wide variety of projects.
 
@@ -192,15 +192,15 @@ Contiki has been ported into platform based on a ARM Cortex M3 processor to crea
 \section{Overview of 802.15.4} \label{Overview15.4}
 Mention that in this thesis the Contiki specific implementations of the 802.15.4 layers will be tested.
 
-\subsection{Physical layer}
+\subsection{Physical Layer}
 802.15.4 also uses the 2.4 GHz \gls{ism} band for communication, with this spectrum divided into 16 channels numbered from 11 to 26. The bit rate used for this standard is 250 kbps.
 
-\subsection{\gls{mac} layer}
+\subsection{\texorpdfstring{\gls{mac}}{MAC} Layer}
 
 The link layer of 802.15.4 consists of \gls{mac} layer on top of a \gls{rdc} layer. For the RDC layer the Null-RDC and ContikiMAC driver will be tested in each of the test with \gls{csma} as the \gls{mac} layer. In case of Contiki-MAC the receiving node switches on periodically to sense if there are any packets that need to be received. The default time of this period is 125 ms. In case of null-RDC the radio receiver is never switched off, as the name suggests.
 
 
-\subsubsection{\gls{rdc} layer}
-\subsubsection{\gls{csma}}
+\subsubsection{\texorpdfstring{\gls{rdc}}{RDC} Layer}
+\subsubsection{\texorpdfstring{\gls{csma}}{CSMA}}
 
 

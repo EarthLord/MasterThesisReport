@@ -2,7 +2,7 @@
 
 This chapter provides a brief overview of the related work being done in the research community. Performance evaluation of \gls{ble}, 802.15.4 and their comparison are presented in section \ref{4ble}, \ref{4802} and \ref{4ble802} respectively.
 
-\section{Evaluating the Performance of \gls{ble}} \label{4ble}
+\section{Evaluating the Performance of \texorpdfstring{\gls{ble}}{BLE}} \label{4ble}
 In a paper \cite{Gomez2012} providing an overview and evaluation of \gls{ble}, its various parameters such as energy consumption, latency, maximum piconet size and throughput have been evaluated. Theoretical calculations were done to predict the lifetime of a \gls{ble} slave device running of a 230 mAh coin cell battery for different values of connection interval and slave latency. The average current consumption of a TI CC2540 \gls{ble} platform was plotted for the entire range of connection interval keeping the slave latency as zero. The estimate of the lifetime was also done with respect to various \gls{ber}. A latency measurement also has been done in this paper, where it measures the time to send a notification packet and receive the `no more data' acknowledgment packet from the receiver in the link-layer. This interaction happening in the same connection event was measured as 676.7 \si{\micro \second}.
 
 The same experimental setup \cite{Gomez2012} shows the maximum throughput between two CC2540 devices as 58.48 kbps considering a payload of 20 bytes. This is attributed to the fact that in each connection event with an interval of 7.5 ms four packets are not transmitted as in an ideal case. An analytical model of the throughput \cite{Gomez2011} has been developed for different \gls{ber} and connection interval. Simulation results validate this model developed. This model show that the maximum throughput in case the \gls{ber} is zero is 236.7 kbps, independent of the connection interval. An assumption made in this paper is that the master and slave device do not have any limit on the number of packets communicated in a connection interval. 
@@ -29,7 +29,7 @@ Adam Dunkels. “The ContikiMAC Radio Duty Cycling Protocol”. In: (Dec. 2011).
 \cite{Uwase2014} M.-P. Uwase, M. Bezunartea, T.L. Nguyen, et al. “Experimental evaluation of message latency and power usage in WSNs”. In: 2014 IEEE International Black Sea Conference on Communications and Networking (BlackSeaCom). IEEE, May 2014,
 pp. 69–72.
 
-\section{Comparison of \gls{ble} and 802.15.4} \label{4ble802}
+\section{Comparison of \texorpdfstring{\gls{ble}}{BLE} and 802.15.4} \label{4ble802}
 
 \gls{ble} is relatively new protocol compared to 802.15.4, due to which there are few studies conducted comparing the two low power wireless protocols. The energy consumption of \gls{ble} and 802.15.4 was compared in terms of the amount of payload can be communicated per Joule of energy i.e. the energy utility measured with unit kByte/J \cite{Siekkinen2012}. It was found that for \gls{ble} the energy utility was independent of the throughput and depended on the number of packets communicated per connection event. The energy utility varied from around 325 to 525 kByte/J when the packets per connection event rose from one to four respectively. In case of 802.15.4, the energy utility did depend on the throughput. Until 1 kBps the energy utility increased with respect to the throughput, then plateaued at 300 kByte/J. 
 
