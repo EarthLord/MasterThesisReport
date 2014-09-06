@@ -4019,7 +4019,7 @@
          y="1035.9041"
          id="tspan1458"><tspan
            id="tspan1460"
-           style="fill:#000000;stroke:none">Source Radio On (%)</tspan></tspan></tspan></text>
+           style="fill:#000000;stroke:none">Requester Radio On (%)</tspan></tspan></tspan></text>
 <text
      class="TextShape"
      id="text1462"
@@ -4036,7 +4036,7 @@
          y="1533.9042"
          id="tspan1466"><tspan
            id="tspan1468"
-           style="fill:#000000;stroke:none">Destination Radio On (%)</tspan></tspan></tspan></text>
+           style="fill:#000000;stroke:none">Responder Radio On (%)</tspan></tspan></tspan></text>
 <text
      class="TextShape"
      id="text1470"
