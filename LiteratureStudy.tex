@@ -1,6 +1,6 @@
 \chapter{Literature Study} \label{4LitStudy}
 
-This chapter provides a brief overview of the related work being done in the research community. Performance evaluation of \gls{ble}, 802.15.4 and their comparison are presented in section \ref{4ble}, \ref{4802} and \ref{4ble802} respectively.
+This chapter provides a brief overview of the related work being done in the research community. Performance evaluation of \gls{ble}, 802.15.4 and their comparison are presented in section \ref{4ble}, \ref{4802} and \ref{4ble802} respectively. The comparison of the existing literature with the results produced in this thesis is explained in section \ref{7Eval} in the `Results and Analysis' chapter.
 
 \section{Evaluating the Performance of \texorpdfstring{\gls{ble}}{BLE}} \label{4ble}
 In a paper \cite{Gomez2012} providing an overview and evaluation of \gls{ble}, its various parameters such as energy consumption, latency, maximum piconet size and throughput have been evaluated. Theoretical calculations were done to predict the lifetime of a \gls{ble} slave device running of a 230 mAh coin cell battery for different values of connection interval and slave latency. The average current consumption of a TI CC2540 \gls{ble} platform was plotted for the entire range of connection interval keeping the slave latency as zero. The estimate of the lifetime was also done with respect to various \gls{ber}. A latency measurement also has been done in this paper, where it measures the time to send a notification packet and receive the `no more data' acknowledgment packet from the receiver in the link-layer. This interaction happening in the same connection event was measured as 676.7 \si{\micro \second}.
@@ -17,17 +17,18 @@ The interference caused by WiFi over \gls{ble} advertisement packets and vice ve
 
 \section{Evaluating the Performance of 802.15.4} \label{4802}
 
-As mentioned in section \ref{Overview15.4}, this thesis will not use the standard 802.15.4 standard MAC layer, only the 802.15.4 physical layer. The MAC layers used with 802.15.4 physical layer are ContikiMAC and Null-RDC. This is because of the amount of activity in the research community with these layers as compared to the standard 802.15.4 MAC layer. This section will briefly explain the research done to evaluate the performance of ContikiMAC and Null-RDC. 
+As mentioned in section \ref{Overview15.4}, this thesis will not use the standard 802.15.4 standard MAC layer, only the 802.15.4 physical layer. The MAC layers used with 802.15.4 physical layer are ContikiMAC and Null-RDC. This is because of the amount of activity in the research community with these layers as compared to the standard 802.15.4 MAC layer. This section will briefly explain the research done to evaluate the performance of ContikiMAC and Null-RDC. There are few research articles which compare the performance of 802.15.4 for point to point networks as multi-hop networks are preferred for analysis.
 
-ContikiMAC is detailed in a technical report \cite{Dunkels2011} which also evaluates its performance with few benchmarks.
+ContikiMAC is detailed in a technical report \cite{Dunkels2011} which also evaluates its performance with few benchmarks. The radio on time and current consumed for different types of reception and transmission have been represented graphically. The performance of a 20 node network has been benchmarked with simulation in Cooja Network Simulator. The \gls{rdc} for a data collection network of with path loss using ContikiMAC was less than 2\% for up to about 25 Hz channel check rate, with the least being less than 1\%. The optimizations of phase lock and fast-sleep can be seen to reduce the \gls{rdc} significantly, especially when there is path loss.
 
-\cite{Dunkels2011}
-Adam Dunkels. “The ContikiMAC Radio Duty Cycling Protocol”. In: (Dec. 2011).
+The maximum throughput for packet transmission through a  network of 139 nodes was evaluated with a new protocol called P\textsuperscript{3} \cite{Doddavenkatappa2014}. The goodput, which is the application level throughput, was significantly improved compared to the existing solution. It ranged from 142.9 kbps to 199.7 kbps depending on the route used in the network, with the average being 175.2 kbps.
 
-\cite{Michel2014} Mathieu Michel and Bruno Quoitin. “Technical Report : ContikiMAC vs X-MAC performance analysis”. In: arXiv preprint arXiv:1404.3589 (Apr. 2014). arXiv: 1404.3589.
+The latency, power consumption and reliability of point to point communication using 802.15.4 has been evaluated for different \gls{mac} layers\cite{Uwase2014}. The latency for ContikiMAC and Null-RDC for a round trip measurement was measured as 103 ms and 5 ms respectively. ContikiMAC increases the latency by an order of 20 times while consuming 13 timess lesser power than Null-RDC. The packet delivery ratio of Null-RDC was measured as 100\% while ContikiMAC had a reliability of 90\%.
 
-\cite{Uwase2014} M.-P. Uwase, M. Bezunartea, T.L. Nguyen, et al. “Experimental evaluation of message latency and power usage in WSNs”. In: 2014 IEEE International Black Sea Conference on Communications and Networking (BlackSeaCom). IEEE, May 2014,
-pp. 69–72.
+%\cite{Michel2014} Mathieu Michel and Bruno Quoitin. “Technical Report : ContikiMAC vs X-MAC performance analysis”. In: arXiv preprint arXiv:1404.3589 (Apr. 2014). arXiv: 1404.3589.
+
+%\cite{Uwase2014} M.-P. Uwase, M. Bezunartea, T.L. Nguyen, et al. “Experimental evaluation of message latency and power usage in WSNs”. In: 2014 IEEE International Black Sea Conference on Communications and Networking (BlackSeaCom). IEEE, May 2014,
+
 
 \section{Comparison of \texorpdfstring{\gls{ble}}{BLE} and 802.15.4} \label{4ble802}
 

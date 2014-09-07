@@ -931,9 +931,9 @@
      borderopacity="1.0"
      inkscape:pageopacity="0.0"
      inkscape:pageshadow="2"
-     inkscape:zoom="2.8"
-     inkscape:cx="200.6781"
-     inkscape:cy="96.480627"
+     inkscape:zoom="1.4"
+     inkscape:cx="172.79571"
+     inkscape:cy="2.289721"
      inkscape:document-units="px"
      inkscape:current-layer="layer1"
      showgrid="true"
@@ -996,7 +996,18 @@
        transform="matrix(0.7027972,0,0,0.7027972,199.21454,277.85963)" />
     <text
        xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold;opacity:1;stroke-opacity:1;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:2;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="370"
+       y="502.36218"
+       id="text2989-1-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-9-1"
+         x="370"
+         y="502.36218">Master</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
        x="370"
        y="502.36218"
        id="text2989-1"
@@ -1015,28 +1026,6 @@
        sodipodi:ry="40.357143"
        d="m 282.85714,316.29074 c 0,22.28864 -18.06851,40.35714 -40.35714,40.35714 -22.28863,0 -40.35714,-18.0685 -40.35714,-40.35714 0,-22.28863 18.06851,-40.35714 40.35714,-40.35714 22.28863,0 40.35714,18.06851 40.35714,40.35714 z"
        transform="matrix(0.7027972,0,0,0.7027972,119.21454,347.85963)" />
-    <text
-       xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold;opacity:1;stroke-opacity:1;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
-       x="290"
-       y="572.36218"
-       id="text2989-6"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2991-4"
-         x="290"
-         y="572.36218">Slave</tspan></text>
-    <text
-       xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold;opacity:1;stroke-opacity:1;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
-       x="270"
-       y="492.36218"
-       id="text2989-5"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2991-82"
-         x="270"
-         y="492.36218">Advertiser</tspan></text>
     <path
        sodipodi:type="arc"
        style="opacity:0.49;color:#000000;fill:url(#Strips1_1);fill-opacity:1;stroke:#000000;stroke-width:1.42288554000000000;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -1047,6 +1036,17 @@
        sodipodi:ry="40.357143"
        d="m 282.85714,316.29074 c 0,22.28864 -18.06851,40.35714 -40.35714,40.35714 -22.28863,0 -40.35714,-18.0685 -40.35714,-40.35714 0,-22.28863 18.06851,-40.35714 40.35714,-40.35714 22.28863,0 40.35714,18.06851 40.35714,40.35714 z"
        transform="matrix(0.7027972,0,0,0.7027972,367.21454,303.85963)" />
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#ffffff;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold;stroke-opacity:1;stroke-width:2;stroke-miterlimit:4;stroke-dasharray:none"
+       x="538"
+       y="528.36218"
+       id="text2989-56-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-1-7"
+         x="538"
+         y="528.36218">Scanner</tspan></text>
     <text
        xml:space="preserve"
        style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold;opacity:1;stroke-opacity:1;stroke-width:0;stroke-miterlimit:4;stroke-dasharray:none"
@@ -1118,17 +1118,6 @@
          style="color:#000000;fill:none;stroke:#000000;stroke-width:1.42288554;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
          sodipodi:type="arc" />
     </g>
-    <text
-       xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
-       x="465"
-       y="460.36218"
-       id="text2989-5-1"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2991-82-4"
-         x="465"
-         y="460.36218">Advertiser</tspan></text>
     <path
        sodipodi:type="arc"
        style="opacity:0.49000005;color:#000000;fill:#000000;fill-opacity:1;stroke:#000000;stroke-width:1.42288554;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -1173,17 +1162,6 @@
        d="m 282.85714,316.29074 c 0,22.28864 -18.06851,40.35714 -40.35714,40.35714 -22.28863,0 -40.35714,-18.0685 -40.35714,-40.35714 0,-22.28863 18.06851,-40.35714 40.35714,-40.35714 22.28863,0 40.35714,18.06851 40.35714,40.35714 z"
        transform="matrix(0.7027972,0,0,0.7027972,199.03596,277.64535)"
        clip-path="none" />
-    <text
-       xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
-       x="627"
-       y="577.36218"
-       id="text2989-5-2"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2991-82-3"
-         x="627"
-         y="577.36218">Advertiser</tspan></text>
     <g
        transform="translate(357,84.999997)"
        id="g6158-9">
@@ -1302,21 +1280,6 @@
        id="path6249"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
-    <text
-       xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
-       x="446"
-       y="569.36218"
-       id="text2989-5-6"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2991-82-1"
-         x="446"
-         y="569.36218">Slave/</tspan><tspan
-         sodipodi:role="line"
-         x="446"
-         y="583.11218"
-         id="tspan3128">Advertiser</tspan></text>
     <path
        sodipodi:type="arc"
        style="color:#000000;fill:none;stroke:#000000;stroke-width:1.42288554;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -1327,17 +1290,6 @@
        sodipodi:ry="40.357143"
        d="m 282.85714,316.29074 c 0,22.28864 -18.06851,40.35714 -40.35714,40.35714 -22.28863,0 -40.35714,-18.0685 -40.35714,-40.35714 0,-22.28863 18.06851,-40.35714 40.35714,-40.35714 22.28863,0 40.35714,18.06851 40.35714,40.35714 z"
        transform="matrix(0.7027972,0,0,0.7027972,195.21454,381.85963)" />
-    <text
-       xml:space="preserve"
-       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
-       x="366"
-       y="606.36218"
-       id="text2989-6-8"
-       sodipodi:linespacing="125%"><tspan
-         sodipodi:role="line"
-         id="tspan2991-4-8"
-         x="366"
-         y="606.36218">Slave</tspan></text>
     <path
        sodipodi:type="arc"
        style="opacity:0.49000005;color:#000000;fill:#000000;fill-opacity:1;fill-rule:evenodd;stroke:#000000;stroke-width:1px;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:10;stroke-opacity:1;stroke-dasharray:none;stroke-dashoffset:0;marker:none;visibility:visible;display:inline;overflow:visible;enable-background:accumulate"
@@ -1419,11 +1371,151 @@
        d="m 24.22003,108.22005 c 0,2.76142 -2.238576,5 -5,5 -2.761424,0 -5,-2.23858 -5,-5 0,-2.76143 2.238576,-5 5,-5 2.761424,0 5,2.23857 5,5 z"
        transform="matrix(-0.90734182,-0.05636582,0.05636582,-0.90734182,454.47176,676.07659)"
        clip-path="url(#clipPath6668)" />
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.3;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="446"
+       y="565.36218"
+       id="text2989-5-6-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-82-1-3"
+         x="446"
+         y="565.36218">Slave/</tspan><tspan
+         sodipodi:role="line"
+         x="446"
+         y="579.11218"
+         id="tspan3128-6">Advertiser</tspan></text>
     <path
        style="fill:none;stroke:#000000;stroke-width:1;stroke-linecap:butt;stroke-linejoin:miter;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:3, 3;stroke-dashoffset:0;marker-end:url(#Arrow1Mend)"
        d="m 299,490.36218 41.05865,5.1608"
        id="path6251-8"
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cc" />
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.20000005;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="270"
+       y="492.36218"
+       id="text2989-5-7"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-82-0"
+         x="270"
+         y="492.36218">Advertiser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="270"
+       y="492.36218"
+       id="text2989-5"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-82"
+         x="270"
+         y="492.36218">Advertiser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.20000005;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="627"
+       y="578.36218"
+       id="text2989-5-7-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-82-0-4"
+         x="627"
+         y="578.36218">Advertiser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="627"
+       y="578.36218"
+       id="text2989-5-0"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-82-8"
+         x="627"
+         y="578.36218">Advertiser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.20000005;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="465"
+       y="460.36218"
+       id="text2989-5-7-3"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-82-0-45"
+         x="465"
+         y="460.36218">Advertiser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="465"
+       y="460.36218"
+       id="text2989-5-9"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-82-88"
+         x="465"
+         y="460.36218">Advertiser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="446"
+       y="565.36218"
+       id="text2989-5-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-82-1"
+         x="446"
+         y="565.36218">Slave/</tspan><tspan
+         sodipodi:role="line"
+         x="446"
+         y="579.11218"
+         id="tspan3128">Advertiser</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="366"
+       y="606.36218"
+       id="text2989-6-8-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-4-8-6"
+         x="366"
+         y="606.36218">Slave</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="366"
+       y="606.36218"
+       id="text2989-6-8"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-4-8"
+         x="366"
+         y="606.36218">Slave</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:#ffffff;stroke-width:1.5;stroke-miterlimit:4;stroke-opacity:1;stroke-dasharray:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="290"
+       y="572.36218"
+       id="text2989-6-1"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-4-1"
+         x="290"
+         y="572.36218">Slave</tspan></text>
+    <text
+       xml:space="preserve"
+       style="font-size:11px;font-style:normal;font-variant:normal;font-weight:bold;font-stretch:normal;text-align:center;line-height:125%;letter-spacing:0px;word-spacing:0px;writing-mode:lr-tb;text-anchor:middle;fill:#000000;fill-opacity:1;stroke:none;font-family:Helvetica Neue;-inkscape-font-specification:Helvetica Neue Bold"
+       x="290"
+       y="572.36218"
+       id="text2989-6"
+       sodipodi:linespacing="125%"><tspan
+         sodipodi:role="line"
+         id="tspan2991-4"
+         x="290"
+         y="572.36218">Slave</tspan></text>
   </g>
 </svg>

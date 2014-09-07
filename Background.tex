@@ -52,13 +52,14 @@ Table \ref{tbl:BLEstates} shows the possible states of a BLE device and figure \
 \vspace{-10pt}
 \end{wrapfigure}
 
-A connection can be formed between two BLE devices, with the master node reaching from the initiating state and the slave node from the advertising state. This master and slave roles follows an asymmetric design philosophy. A slave is a simple device that can be connected with at most one master at a time and are usually single purpose devices. A master on the other hand is a more complex device which is responsible for coordinating the connections and activities of all the slaves connected to it. A master is usually a multi-purpose device such as a mobile phone, tablet or a laptop. A master connected with multiple slaves employs a star topology. The slaves cannot directly communicate with each other. An example of a BLE network is shown in figure \ref{fig:TopoBLE}. Here a master can be seen connected to multiple slaves. The bidirectional continuous lines show data communicated in both directions when in a connection. The dashed lines show the data from the advertisements being sent broadcast. A master or slave can be an advertiser simultaneously as seen in the figure \ref{fig:TopoBLE}. Note that in this figure, since the advertisers are at the two ends, their signals are not able to reach both the master and the scanner device.
+A connection can be formed between two BLE devices, with the master node reaching from the initiating state and the slave node from the advertising state. This master and slave roles follows an asymmetric design philosophy. A slave is a simple device that can be connected with at most one master at a time and are usually single purpose devices. A master on the other hand is a more complex device which is responsible for coordinating the connections and activities of all the slaves connected to it. A master is usually a multi-purpose device such as a mobile phone, tablet or a laptop. A master connected with multiple slaves employs a star topology. \gls{ble} only supports single hop communication, meaning that a master cannot communicate with a master and a slave cannot communicate with a slave. An example of a BLE network is shown in figure \ref{fig:TopoBLE}. Here a master can be seen connected to multiple slaves. The bidirectional continuous lines show data communicated in both directions when in a connection. The dashed lines show the data from the advertisements being sent broadcast. A master or slave can be an advertiser simultaneously as seen in the figure \ref{fig:TopoBLE}. Note that in this figure, since the advertisers are at the two ends, their signals are not able to reach both the master and the scanner device.
 
 \begin{figure}[h]
 \centering
 \includegraphics{TopologyBLE.pdf}
 \caption{An example of BLE topology}
 \label{fig:TopoBLE}
+\vspace{-10pt}
 \end{figure}
 
 %\begin{figure}[h] %{r}{0.51\textwidth}
@@ -158,7 +159,7 @@ An illustration of these parameters is presented in figure \ref{fig:ConnIntvl}. 
 Error detection in BLE communication is performed by utilizing 24 bit \gls{crc} in every packet. A simple acknowledgment scheme is used to request retransmission in case an error is detected or packet reception does not happen. This uses two bits called `\gls{sn}' and `\gls{nesn}'. When a device gets a packet with a particular \gls{nesn},  it must use that as \gls{sn} when it transmits a packet. In case a packet is missed, the device does not know \gls{nesn} and uses the old \gls{sn} in its transmitted packet, thus indicating that it did not receive the last packet. This is better illustrated in figure \ref{fig:SeqNum}. When the slave's packet is lost, the master uses the previous \gls{sn}, thus indicating retransmission. After that the \gls{sn} follows \gls{nesn}.
 
  
-Another important parameter used in maintaining BLE connection is the `\gls{md}' bit. The \gls{md} bit indicates if a device has more data to send, so that more packets can be exchanged in a connection event. In figure \ref{fig:SeqNum}, the master has \gls{md} set to one while slave has it set to zero, indicating that the master has more data to send. In this case the master and slave exchange two packets in a connection event until both master and slave have \gls{md} as zero. In the second connection event, both master and slave have \gls{md} as zero, causing the connection event to end after exchange of one packet. \gls{md} bit allows communication of multiple packets in a connection interval when there is large amount of data to be communicated, thus increasing the throughput.
+Another important parameter used in maintaining BLE connection is the `\gls{md}' bit. The \gls{md} bit indicates if a device has more data to send, so that more packets can be exchanged in a connection event. In figure \ref{fig:SeqNum}, the master has \gls{md} set to one while slave has it set to zero, indicating that the master has more data to send. In this case the master and slave exchange two packets in a connection event until both master and slave have \gls{md} as zero. In the second connection event, both master and slave have \gls{md} as zero, causing the connection event to end after exchange of one packet. \gls{md} bit allows communication of multiple packets in a connection interval when there is large amount of data to be communicated, thus increasing the throughput. This \gls{md} bit is used in the `@' connection event in figure \ref{fig:ConnIntvl} for two exchanges of packet.
 
 \paragraph{\gls{l2cap}} This layer is responsible for multiplexing data from different logical channels in BLE, although in Bluetooth 4.0 only three fixed channels are used. 
 
@@ -201,7 +202,7 @@ Contiki was ported to two new platforms, namely MicaZ and TelosB in a Bachelor t
 Contiki has been ported into platform based on a ARM Cortex M3 processor to create a device wired with Ethernet to connected to the Internet \cite{Wilde2013a}. Ethernet based networking with the libraries present in Contiki was developed in this project to demonstrate as a proof of concept. There are many unofficial ports of Contiki to various hardware platforms.
 
 \section{Overview of 802.15.4} \label{Overview15.4}
-802.15.4, maintained by IEEE 802.15 group, is a standard for the physical and \gls{mac} layer for low data rate wireless network\cite{IEEE802154}. Mnay protocols such as Zigbee and WirelessHART are based on 802.15.4. The emphasis of this protocol is to provide low cost, low power, low data rate wireless communication for short range, which is similar to \gls{ble}.
+802.15.4, maintained by IEEE 802.15 group, is a standard for the physical and \gls{mac} layer for low data rate wireless network\cite{IEEE802154}. Mnay protocols such as Zigbee and WirelessHART are based on 802.15.4. The emphasis of this protocol is to provide low cost, low power, low data rate wireless communication for short range, which is similar to \gls{ble}. One of the differentiating factors from \gls{ble} is that many of the protocols based on 802.15.4 support multi-hop. This expands the applications supported by 802.15.4 networks, especially when the application requires machine to machine communication.
 
 Following the research community which primarily uses many different \gls{mac} layers in favor of the standardized 802.15.4 \gls{mac} layer, this thesis uses ContikiMAC and Null-RDC layers along with the physical layer of 802.15.4. Both ContikiMAC and Null-RDC are natively supported in Contiki across various platforms. In this report unless mentioned otherwise, 802.15.4 is implied to be using either ContikiMAC or Null-RDC, not the standard 802.15.4 \gls{mac}.
 
@@ -211,15 +212,18 @@ Following the research community which primarily uses many different \gls{mac} l
 \subsection{\texorpdfstring{\gls{mac}}{MAC} Layer}
 
 
-Unlike BLE where the communicating nodes in a connection are tightly synchronized, the nodes operate asynchronously with 802.15.4. This is done by the nodes periodically switching on their receivers to sense any radio activity using the \gls{rssi} measurement. If any activity is sensed, the radio is kept on longer to enable reception if a packet is sent. The sender on the other hand transmits a number of strobe packets to inform the receiver that it is being sent a packet. Since these strobe packets contain the address of the intended receiver, the other neighboring devices can go back to sleep after receiving a strobe packet. The duration of sending these strobe packets must be longer than the sleep interval of all the neighboring nodes so that they won't miss the strobes.
-
-A mechanism called \gls{cca} is used by the senders to ensure that the channel is free before initiating communication i.e. sending the strobe packets. This is done since process of sending strobes aggressively occupies the channel, so it is important to verify that the channel is clear. This is again done with \gls{rssi} measurement.
-
 \begin{figure}[h]
 \centering
-\includegraphics[scale=2]{ContikiMAC.pdf}
-\caption{Working of ContikiMAC}
+
+\includegraphics[scale=2,trim={0cm 0.1cm 0cm 0.3cm}]{ContikiMAC.pdf}
+\caption{Working of ContikiMAC \cite{Dunkels2011}}
 \label{fig:ContikiMAC}
 \end{figure}
 
-This mechanism is also followed in ContikiMAC with some additional optimizations such as fast wake-up and phase lock for lower power consumption. The process of strobing in case of ContikiMAC is done with data packets as shown in figure \ref{fig:ContikiMAC} from \cite{Dunkels2011}. The default wake up interval of the nodes with ContikiMAC is 125 ms. In case of null-RDC the radio receiver is never switched off, as the name suggests.
+
+Unlike BLE where the communicating nodes in a connection are tightly synchronized, the nodes operate asynchronously with 802.15.4. This is done by the nodes periodically switching on their receivers to sense any radio activity using the \gls{rssi} measurement. If any activity is sensed, the radio is kept on longer to enable reception if a packet is sent. The sender on the other hand transmits a number of strobe packets to inform the receiver that it is being sent a packet. Since these strobe packets contain the address of the intended receiver, the other neighboring devices can go back to sleep after receiving a strobe packet. The duration of sending these strobe packets must be longer than the sleep interval of all the neighboring nodes so that they won't miss the strobes.
+
+
+A mechanism called \gls{cca} is used by the senders to ensure that the channel is free before initiating communication i.e. sending the strobe packets. This is done since process of sending strobes aggressively occupies the channel, so it is important to verify that the channel is clear. This is again done with \gls{rssi} measurement.
+
+This mechanism is also followed in ContikiMAC with some additional optimizations such as fast wake-up and phase lock for lower power consumption. The process of strobing in case of ContikiMAC is done with data packets as shown in figure \ref{fig:ContikiMAC} from \cite{Dunkels2011}. The default wake up interval of the nodes with ContikiMAC is 125 ms. In case of Null-RDC the radio receiver is never switched off, as the name suggests. Null-RDC also uses the \gls{cca} mechanism to check if the channel is free before sending strobe packets.
