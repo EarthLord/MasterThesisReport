@@ -76,27 +76,6 @@ A connection can be formed between two BLE devices, with the master node reachin
 
 To implement the BLE network described in the previous section, the BLE stack used is as shown in figure \ref{fig:StackBLE}. The BLE stack is split into a host section and a controller section. The controller part takes care of the actual interaction with the radio and enforcing the timing requirements. The controller part is implemented in the \gls{ic} where the radio is located, usually the \gls{soc} or the discrete transceiver. On the other hand, the host contains the software required for handling the various kinds of BLE packets. This separation of host and controller allows mixing and matching of these parts from different sources. The communication between the host and controller is done through the Host Controller Interface. The rest of this section explains the different layers briefly, with emphasis on the parts used in this thesis.
 
-%\begin{figure}[h]
-%\begin{center}
-%\setlength{\extrarowheight}{1.5pt}
-%\begin{tabular}{|c||c|c|}
-%\cline{2-3}
-%\multicolumn{1}{c|}{} &  \multicolumn{ 2}{c|}{Applications} \\ \hline
-%\multicolumn{ 1}{|c||}{} & \multicolumn{ 2}{c|}{Generic Access Profile} \\ \cline{ 2- 3}
-%\multicolumn{ 1}{|c||}{Host} & \multicolumn{ 2}{c|}{Generic Attribute Profile} \\ \cline{ 2- 3}
-%\multicolumn{ 1}{|l||}{} & \multicolumn{1}{c|}{Attribute Protocol} & \multicolumn{1}{c|}{Security Manager} \\ \cline{ 2- 3}
-%\multicolumn{ 1}{|l||}{} & \multicolumn{ 2}{c|}{Logic Link Control and Adaptation Protocol} \\ \hline \cline{2-3}
-%\multicolumn{1}{c|}{} & \multicolumn{ 2}{c|}{Host Control Interface} \\ \cline{2-3} \hline
-%\multicolumn{ 1}{|c||}{Controller} & \multicolumn{1}{c|}{Link Layer} & \multicolumn{1}{c|}{Direct Test Mode} \\ \cline{ 2- 3}
-%\multicolumn{ 1}{|c||}{} & \multicolumn{ 2}{c|}{Physical Layer} \\ \hline
-%\multicolumn{ 1}{c}{} & \multicolumn{1}{m{4cm}}{} & \multicolumn{1}{m{4cm}}{} \\ 
-%\end{tabular}
-%\end{center}
-%\vspace{-30pt}
-%\caption{BLE Stack}
-%\label{fig:StackBLE}
-%\end{figure}
-
 \begin{figure}[h]
 \begin{center}
 \setlength{\extrarowheight}{1.5pt}
@@ -151,7 +130,8 @@ An illustration of these parameters is presented in figure \ref{fig:ConnIntvl}. 
 
 
 \begin{figure}[h]
-\includegraphics[width=0.9\textwidth]{SeqNum}
+\centering
+\includegraphics[scale=1.1]{SeqNum.pdf}
 \caption{Illustration of working of BLE link layer's \gls{sn}, \gls{nesn} and \acrshort{md}}
 \label{fig:SeqNum}
 \end{figure}
@@ -224,7 +204,7 @@ A mechanism called \gls{cca} is used by the senders to ensure that the channel i
 
 \begin{figure}[h]
 \centering
-\includegraphics[scale=2,trim={0cm 0.1cm 0cm 0.3cm}]{ContikiMAC.pdf}
+\includegraphics[scale=2]{ContikiMAC.pdf}
 \caption{Working of ContikiMAC \cite{Dunkels2011}}
 \label{fig:ContikiMAC}
 \end{figure}
