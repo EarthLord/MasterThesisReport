@@ -120,7 +120,7 @@ To implement the BLE network described in the previous section, the BLE stack us
 \end{figure}
 
 \paragraph{Physical Layer}
-This is layer with the actual task of sending and receiving electromagnetic signals with a 2.4 GHz \gls{ism} radio. The modulation scheme used is \gls{gfsk}. The bit rate used is 1 Mbps. There are 40 channels over which BLE operates, each 2 MHz apart from each other. In these there are 3 advertisement channels for sending advertisement packets. These are spread over the \gls{ism} band, located where overlapping with WiFi signals does not occur. The rest of the channels are used for communicating data when in connection mode.
+This is layer with the actual task of sending and receiving electromagnetic signals with a 2.4 GHz \gls{ism} radio. The modulation scheme used is \gls{gfsk}. The bit rate used is 1 Mbps. There are 40 channels over which BLE operates, each 2 MHz apart from each other. In these there are 3 advertisement channels for sending advertisement packets. These are spread over the \gls{ism} band, located where overlapping with WiFi signals does not occur. The rest of the channels are used for communicating data when in connection mode. The channel map used by BLE is illustrated in figure \ref{fig:ChMap}.
 
 \paragraph{Link Layer}
 The link layer is responsible for advertising and scanning when unconnected, along with creating and maintaining connections. The error detection and encryption are also taken care by this layer. 
@@ -207,23 +207,26 @@ Contiki has been ported into platform based on a ARM Cortex M3 processor to crea
 Following the research community which primarily uses many different \gls{mac} layers in favor of the standardized 802.15.4 \gls{mac} layer, this thesis uses ContikiMAC and Null-RDC layers along with the physical layer of 802.15.4. Both ContikiMAC and Null-RDC are natively supported in Contiki across various platforms. In this report unless mentioned otherwise, 802.15.4 is implied to be using either ContikiMAC or Null-RDC, not the standard 802.15.4 \gls{mac}.
 
 \subsection{Physical Layer}
-802.15.4 also uses the 2.4 GHz \gls{ism} band for communication, with this spectrum divided into 16 channels numbered from 11 to 26. The bit rate used for this standard is 250 kbps. The modulation scheme used in 16-ary orthogonal modulation using Direct Sequence Spread Spectrum technique. 0 to 10 channels of 802.15.4's are present in sub 1 GHz bands with lower bit rate.
+\begin{figure}[h]
+\centering
+\includegraphics[scale=1.15]{ChMap_BLE_15_4.pdf}
+\caption{BLE and 802.15.4's channel map comparison}
+\label{fig:ChMap}
+\end{figure}
+
+802.15.4 also uses the 2.4 GHz \gls{ism} band for communication, with this spectrum divided into 16 channels numbered from 11 to 26. The bit rate used for this standard is 250 kbps. The modulation scheme used in 16-ary orthogonal modulation using Direct Sequence Spread Spectrum technique. 0 to 10 channels of 802.15.4's are present in sub 1 GHz bands with lower bit rate. Comparison of BLE and 802.15.4's channel map is presented in figure \ref{fig:ChMap}.
 
 \subsection{\texorpdfstring{\gls{mac}}{MAC} Layer}
 
+Unlike BLE where the communicating nodes in a connection are tightly synchronized, the nodes operate asynchronously with 802.15.4. This is done by the nodes periodically switching on their receivers to sense any radio activity using the \gls{rssi} measurement. If any activity is sensed, the radio is kept on longer to enable reception if a packet is sent. The sender on the other hand transmits a number of strobe packets to inform the receiver that it is being sent a packet. Since these strobe packets contain the address of the intended receiver, the other neighboring devices can go back to sleep after receiving a strobe packet. The duration of sending these strobe packets must be longer than the sleep interval of all the neighboring nodes so that they won't miss the strobes.
+
+A mechanism called \gls{cca} is used by the senders to ensure that the channel is free before initiating communication i.e. sending the strobe packets. This is done since process of sending strobes aggressively occupies the channel, so it is important to verify that the channel is clear. This is again done with \gls{rssi} measurement.
 
 \begin{figure}[h]
 \centering
-
 \includegraphics[scale=2,trim={0cm 0.1cm 0cm 0.3cm}]{ContikiMAC.pdf}
 \caption{Working of ContikiMAC \cite{Dunkels2011}}
 \label{fig:ContikiMAC}
 \end{figure}
-
-
-Unlike BLE where the communicating nodes in a connection are tightly synchronized, the nodes operate asynchronously with 802.15.4. This is done by the nodes periodically switching on their receivers to sense any radio activity using the \gls{rssi} measurement. If any activity is sensed, the radio is kept on longer to enable reception if a packet is sent. The sender on the other hand transmits a number of strobe packets to inform the receiver that it is being sent a packet. Since these strobe packets contain the address of the intended receiver, the other neighboring devices can go back to sleep after receiving a strobe packet. The duration of sending these strobe packets must be longer than the sleep interval of all the neighboring nodes so that they won't miss the strobes.
-
-
-A mechanism called \gls{cca} is used by the senders to ensure that the channel is free before initiating communication i.e. sending the strobe packets. This is done since process of sending strobes aggressively occupies the channel, so it is important to verify that the channel is clear. This is again done with \gls{rssi} measurement.
 
 This mechanism is also followed in ContikiMAC with some additional optimizations such as fast wake-up and phase lock for lower power consumption. The process of strobing in case of ContikiMAC is done with data packets as shown in figure \ref{fig:ContikiMAC} from \cite{Dunkels2011}. The default wake up interval of the nodes with ContikiMAC is 125 ms. In case of Null-RDC the radio receiver is never switched off, as the name suggests. Null-RDC also uses the \gls{cca} mechanism to check if the channel is free before sending strobe packets.
