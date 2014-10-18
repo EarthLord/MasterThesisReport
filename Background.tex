@@ -5,9 +5,9 @@ This chapter aims at providing a succinct background necessary to understanding 
 
 \section{Overview of \texorpdfstring{\acrlong{ble}}{Bluetooth Low Energy}} \label{OverviewBLE}
 
-\acrfull{ble} is a relatively new low power standard incorporated in Bluetooth Core Specification Version 4.0 released by Bluetooth \gls{sig} in 2010\cite{CoreSpec4.0}. This wireless personal area network is marketed as Bluetooth Smart the Bluetooth \gls{sig}. Devices containing only BLE hardware are \emph{single mode} devices, whereas devices containing both classic Bluetooth and BLE are known as \emph{dual mode} devices.   
+\acrfull{ble} is a relatively new low power standard incorporated in Bluetooth Core Specification Version 4.0 released by Bluetooth \gls{sig} in 2010 \cite{CoreSpec4.0}. This wireless personal area network is marketed as Bluetooth Smart the Bluetooth \gls{sig}. Devices containing only BLE hardware are \emph{single mode} devices, whereas devices containing both classic Bluetooth and BLE are known as \emph{dual mode} devices.   
 
-\gls{ble} was designed by Bluetooth \gls{sig} from the ground up, which helped it achieve certain design goals. These design goals for this wireless personal area network were \emph{low cost, worldwide operation, short range, robustness} and \emph{low power}\cite{Heydon2012}. One most important differentiating factors that has made BLE so successful is the standardization by Bluetooth SIG, facilitating its inclusion in consumer devices and enabling communication across different vendors. In 2013, over 85\% consumer electronic devices supported BLE, making it the de facto standard for low power wireless communication in these devices\cite{Martin2014}. BLE is adopted for various control, notification and monitoring applications, especially in the healthcare, fitness, security and home entertainment industry. 
+\gls{ble} was designed by Bluetooth \gls{sig} from the ground up, which helped it achieve certain design goals. These design goals for this wireless personal area network were \emph{low cost, worldwide operation, short range, robustness} and \emph{low power} \cite{Heydon2012}. One most important differentiating factors that has made BLE so successful is the standardization by Bluetooth SIG, facilitating its inclusion in consumer devices and enabling communication across different vendors. In 2013, over 85\% consumer electronic devices supported BLE, making it the de facto standard for low power wireless communication in these devices \cite{Martin2014}. BLE is adopted for various control, notification and monitoring applications, especially in the healthcare, fitness, security and home entertainment industry. 
 
 %\subsection{Design objectives of \gls{ble}}
 %
@@ -19,9 +19,9 @@ This chapter aims at providing a succinct background necessary to understanding 
 %\paragraph{Low Cost} Lower power requirements mean that the batteries in \gls{ble} devices need to smaller and have to be replaced less frequently, both resulting in a reduction of cost for both the manufacturer and the customer. The use of the \gls{ism} band for communication levels removes the licensing entry barrier for start-ups to develop \gls{ble} devices. \gls{ble} embraces simplicity in its pursuit to lower the cost. \gls{ble} supports only single-hop communication in a star network, which reduces the memory and processor requirement for supporting the protocol. Simplicity was the key factor for the choosing of \gls{gfsk} as the modulation scheme for \gls{ble} to result in low cost, simple implementation of the radio in the \glspl{ic} for \gls{ble}. 
 %\paragraph{Robustness} The 2.4~\si{\GHz} space is crowded with devices communicating with various standards as well as spurious noise making the robustness a key criteria in developing \gls{ble} standard. \gls{ble} uses a multi-channel hopping mechanism called \gls{afh} to detect, avoid and recover from interference. In addition to \gls{afh}, \gls{ble} uses \gls{crc} to detect and recover from bit-errors due to background noise.
 
-\subsection[\texorpdfstring{\gls{ble}}{BLE} Network Architecture]{\texorpdfstring{\gls{ble}}{BLE} Network Architecture\cite{BLE101}}
+\subsection[\texorpdfstring{\gls{ble}}{BLE} Network Architecture]{\texorpdfstring{\gls{ble}}{BLE} Network Architecture \cite{BLE101}}
 
-\begin{table}[htbp]
+\begin{table}[h]
 \begin{center}
 \vspace{-10pt}
 \setlength{\extrarowheight}{1.5pt}
@@ -44,25 +44,29 @@ This chapter aims at providing a succinct background necessary to understanding 
 
 Table \ref{tbl:BLEstates} shows the possible states of a BLE device and figure \ref{fig:Roles} illustrates the ways in which these states can change. The standby role is universally supported across all BLE devices and the other roles are present in device according to their configuration. For example, a device with only a radio transmitter can alternate between the advertising and standby state, usually called an \emph{advertiser}. Similarly a \emph{scanner} can just receive BLE packets.
 
-\begin{wrapfigure}{r}{0.55\textwidth}
+\begin{figure}[t] %{r}{0.55\textwidth}
 \centering
+\vspace{-15pt}
 \includegraphics{Roles.pdf}
-\caption{State diagram of BLE states \cite{BLE101}}
+\vspace{-5pt}
+\caption{State diagram of BLE states  \cite{BLE101}}
 \label{fig:Roles}
 \vspace{-10pt}
-\end{wrapfigure}
+\end{figure}
 
-A connection can be formed between two BLE devices, with the master node reaching from the initiating state and the slave node from the advertising state. This master and slave roles follows an asymmetric design philosophy. A slave is a simple device that can be connected with at most one master at a time and are usually single purpose devices. A master on the other hand is a more complex device which is responsible for coordinating the connections and activities of all the slaves connected to it. A master is usually a multi-purpose device such as a mobile phone, tablet or a laptop. A master connected with multiple slaves employs a star topology. \gls{ble} only supports single hop communication, meaning that a master cannot communicate with a master and a slave cannot communicate with a slave. An example of a BLE network is shown in figure \ref{fig:TopoBLE}. Here a master can be seen connected to multiple slaves. The bidirectional continuous lines show data communicated in both directions when in a connection. The dashed lines show the data from the advertisements being sent broadcast. A master or slave can be an advertiser simultaneously as seen in the figure \ref{fig:TopoBLE}. Note that in this figure, since the advertisers are at the two ends, their signals are not able to reach both the master and the scanner device.
+A connection can be formed between two BLE devices, with the master node reaching from the initiating state and the slave node from the advertising state. This master and slave roles follows an asymmetric design philosophy. A slave is a simple device that can be connected with at most one master at a time and are usually single purpose devices. A master on the other hand is a more complex device which is responsible for coordinating the connections and activities of all the slaves connected to it. A master is usually a multi-purpose device such as a mobile phone, tablet or a laptop. A master connected with multiple slaves employs a star topology. \gls{ble} only supports single hop communication, meaning that a master cannot communicate with a master and a slave cannot communicate with a slave.
+
+An example of a BLE network is shown in figure \ref{fig:TopoBLE}. Here a master can be seen connected to multiple slaves. The bidirectional continuous lines show data communicated in both directions when in a connection. The dashed lines show the data from the advertisements being sent broadcast. A master or slave can be an advertiser simultaneously as seen in the figure \ref{fig:TopoBLE}. Note that in this figure, since the advertisers are at the two ends, their signals are not able to reach both the master and the scanner device.
 
 \begin{figure}[h]
 \centering
-\includegraphics{TopologyBLE.pdf}
-\caption{An example of BLE topology \cite{BLE101}}
+\includegraphics[scale=1.05]{TopologyBLE.pdf}
+\caption{An example of BLE topology  \cite{BLE101}}
 \label{fig:TopoBLE}
 \vspace{-10pt}
 \end{figure}
 
-\section[\texorpdfstring{\gls{ble}}{BLE} Stack Overview]{\texorpdfstring{\gls{ble}}{BLE} stack overview\cite{Heydon2012}}
+\section[\texorpdfstring{\gls{ble}}{BLE} Stack Overview]{\texorpdfstring{\gls{ble}}{BLE} stack overview \cite{Heydon2012}}
 
 To implement the BLE network described in the previous section, the BLE stack used is as shown in figure \ref{fig:StackBLE}. The BLE stack is split into a host section and a controller section. The controller part takes care of the actual interaction with the radio and enforcing the timing requirements. The controller part is implemented in the \gls{ic} where the radio is located, usually the \gls{soc} or the discrete transceiver. On the other hand, the host contains the software required for handling the various kinds of BLE packets. This separation of host and controller allows mixing and matching of these parts from different sources. The communication between the host and controller is done through the Host Controller Interface. The rest of this section explains the different layers briefly, with emphasis on the parts used in this thesis.
 
@@ -114,6 +118,7 @@ Where, `\%' denotes the modulus operation, $f_{n+1}$ is the next channel that wi
 \includegraphics[scale=1.1]{ConnIntvl.pdf}
 \caption{Illustration of BLE connection parameters}
 \label{fig:ConnIntvl}
+\vspace{-5pt}
 \end{figure}
 
 An illustration of these parameters is presented in figure \ref{fig:ConnIntvl}. In this figure the concept of connection event, connection interval, slave latency, frequency hopping, hop increment and channel map can be visualized. The interaction that happens after every connection interval is the connection event as represented by `\#', `\&' and `@'. The slave latency considered in this example is 2. Its effect can be seen when the slave chooses not to respond to the master in the two `\&' connection events. But it \emph{had} to respond in the third connection event to keep the connection alive. Also it chose to respond in the `@' connection event. Multiple packets were communicated in this event by a mechanism described in the next paragraph. The frequency hopping can also be seen when the channel used changes for each connection event. The hop increment used in this example is 7. The working of the hopping algorithm can be seen when the channel hops from 33 to ((33+7)\%37), which is 3. The entire channel map is considered for this example. 
@@ -122,7 +127,7 @@ An illustration of these parameters is presented in figure \ref{fig:ConnIntvl}. 
 \begin{figure}[h]
 \centering
 \includegraphics[scale=1.1]{SeqNum.pdf}
-\caption{Illustration of working of BLE link layer's \gls{sn}, \gls{nesn} and \acrshort{md} \cite{Heydon2012}}
+\caption{Illustration of working of BLE link layer's \gls{sn}, \gls{nesn} and \acrshort{md}  \cite{Heydon2012}}
 \label{fig:SeqNum}
 \end{figure}
 
@@ -135,7 +140,7 @@ Another important parameter used in maintaining BLE connection is the `\gls{md}'
 
 \paragraph{Security Manager} This layer is used for pairing BLE devices, which is a form of authenticating the other device. Typically this is followed by encryption key distribution.
 
-\paragraph{\gls{att}} This layer defines the \emph{Client-Server} architecture used by BLE to communicate data. A server is where data is held in a database and a client is one which gets the data from a server. All data stored in BLE devices as \emph{Attributes}, which is data organized in a specific format containing a label and address. Thus, a client can requests and gets a specific attribute from a server's database. Client or server configuration is independent of the role in link layer. A master or slave device can have \emph{both} a client and a server.
+\paragraph{\gls{att}} This layer defines the \emph{Client-Server} architecture used by BLE to communicate data. A server is where data is held in a database and a client is one which gets the data from a server. All data stored in BLE devices as \emph{Attributes}, which is data organized in a specific format containing a label and address. Thus, a client can request and get a specific attribute from a server's database. Client or server configuration is independent of the role in link layer. A master or slave device can have \emph{both} a client and a server.
 
 Attributes can be accessed from the attribute database in six ways as listed below.
 
@@ -156,23 +161,19 @@ This layer defines how BLE devices discover, connect and present useful informat
 
 \section[Overview of Contiki \texorpdfstring{\gls{os}}{OS}]{Overview of Contiki \texorpdfstring{\gls{os}}{OS}} \label{OverviewContiki}
 
-Contiki \gls{os} is a lightweight, mature and open source operating systems with extensive networking stack for low cost and low power systems\cite{Contiki}. In this document `Contiki' and `Contiki \gls{os}' have been used interchangeably and mean the same thing. Contiki's networking capabilities include the complete IP stack (IPv4, IPv6, UDP, TCP, HTTP) and the recent \gls{ietf} standardized protocols for IPv6 networking such as RPL multihop routing protocol, 6LowPAN and CoAP RESTful application layer protocol. For the event driven scheduler that Contiki uses, a mechanism called \emph{Protothreads} is used. This results in low memory foot-print and nice flow control in code development. Another tool developed to ease development using Contiki, especially in large distributed systems is \emph{Cooja}. Cooja is a network simulator that has the capability of simulating large scale network on emulated hardware units with fine grained control. Cooja was used in this thesis also to verify designed before actually deploying them. Low power \glspl{wsn} is the typical application scenario of devices running on Contiki, although Contiki has been used in a wide variety of projects.
+Contiki \gls{os} is a lightweight, mature and open source operating system with extensive networking stack for low cost and low power systems \cite{Contiki}. In this document `Contiki' and `Contiki \gls{os}' have been used interchangeably and mean the same thing. Contiki's networking capabilities include the complete IP stack (IPv4, IPv6, UDP, TCP, HTTP) and the recent \gls{ietf} standardized protocols for IPv6 networking such as RPL multihop routing protocol, 6LowPAN and CoAP RESTful application layer protocol. For the event driven scheduler that Contiki uses, a mechanism called \emph{Protothreads} is used. This results in low memory foot-print and enables sequential programming. Another tool developed to ease development using Contiki, especially in large distributed systems is \emph{Cooja}. Cooja is a network simulator that has the capability of simulating large scale network on emulated hardware units with fine grained control. Cooja was used in this thesis also to verify designed before actually deploying them. Low power \glspl{wsn} is the typical application scenario of devices running on Contiki, although Contiki has been used in a wide variety of projects.
 
+%\subsection{Porting the Contiki to a New Platform} \label{2Porting}
+Contiki \gls{os} has been ported to an increasing number of hardware platforms  \cite{contikiHw}. Since Contiki is an open-source BSD Clause-3 licensed project, there are many projects in various hardware platforms based on a fork from the Contiki repository. These hardware platforms' processors range across a spectrum of 8-bit (8051 and AVR), 16-bit (MSP430) to 32-bit (ARM Cortex-M, PIC32). Contiki has support for 802.15.4 based wireless communication with various external transceivers and \glspl{soc} with radio transceiver built in the same \gls{ic} as the \gls{mcu}. Various common features of many platforms such as \glspl{led}, buttons and serial port have modules in Contiki for common \gls{api} across platforms.
 
+%In  \cite{Oikonomou2011} the authors describe Contiki's port to a CC2430 based platform manufactured by Sensinode Ltd. CC2430 is an enhanced Intel 8051 processor based \gls{soc} having 802.15.4 physical layer compatible radio transceiver. The authors fully debugged the port which had of a code footprint of about 100 kB, varying based on the compiler mode and the features enabled. Many new features were added to the port including support for \gls{adc} unit, all the sensor available on the platform (accelerometer, light sensor, voltage and temperature sensors), watchdog timer and the general purpose buttons. Because of the limited stack availability of 233 bytes, many optimizations such as moving variables to external \gls{ram} memory space and re-writing the radio driver for CC2430 to prevent stack from overflowing.
 
-\subsection{Porting the Contiki to a New Platform} \label{2Porting}
-Contiki \gls{os} has been ported to an increasing number of hardware platforms \cite{contikiHw}. Since Contiki is an open-source BSD Clause-3 licensed project, there are many projects in various hardware platforms based on a fork from the Contiki repository.
+%Contiki was ported to two new platforms, namely MicaZ and TelosB in a Bachelor thesis  \cite{stan2007porting}. TelosB, similar to the TMote-Sky platform, consists of a 8MHz 16-bit MSP430 \gls{mcu}, a CC2400 transceiver with 802.15.4 \gls{phy} and a host of sensors to measure light, temperature and humidity. The port to TelosB was done by changing the port to the fully supported TMote-Sky platform. MicaZ platform consisted of a 8-bit Atmel ATMega128L \gls{mcu} and a CC2400 transceiver. MicaZ platform needed rewriting of the code for processor abstraction so that the high level Contiki \glspl{api} could work.
 
-These hardware platforms' processors range across a spectrum of 8-bit (8051 and AVR), 16-bit (MSP430) to 32-bit (ARM Cortex-M, PIC32). Contiki has support for 802.15.4 based wireless communication with various external transceivers and \glspl{soc} with radio transceiver built in the same \gls{ic} as the \gls{mcu}. Various common features of many platforms such as \glspl{led}, buttons and serial port have modules in Contiki for common \gls{api} across platforms.
-
-In \cite{Oikonomou2011} the authors describe Contiki's port to a CC2430 based platform manufactured by Sensinode Ltd. CC2430 is an enhanced Intel 8051 processor based \gls{soc} having 802.15.4 physical layer compatible radio transceiver. The authors fully debugged the port which had of a code footprint of about 100 kB, varying based on the compiler mode and the features enabled. Many new features were added to the port including support for \gls{adc} unit, all the sensor available on the platform (accelerometer, light sensor, voltage and temperature sensors), watchdog timer and the general purpose buttons. Because of the limited stack availability of 233 bytes, many optimizations such as moving variables to external \gls{ram} memory space and re-writing the radio driver for CC2430 to prevent stack from overflowing.
-
-Contiki was ported to two new platforms, namely MicaZ and TelosB in a Bachelor thesis \cite{stan2007porting}. TelosB, similar to the TMote-Sky platform, consists of a 8MHz 16-bit MSP430 \gls{mcu}, a CC2400 transceiver with 802.15.4 \gls{phy} and a host of sensors to measure light, temperature and humidity. The port to TelosB was done by changing the port to the fully supported TMote-Sky platform. MicaZ platform consisted of a 8-bit Atmel ATMega128L \gls{mcu} and a CC2400 transceiver. MicaZ platform needed rewriting of the code for processor abstraction so that the high level Contiki \glspl{api} could work.
-
-Contiki has been ported into platform based on a ARM Cortex M3 processor to create a device wired with Ethernet to connected to the Internet \cite{Wilde2013a}. Ethernet based networking with the libraries present in Contiki was developed in this project to demonstrate as a proof of concept. There are many unofficial ports of Contiki to various hardware platforms.
+%Contiki has been ported into platform based on a ARM Cortex M3 processor to create a device wired with Ethernet to connected to the Internet  \cite{Wilde2013a}. Ethernet based networking with the libraries present in Contiki was developed in this project to demonstrate as a proof of concept. There are many unofficial ports of Contiki to various hardware platforms.
 
 \section{Overview of 802.15.4} \label{Overview15.4}
-802.15.4, maintained by IEEE 802.15 group, is a standard for the physical and \gls{mac} layer for low data rate wireless network\cite{IEEE802154}. Mnay protocols such as Zigbee and WirelessHART are based on 802.15.4. The emphasis of this protocol is to provide low cost, low power, low data rate wireless communication for short range, which is similar to \gls{ble}. One of the differentiating factors from \gls{ble} is that many of the protocols based on 802.15.4 support multi-hop. This expands the applications supported by 802.15.4 networks, especially when the application requires machine to machine communication.
+802.15.4, maintained by IEEE 802.15 group, is a standard for the physical and \gls{mac} layer for low data rate wireless network \cite{IEEE802154}. Mnay protocols such as Zigbee and WirelessHART are based on 802.15.4. The emphasis of this protocol is to provide low cost, low power, low data rate wireless communication for short range, which is similar to \gls{ble}. One of the differentiating factors from \gls{ble} is that many of the protocols based on 802.15.4 support multi-hop. This expands the applications supported by 802.15.4 networks, especially when the application requires machine to machine communication.
 
 Following the research community which primarily uses many different \gls{mac} layers in favor of the standardized 802.15.4 \gls{mac} layer, this thesis uses ContikiMAC and Null-RDC layers along with the physical layer of 802.15.4. Both ContikiMAC and Null-RDC are natively supported in Contiki across various platforms. In this report unless mentioned otherwise, 802.15.4 is implied to be using either ContikiMAC or Null-RDC, not the standard 802.15.4 \gls{mac}.
 
@@ -186,17 +187,22 @@ Following the research community which primarily uses many different \gls{mac} l
 
 802.15.4 also uses the 2.4 GHz \gls{ism} band for communication, with this spectrum divided into 16 channels numbered from 11 to 26. The bit rate used for this standard is 250 kbps. The modulation scheme used in 16-ary orthogonal modulation using Direct Sequence Spread Spectrum technique. 0 to 10 channels of 802.15.4's are present in sub 1 GHz bands with lower bit rate. Comparison of BLE and 802.15.4's channel map is presented in figure \ref{fig:ChMap}.
 
-\subsection{\texorpdfstring{\gls{mac}}{MAC} Layer}
+\subsection{\texorpdfstring{\gls{mac}}{MAC} Layer - ContikiMAC \& Null-RDC}
 
-Unlike BLE where the communicating nodes in a connection are tightly synchronized, the nodes operate asynchronously with 802.15.4. This is done by the nodes periodically switching on their receivers to sense any radio activity using the \gls{rssi} measurement. If any activity is sensed, the radio is kept on longer to enable reception if a packet is sent. The sender on the other hand transmits a number of strobe packets to inform the receiver that it is being sent a packet. Since these strobe packets contain the address of the intended receiver, the other neighboring devices can go back to sleep after receiving a strobe packet. The duration of sending these strobe packets must be longer than the sleep interval of all the neighboring nodes so that they won't miss the strobes.
+Unlike BLE where the communicating nodes in a connection are tightly synchronized, the nodes operate asynchronously with 802.15.4. This is done by the nodes periodically switching on their receivers to sense any radio activity using the \gls{rssi} measurement. This period is called the \emph{wakeup interval}. If any activity is sensed, the radio is kept on longer to enable reception if a packet is sent, otherwise the nodes goes back to sleep for
+one wakeup interval. The sender on the other hand transmits a number of strobe packets to inform the receiver that it is being sent a packet. Since these strobe packets contain the address of the intended receiver, the other neighboring devices can go back to sleep after receiving a strobe packet. The duration of sending these strobe packets must be longer than the wakeup interval of all the neighboring nodes so that they won't miss the strobes.
 
-A mechanism called \gls{cca} is used by the senders to ensure that the channel is free before initiating communication i.e. sending the strobe packets. This is done since process of sending strobes aggressively occupies the channel, so it is important to verify that the channel is clear. This is again done with \gls{rssi} measurement.
-
-\begin{figure}[h]
+\begin{figure}[b]
 \centering
 \includegraphics[scale=1.7]{ContikiMAC.pdf}
-\caption{Working of ContikiMAC \cite{Dunkels2011}}
+\caption{Working of ContikiMAC  \cite{Dunkels2011}}
 \label{fig:ContikiMAC}
 \end{figure}
 
-This mechanism is also followed in ContikiMAC with some additional optimizations such as fast wake-up and phase lock for lower power consumption. The process of strobing in case of ContikiMAC is done with data packets as shown in figure \ref{fig:ContikiMAC} from \cite{Dunkels2011}. The default wake up interval of the nodes with ContikiMAC is 125 ms. In case of Null-RDC the radio receiver is never switched off, as the name suggests. Null-RDC also uses the \gls{cca} mechanism to check if the channel is free before sending strobe packets.
+A mechanism called \gls{cca} is used by the senders to ensure that the channel is free before initiating communication i.e. sending the strobe packets. This is done since process of sending strobes aggressively occupies the channel, so it is important to verify that the channel is clear. This is again done with \gls{rssi} measurement.
+
+\paragraph{ContikiMAC}
+This mechanism earlier in this section is also followed in ContikiMAC with some additional optimizations such as fast wake-up and phase lock for lower power consumption. The process of strobing in case of ContikiMAC is done with data packets as shown in figure \ref{fig:ContikiMAC} from  \cite{Dunkels2011}. The default wakeup interval of the nodes with ContikiMAC is 125 ms. By default, ContikiMAC does \gls{cca} twice before initiating communication and this can be increased to up to six times.
+
+\paragraph{Null-RDC}
+In case of Null-RDC the radio receiver is never switched off, as the name suggests. Null-RDC also uses the \gls{cca} mechanism to check if the channel is free before sending strobe packets.

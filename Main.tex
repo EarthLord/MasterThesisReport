@@ -120,11 +120,11 @@ urlseen = {Retrieved on},
 \input{Contributions.tex}
 \input{ConclusionsFutureWork.tex}
 
-
-\printbibliography[title={References}]
+%\addcontentsline{toc}{chapter}{References}
+\printbibliography[heading=bibintoc,title={References}]
 
 %Add chapter tile as 'Appendix x | title'
-\titleformat{\chapter}[hang]{\LARGE\bfseries}{\chaptername\hsp\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
+\titleformat{\chapter}[hang]{\LARGE\bfseries}{Appendix\hsp\thechapter\hsp\textcolor{gray75}{|}\hsp}{0pt}{\LARGE\bfseries}
 %Start appendix mode
 \begin{appendices}
 \input{Appendix.tex}

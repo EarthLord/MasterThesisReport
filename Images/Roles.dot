@@ -1,5 +1,5 @@
   digraph main_flow {
-  	graph[nodesep=0.4, ranksep=0.5]
+  	graph[nodesep=0.6, ranksep=0.4]
 
    Sb [fontsize=11.0,shape=circle,fixedsize=true,width=0.85,fontname="Helvetica Neue",label="Standby"]
  	A [fontsize=11.0,shape=circle,fixedsize=true,width=0.85,fontname="Helvetica Neue",label="Advertising"]
@@ -16,4 +16,5 @@
  	Sb -> I [dir=both];
  	A -> C [fontsize=11.0,labeldistance=5,labelangle=40,headlabel="To become\na slave",fontname = "Helvetica Neue"];
  	I -> C [fontsize=11.0,labeldistance=5,labelangle=-40,headlabel="To become\na master",fontname = "Helvetica Neue"];
+ 	C -> Sb;
 }

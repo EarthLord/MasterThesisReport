@@ -2,44 +2,25 @@
 This chapter provides a graphical representation of the data acquired from conducting the tests designed in the last chapter. The raw data used to generate this graphs can be accessed in Appendix \ref{ApdxData}. After the graphs their analysis is done to explain the various characteristics of the two wireless protocols according to the experimental results.
 
 \section{\texorpdfstring{\acrlong{ht}}{High-Throughput} Test}
-The data acquired from the different test cases of the \gls{ht} test suite is represented graphically below. The legend used for naming the test cases is same as described in section \ref{6HTdesign}.
+The data acquired from the different test cases of the \gls{ht} test suite is represented graphically followed by its analysis. The legend used for naming the test cases is same as described in section \ref{6HTdesign}.
 
-\subsection{Graphical Representation of the Data Acquired}
+\subsection{Data Rate}
 
-Note that in figure \ref{fig:HT-dr} there are two Y-axis representing the data rate in packets per second and kilobit per second. The link layer payload of 27 bytes and 110 byte was used for BLE and 802.15.4 respectively to calculate the data rate in kbps. The data used for the plot is the median of the 10 tests conducted, each of one minute. The standard deviation of the data rate from  these 10 tests are also plotted. 
-\begin{figure}[h]
+Note that in figure \ref{fig:HT-dr} there are two Y-axis representing the data rate in packets per second and kilobit per second. The link layer payload of 27 bytes and 110 byte was used for BLE and 802.15.4 respectively to calculate the data rate in kbps. The data used for the plot is the median of the 10 tests conducted, each of one minute. The standard deviation of the data rate from these 10 tests is also plotted. 
+\begin{figure}[tb]
 \includegraphics[width=\textwidth]{HT-dr-new}
-\caption{Data Rate}
+\caption{Comparison of data rate as kbps and packets/s for different tests in \gls{ht} test suite}
 \label{fig:HT-dr}
-\vspace{-10 pt}
+
 \end{figure}
 
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{HT-r}
-\caption{Reliability}
-\label{fig:HT-r}
-\vspace{-6 pt}
-\end{figure}
-The graph in figure \ref{fig:HT-r} has Y-axes from 75 to 100 \% for clearer representation of the \gls{pdr} and \gls{prr}. As mentioned in section \ref{6HTdesign} the reliability was calculate in BLE by logging the number of times the radio was switched on as this information was accessible from the SoftDevice. This allowed the calculation of \gls{prr} with one packet per connection event. Since the android devices can communicate multiple packets per connection event, the \gls{prr} could not be calculated. Hence, those test cases are not plotted.
-
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{HT-ec}
-\caption{Energy Consumption}
-\label{fig:HT-ec}
-\end{figure}
-
-For a clearer representation of the graph, the y-axis in figure \ref{fig:HT-ec} is limited to 50\%. The break in the graph shows when Tmote-Sky uses \textasciitilde100\% of radio duty cycle. In all the tests with BLE the source node was the slave device sending the notifications, while the destination node was the master device receiving them.
-
-There was no easy way of accessing the low level information of BLE \gls{rdc} on an Android device, so the energy consumption of these devices is not plotted. Moreover the energy consumption of such multi-purpose master device is less important than a single purpose slave device running on a meager battery.
-
-\subsection{Analysis}
-\paragraph{Data Rate}
 The absolute data rate is higher in 802.15.4 than BLE although the number of packets transmitter per second is higher in BLE as seen in figure \ref{fig:HT-dr}. This is because of the higher packet size of 802.15.4 and the bit rate of transmission of BLE is four time the bit rate of 802.15.4 at 1 Mbps.
 
-For 802.15.4 the peak data rate of 155.06 kbps is achieved when \gls{cca} is not used. The use of \gls{cca} decreased the data rate slightly. When communicating using \gls{cca} in a channel not overlapping with external interference, the data rate was 147.83 kbps. When overlapping WiFi interference was introduced, most of the transmission slots were not utilized because of backing off by \gls{cca}. Appendix \ref{ApdxData} shows that only 37\% of the transmission slots were used, dropping the data rate considerably. With this 60.53 kbps data rate was achieved, which is higher than the data rate achieved by BLE communication between nodes of PCA10000 platform in any test case. Since 802.15.4's Null-RDC tries to send a packet as soon as possible, we can approximately calculate that the inference of WiFi traffic was not present 40.1\% of the time by taking the ratio of the data rate with and without WiFi interference (60.53/147.85). % \todo{can do this?}
+For 802.15.4 the peak data rate of 155.06 kbps is achieved when \gls{cca} is not used and there was no WiFi interference. The use of \gls{cca} decreased the data rate slightly. When communicating using \gls{cca} in a channel not overlapping with external interference, the data rate was 147.83 kbps. When overlapping WiFi interference was introduced, most of the transmission slots were not utilized because of backing off by \gls{cca}. Appendix \ref{ApdxData} shows that only 37\% of the transmission slots were used, dropping the data rate considerably. With this 60.53 kbps data rate was achieved, which is higher than the data rate achieved by BLE communication between nodes of PCA10000 platform in any test case. Since 802.15.4's Null-RDC tries to send a packet as soon as possible, we can approximately calculate that the inference of WiFi traffic was not present 40.1\% of the time by taking the ratio of the data rate with and without WiFi interference (60.53/147.85). An interesting result is where switching off \gls{cca} results in higher data rate with WiFi interference, with more than double the data rate as compared to when \gls{cca} was used. This result can be attributed to both the WiFi backing off sensing the 802.15.4 traffic and the lack of the aggressive backing off by \gls{cca} by the TMoteSky Node. %\todo{can do this?}
 
-The SoftDevice used to implement the central stack allows only one packet to be communicated per connection interval. With this the theoretical data rate that can be achieved can be found out by 
+The SoftDevice used to implement the central stack allows only one packet to be communicated per connection interval. With this the theoretical data rate that can be achieved can be found out by
 
+\vspace{5pt}
 $\mbox{Data Rate  (packet/second)}=\frac{1}{\mbox{connection interval}}=\frac{1}{7.5ms}=133.33\:packet/second$
 
 \vspace{15 pt}
@@ -51,91 +32,177 @@ The experimental results seen in figure \ref{fig:HT-dr} shows this is achieved a
 
 When the WiFi free channels were used the data rate recorded was close to the theoretical data rate predicted. There was negligible influence of the WiFi traffic at all for BLE communication in this case. This shows that when frequency hopping channel map is chosen to avoid the interference, there is no effect on the data rate.
 
-Communication of the PCA10000 with a Nexus4/7 master device achieved a greater data rate of about 86 kbps or \textasciitilde400 packet/second. This is because the BLE stack in these Android devices support communication of multiple packets in a connection event, increasing the data rate achievable. With a connection interval of 7.5 ms, at an average there were around $(400\times7.5/1000)$ i.e. 3 packets of data received by the Android device per connection event.
+Communication of the PCA10000 with a Nexus4 master device achieved a greater data rate of about 86 kbps or \textasciitilde400 packet/second. This is because the BLE stack in these Android devices support communication of multiple packets in a connection event, increasing the data rate achievable. With a connection interval of 7.5 ms, at an average there were around (400 x 7.5/1000) i.e. 3 packets of data received by the Android device per connection event. Test with a Nexus 7 device also achieved a similar result.
 
-\paragraph{Reliability}
-In case of 802.15.4, the \gls{pdr} and \gls{prr} is same since it does not have any communication failure detection and retransmission mechanism. This is left to the upper layer to handle. The link layer just tries initiate communication when there is no external interference present with its \gls{cca}. Figure \ref{fig:HT-r} shows that the \gls{prr} achieved when \gls{cca} is switched off is 98.13\%, the value being high since there was little external interference. While it can be seen that without \gls{cca} the data-rate is higher, the reliability decreases. By using \gls{cca} in a WiFi free channel, the \gls{prr} is 99.05\%, which means that the \gls{cca} is effective in case of less interference in the operated channel. When there was heavy WiFi traffic in the same channel of communication, the \gls{cca} did work since only 36.82\% of the transmission slots were used. Of these transmissions the \gls{prr} was 78.87\%. This could happen when the interference starts after the carrier assessment, causing the packet to get corrupted. Here it can be seen that \gls{cca} of 802.15.4 has reduced effectiveness in case of heavy interference.
+\vspace{7pt}
+\noindent\textbf{Results and Comparison}
 
-In case of \gls{ble}, figure \ref{fig:HT-r} shows that the \gls{pdr} is always 100\% since BLE employs a simple acknowledgment scheme to detect if the communication has not been successful so that the packet can be retransmitted. This ensures that the upper layers can safely assume that the link layer is completely reliable. Without WiFi interference \gls{prr} was about 99.97\%, which means that there were few retransmissions. With all the channels employed and with WiFi interference, the \gls{prr} reduced to 80.46\%. This number is not low because of the frequency hopping used by BLE, which ensures that interference in one frequency range only effects the communication happening over the channels in that frequency range. The other data channels can still keep the communication flow intact. This shows that the frequency hopping when used over the complete channel map helps in sustaining the communication when there is external interference. When only the WiFi free channels were employed, there was no influence of the WiFi interference on \gls{prr}, which was 99.79\%. This shows that when a master device has the capability of detecting external interference, it can adapt the frequency hopping channels so that there is negligible effect on the communication. Note that \gls{afh} can only help negate narrow band interference in the 2.4 GHz \gls{ism} band.
+\begin{easylist}[itemize]
+& The absolute data rate achievable with 802.15.4 is higher than BLE on the account of the greater link-layer payload size, which is 110 byte for 802.15.4 and 27 byte for BLE. This is even with BLE having higher bit rate (1 Mbps) compared to 802.15.4 (250 kbps).
+& The highest data rate achieved with 802.15.4 is when \gls{cca} wasn't used (155 kbps), followed by communicating with a channel not overlapping with external interference using \gls{cca} (148 kbps).
+& When WiFi interference was present in the channel used, the lack of \gls{cca} resulted in higher data (114 kbps) rate as compared to \gls{cca} enabled (61 kbps).
+& In case of BLE, the highest data rate was recorded when communicating with an Android device (86 kbps), since the master device allowed multiple packets to be communicated in a connection interval. 
+& The data rate achieved between PCA10000 nodes was in-line with the theoretically calculated data rate when there was no external interference (29 kbps). This is the same case when WiFi free channel map was used with external interference. Since this is as if \gls{afh} is implemented, there is no degradation in the data rate. When there was WiFi interference and the complete channel map was used, the data rate dropped to only 80\% of the interference free data rate because of the frequency hopping.
+& The data rate achieved in BLE communication depends highly on the stack, which limits the deciding parameters of connection interval and packets communicated consistently in each connection interval. In case of 802.15.4 it is easy to have the radio always on and achieve the maximum possible data rate.
+\end{easylist}
 
-\paragraph{Energy Consumption}
+\subsection{Reliability}
+The graph in figure \ref{fig:HT-r} has Y-axes from 75 to 100 \% for clearer representation of the \gls{pdr} and \gls{prr}. As mentioned in section \ref{6HTdesign} the reliability was calculated in BLE by logging the number of times the radio was switched on as this information was accessible from the SoftDevice. This allowed the calculation of \gls{prr} with one packet per connection event. Since the android devices can communicate multiple packets per connection event, the \gls{prr} could not be calculated. Hence, those test cases are not plotted.
+
+\begin{figure}[b]
+\includegraphics[width=\textwidth]{HT-r-new}
+\caption{Comparison of reliability in terms of \gls{pdr} \& \gls{prr} for different tests in \gls{ht} test suite }
+\label{fig:HT-r}
+\vspace{-6 pt}
+\end{figure}
+
+As mentioned in section \ref{6HTdesign}, in case of 802.15.4 the \gls{mac} layer used in \gls{ht} test suite is a modified version of Null-RDC which sends a full payload sized packet repeatedly as soon as possible. In other non-throughput oriented \gls{mac} layers there is provision of acknowledgment and retransmission in case of error. In this \gls{ht} test suite, the \gls{pdr} and \gls{prr} is same since it does not have any communication failure detection and retransmission mechanism. This is left to the upper layer to handle. The link layer just tries initiate communication when there is no external interference present when \gls{cca} is enabled, otherwise sends a packet at the next opportunity. 
+
+Figure \ref{fig:HT-r} shows that the \gls{prr} achieved is around 98\% when \gls{cca} is switched off and there is no WiFi interference. When there is external interference present and \gls{cca} is disabled, the reliability drops to about 71\%. With this \gls{prr} we can see that the WiFi also backs off because of the heavy 802.15.4 traffic. By using \gls{cca} in a WiFi free channel, the \gls{prr} is 99.05\%, which means that the \gls{cca} is effective in case of less interference in the operated channel. When there was heavy WiFi traffic in the same channel of communication, the \gls{cca} did work since only 36.82\% of the transmission slots were used. Of these transmissions the \gls{prr} was 78.87\%. This could happen when the interference starts after the carrier assessment, causing the packet to get corrupted. Here it can be seen that \gls{cca} of 802.15.4 has reduced effectiveness in case of heavy interference. Also while it can be seen that without \gls{cca} the data-rate is higher, the reliability decreases.
+
+In case of \gls{ble}, figure \ref{fig:HT-r} shows that the \gls{pdr} is always 100\% since BLE employs a simple acknowledgment scheme to detect if the communication has not been successful so that the packet can be retransmitted. This ensures that the upper layers can safely assume that the link layer is completely reliable. Without WiFi interference \gls{prr} was about 99.97\%, which means that there were few retransmissions. With all the channels employed and with WiFi interference, the \gls{prr} reduced to 80.46\%. Since \gls{ble} does not use any back-off mechanism this means that 80\% of the transmission opportunities were successful. Compared to this only 37\% of transmission slots were used in 802.15.4 and out of that the \gls{prr} was 79\%.  The successful usage of transmission slots is higher in BLE because of the frequency hopping used, which ensures that interference in one frequency range only effects the communication happening over the channels in that frequency range. The other data channels can still keep the communication flow intact. This shows that the frequency hopping when used over the complete channel map helps in sustaining the communication when there is external interference. When only the WiFi free channels were employed, there was no influence of the WiFi interference on \gls{prr}, which was 99.79\%. This shows that when a master device has the capability of detecting external interference, it can adapt the frequency hopping channels so that there is negligible effect on the communication. Note that \gls{afh} can only help negate narrow band interference in the 2.4 GHz \gls{ism} band.
+
+\vspace{7pt}
+\noindent\textbf{Results and Comparison}
+
+\begin{easylist}[itemize]
+& \gls{cca} operation in 802.15.4 has greater efficiency in case of low external interference (99\% \gls{prr}) as compared to high external interference  (79\% \gls{prr}).
+& When communicating in a channel with interference and with \gls{cca} disabled, the \gls{prr} is around 71\%. Comparing with the 37\% transmission slot usage with \gls{cca} enabled this shows that firstly the \gls{cca} in 802.15.4 is backing-off aggressively and secondly the WiFi is also backing-off in case of heavy 802.15.4 traffic.
+& The acknowledgment scheme of BLE does result in 100\% \gls{pdr} for the layers above the link layer in all cases. The \gls{prr} with BLE is greater than 99\% when there was no external interference and when WiFi free channel map was used. 80\% \gls{prr} was achieved when all the channel map was used with external interference, which shows that narrow band interference affects only a small portion of the communication.
+& Error detection and retransmission scheme is present in 802.15.4 MAC layers such as ContikiMAC which will result in the \gls{pdr} being higher than the \gls{prr} unlike in this experiment.
+& There is no back-off mechanism in BLE as compared to 802.15.4 which can result in additional interference in case interference is present.
+& BLE's frequency hopping reduces the effect of narrow band interference on communication and when \gls{afh} is used it makes BLE impervious to narrow band interference. A mechanism like this isn't present in Null-RDC or ContikiMAC.
+\end{easylist}
+
+\subsection{Energy Consumption}
+For a clearer representation of the graph, the y-axis in figure \ref{fig:HT-ec} is limited to 50\%. The break in the graph shows when Tmote-Sky uses \textasciitilde100\% of radio duty cycle. In all the tests with BLE the source node was the slave device sending the notifications, while the destination node was the master device receiving them.
+
+There was no easy way of accessing the low level information of BLE \gls{rdc} on an Android device, so the energy consumption of these devices is not plotted. Moreover the energy consumption of such multi-purpose master device is less important than a single purpose slave device running on a meager battery.
+
+\begin{figure}[tb]
+\includegraphics[width=\textwidth]{HT-ec-new}
+\caption{Comparison of energy consumption as \gls{rdc} for different tests in \gls{ht} test suite}
+\label{fig:HT-ec}
+\end{figure}
+
 As seen in figure \ref{fig:HT-ec}, the radio of Tmote-Sky nodes is used nearly 100\% the time in all the test cases of the \gls{ht} test suite. This shows that in 802.15.4 the data rate can be maximized, by choosing an appropriate \gls{rdc} layer like Null-RDC, although at the expense of energy consumption. 
 
 When the test cases where the communication happened between PCA10000 node, the source node had \gls{rdc} between 25.5\% and 26.5\%. The destination nodes had \gls{rdc} between 27.5\% and 29\%. From this we can see that when streaming data every connection interval, the energy consumption of the master and slave is similar, with the master node being a few percent higher. The energy consumption isn't affected by the presence of external interference in this case of the stack supporting one packet per connection event. This is because the radio must switch on anyway in each connection event to detect if the communication is successful. In case multiple packets per connection interval is supported, the energy consumption for streaming of data with external interference could be lower as the connection event ends prematurely. This could not be tested with the existing setup.
 
 In case of communication with the Android devices, the source nodes had \gls{rdc} of 44\% to 45\%. This is higher because multiple packets were communicated per connection interval, which also increased the data rate. This shows that when a master device can support communication of greater number packets per connection event, both the data rate and energy consumption increases.
 
+\vspace{7pt}
+\noindent\textbf{Results and Comparison}
+
+\begin{easylist}[itemize]
+& In this experiment the 802.15.4 radio was on always as the aim was to achieve the maximum data rate.
+& When one packet was communicated per connection interval, the \gls{rdc} was between 26 and 29\%. This value increased to about 44\% when an average of 3 packets were communicated per connection event.
+& While 802.15.4 had higher data rate as compared to BLE the energy consumed by BLE was lower in the high-throughput test. 
+\end{easylist}
+
 \section{\texorpdfstring{\acrlong{rr}}{Request-Response} Test}
 The data acquired from the different test cases of the \gls{rr} test suite is represented graphically below. The legend used for naming the test cases is same as described in section \ref{6RRdesign}.
-\subsection{Graphical Representation of Data Acquired}
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{RR-l}
-\caption{Latency}
+
+\subsection{Latency}
+Figure \ref{fig:RR-l} shows the mean of the thousand measurements of latency in ms for different cases of the \gls{rr} test suite along with the standard deviation. 
+
+\begin{figure}[tb]
+\includegraphics[width=\textwidth]{RR-l-new}
+\caption{Comparison of latency for different tests in \gls{rr} test suite}
 \label{fig:RR-l}
 \end{figure}
 
-Figure \ref{fig:RR-l} shows the mean of the thousand measurement of latency in ms for different cases of the \gls{rr} test suite along with the standard deviation. 
+The latency measurement as seen from figure \ref{fig:RR-l} can vary in an order of magnitude among different tests. The least latency can be achieved using 802.15.4 when using Null-RDC, which is about 24 ms. This is because both the requester and responder have their radio always on. When using ContikiMAC, the average latency was about 90 ms, which can be attributed to the 125 ms interval with which the receiver wakes up. In this test case where the requester was assumed to be unconstrained in terms of power, its radio was always listening, if not transmitting. This means that when the constrained responder node was ready to send the reply, the requester node will be listening and get the reply immediately. This is the reason the average latency is less than the waking interval of the receiver. Note that in case both the nodes have a sleep and wake up routine, the latency would be greater than the waking interval. One disadvantage of various 802.15.4 based MAC standards is that there is no way of dynamically changing the link layer parameters. This is because there is no hierarchal master and slave concept to force particular link layer parameters.
 
-\begin{figure}[h]
-\includegraphics[width=\textwidth]{RR-ec}
-\caption{Energy Consumption}
+Based on the link layer configurations used for BLE, the latency varied from a minimum of about 14 ms to a maximum of about 750 ms. The provision in BLE's link layer for changing these configurations while in a connection is an advantage since the latency can be adapted according to the requirement dynamically. The configuration of the slave latency value determines if there is any difference in the latency experienced based on whether the communication happens with a read request or an indication. With slave latency as zero, the latency of the read and indication case is almost same, with the average latency being around 14 ms with 7.5 ms connection interval and 190 ms with a connection interval of 125 ms. With a non-zero slave latency value, the read-request from the master node (client in \gls{att}) has high latency since the slave node (server in \gls{att}) will not react to the master at every connection interval as it is sleeping. With a slave latency value of 65, the master node can read a value from the slave node with a latency of about 736 ms, even with a connection interval of 7.5 ms. Similarly, with a slave latency of 3 and connection interval of 125 ms, the master will read a value from the slave with a latency of about 752 ms. When using indication to communicate data to a master, the latency can be low since the slave can decide to respond to the master whenever the necessity arises. With a 7.5 ms connection interval and slave latency of 65, the latency is about 15 ms, which is similar to the latency experience with zero slave latency. Similarly, an indication providing the master with data experiences a latency of 187 ms with a connection interval of 125 ms and slave latency of 3. This is almost equal to the latency experienced with zero slave latency. This shows that use of indication does not effect the latency experienced to send data to a master node in a connection with non-zero slave latency.
+
+With slave latency as zero, it can be seen that for an application layer the latency experienced is between one and two times the connection interval, the best case being close to one connection interval. This shows that a read-request communication happening in the same connection event is not possible. The read request in sent in one connection event and the requested data is sent back in the next connection event. This is because the 150 \si{\micro \second} inter frame time in a connection event is not enough for the resource constrained \glspl{mcu} respond back with the requested data.
+
+\vspace{7pt}
+\noindent\textbf{Results and Comparison}
+
+\begin{easylist}[itemize]
+& Null-RDC with radio on always achieved least latency for 802.15.4 for a read-response operation with a mean delay of 24 ms. When the more practical ContikiMAC layer was used the mean delay increased to 90 ms, although with lower power consumption in the responder node.
+& The latency measurement with BLE nodes ranged from 14 ms to 750 ms depending on the configuration. One directly contributing factor is the connection interval used. With a greater connection interval the latency also increased.
+& By using non-zero slave latency the slave node's energy consumption decreased and the effect on latency measurement was dependent on which node initiated the request for data. When the master node initiated the request for data the latency increased but when the slave node initiated the communication the latency was as in the case with zero slave latency. 
+& Comparing the latency achieved when using Null-RDC with the test case with connection interval of 7.5 ms in BLE we can see that BLE has lower latency (14 ms vs 24 ms).
+& When comparing the latency achieved with ContikiMAC with the test case with 125 ms connection interval we can see that ContikiMAC has lower latency (90 ms vs 190 ms).
+& In BLE the latency depends on the connection interval and slave latency parameters of the tightly synchronized connection between the nodes. In case of Null-RDC and ContikiMAC, the latency depends on the wake-up interval of each of the node in this loosely synchronized connection.
+
+\end{easylist}
+
+\subsection{Energy Consumption}
+Figure \ref{fig:RR-ec} shows the energy consumption of the nodes in terms of the percentage of time the radio was switched on for the different cases of the \gls{rr} test suite. Similar to the graph for the \gls{ht} tests, this graph is limited to 30\% for clearer representation, especially of in test cases with low duty cycle.
+
+\begin{figure}[tb]
+\includegraphics[width=\textwidth]{RR-ec-new}
+\caption{Comparison of energy consumption as \gls{rdc} for different tests in \gls{rr} test suite}
 \label{fig:RR-ec}
 \end{figure}
 
-Figure \ref{fig:RR-ec} shows the energy consumption of the nodes in terms of the percentage of time the radio was switched on for the different cases of the \gls{rr} test suite. Similar to the graph for the \gls{ht} tests, this graph is limited to 30\% for clearer representation, especially of in test cases with low duty cycle.
-
 The requester and responder nodes are identified as explained when describing the \gls{rr} tests in section \ref{6RRdesign}. Note that when indication packets are used, the slave becomes the requester and the master the responder.
+The energy consumption of both the 802.15.4 nodes is 100\% in terms of \gls{rdc} in case of Null-RDC. This is as expected because of the nature of Null-RDC implementation. In case of ContikiMAC, the requester node has 100\% \gls{rdc} while the responder has 1.3\%. The requester node has this high energy consumption because it is configured so. This in accordance with the assumption of one node being unconstrained in terms of power. Usually the root node of a 802.15.4 network has access to a wall socket and gathers data from the other nodes. It is the responder node which is battery operated and has to conserve energy. 
 
-\begin{table}[h]
+In case of BLE, the energy consumption of the nodes which have to switch on their radio every 7.5 ms have the highest \gls{rdc} at around 21-22\%. This includes both the requester and responder when the slave latency is zero and connection interval is 7.5 ms. In case the slave latency of 65 is used, the master has \gls{rdc} of around 21\%, while the slave has a \gls{rdc} of only 0.6\%. This is since the slave  can choose only to respond to the master every 66th connection interval and sleep the rest of the time, thereby creating an asymmetric architecture. Similarly when the connection interval is 125 ms and slave latency is zero, both master and slave node have 
+approximately equal \gls{rdc} of 1.32 to 1.37\%. By using a slave latency of 3 and the same connection interval, the slave nodes were able to sleep for longer duration leading to the reduction of \gls{rdc} to around 0.6\%.
+
+\vspace{7pt}
+\noindent\textbf{Results and Comparison}
+
+\begin{easylist}[itemize]
+& ContikiMAC had \gls{rdc} of 1.3\% for the request-response experiment, same as BLE with 125 ms connection interval without slave latency.
+& Null-RDC always had its radio on while the test cases with 7.5 ms connection interval without slave latency had a \gls{rdc} of about 22\%.
+& Use of slave latency decreases the energy consumption of the slave node.
+\end{easylist}
+
+\subsection{Latency vs Energy Consumption}
+
+\begin{table}[b]
 \centering
 \setlength{\extrarowheight}{1.5pt}
 \begin{tabular}[c]{|l|l|l|l|}
 \hline
 Latency (ms) & Master RDC (\%) & Slave RDC (\%) & Test case \\ \hline
 14.24 & 22.09 & 21.44 & 7.5\_0\_r \\ \hline
-13.9 & 22.07 & 21.43 & 7.5\_0\_i \\ \hline
+13.90 & 22.07 & 21.43 & 7.5\_0\_i \\ \hline
 735.79 & 21.79 & 0.6 & 7.5\_65\_r \\ \hline
 15.58 & 21.5 & 0.54 & 7.5\_65\_i \\ \hline
 187.38 & 1.37 & 1.32 & 125\_0\_r \\ \hline
 195.06 & 1.37 & 1.32 & 125\_0\_i \\ \hline
 752.22 & 1.37 & 0.54 & 125\_3\_r \\ \hline
-186.96 & 1.32 & 0.46 & 125\_3\_i \\ \hline
+186.96 & 1.32 & 0.46 & 125\_3\_i \\ \hline  \hline
+89.90 & Requester RDC : 100\% & Responder RDC : 1.3\% & ContikiMAC \\ \hline
 \end{tabular}
-\caption{Latency in terms of master and slave \gls{rdc}}
+\caption{Latency in terms of \gls{rdc} for BLE and ContikiMAC test cases}
 \label{tbl:latVsEnergy}
 \end{table}
 
 Table \ref{tbl:latVsEnergy} shows the latency measurement from the data acquired in the \gls{rr} test in terms of BLE master and slave \gls{rdc} in different test cases. With this data the graph in figure \ref{fig:RR-l-ec} was plotted to show the various possible latency values for different master and slave's energy consumption. Note that this table and graph includes data from the only BLE test cases as it is made to evaluate the impact of the various configurations on latency in terms of energy consumption.
 
-\begin{figure}[h]
+\begin{figure}[tb]
 \includegraphics[width=\textwidth]{RR-l-ec}
-\caption{Energy Consumption vs Latency}
+\caption{Visualization of `energy consumption vs
+latency' from the data in table \ref{tbl:latVsEnergy}}
 \label{fig:RR-l-ec}
 \end{figure}
-
-\subsection{Analysis}
-\paragraph{Latency}
-The latency measurement as seen from figure \ref{fig:RR-l} can vary in the order of magnitude among different tests. The least latency can be achieved using 802.15.4 when using Null-RDC, which is about 24 ms.  When using ContikiMAC, the average latency was about 90 ms, which can be attributed to the 125 ms interval with which the receiver wakes up. In this test case where the requester was assumed to be unconstrained in terms of power, it's radio was always listening, if not transmitting. This means that when the constrained responder node when ready to send the reply, the requester node will be listening and get the reply immediately. This is the reason the average latency is less than the waking interval of the receiver. Note that in case both the nodes have a sleep and wake up routine, the latency would be greater than the waking interval. One disadvantage of various 802.15.4 based MAC standards is that there is no way of dynamically changing the link layer parameters. This is because there is no hierarchal master and slave concept to force particular link layer parameters.
-
-Based on the link layer configurations used for BLE, the latency varied from a minimum of about 14 ms to a maximum of about 750 ms. The provision in BLE's link layer for changing these configurations while in a connection is an advantage since the latency can be adapted according to the requirement dynamically. The configuration of the slave latency value determines if there is any difference in the latency experienced based on whether the communication happens with a read request or an indication. With slave latency as zero, the latency of the read and indication case is almost same, with the average latency being around 14 ms with 7.5 ms connection interval and 190 ms with a connection interval of 125 ms. With a non-zero slave latency value, the read-request from the master node (client in \gls{att}) has high latency since the slave node (server at \gls{att})will not react to the master at every connection interval as it is sleeping. With a slave latency value of 65, the master node can read a value from the slave node with a latency of about 736 ms, even with a connection interval of 7.5 ms. Similarly, with a slave latency of 3 and connection interval of 125 ms, the master will read a value from the slave with a latency of about 752 ms. When using indication to communicate data to a master, the latency can be low since the slave can decide to respond to the master when necessary communicate. With a 7.5 ms connection interval and slave latency of 65, the latency is about 15 ms, which is similar to the latency experience with zero slave latency. Similarly, an indication providing the master with data experiences a latency of 187 ms with a connection interval of 125 ms and slave latency of 3. This is almost equal to the latency experienced with zero slave latency. This shows that use of indication does not effect the latency experienced to send data to a master node in a connection with non-zero slave latency.
-
-With slave latency as zero, it can be seen that for an application layer the latency experienced is between one and two times the connection interval, the best case being close to one connection interval. This shows that a read-request communication happening in the same connection event is not possible. The read request in sent in one connection event and the requested data is sent back in the next connection event. This is because the 150 \si{\micro \second} inter frame time in a connection event is not enough for the resource constrained \glspl{mcu} respond back with the requested data.
-
-\paragraph{Energy Consumption}
-The energy consumption of both the 802.15.4 nodes is 100\% in terms of \gls{rdc} in case of Null-RDC. This is as expected because of the nature of Null-RDC implementation. In case of ContikiMAC, the requester node has 100\% \gls{rdc} while the responder has 1.3\%. The requester node has this high energy consumption because it is configured so. This in accordance with the assumption of one node being unconstrained in terms of power. Usually the root node of a 802.15.4 network has access to a wall socket and gathers data from the other nodes. It is the responder node which is battery operated and has to conserve energy. 
-
-In case of BLE, the energy consumption of the nodes which have to switch on their radio every 7.5 ms have the highest \gls{rdc} at around 21-22\%. This includes both the requester and responder when the slave latency is zero and connection interval is 7.5 ms. In case the slave latency of 65 is used, the master has \gls{rdc} of around 21\%, while the slave has a \gls{rdc} of only 0.6\%. This is since the slave  can choose only to respond to the master every 66th connection interval and sleep the rest of the time, thereby creating an asymmetric architecture. Similarly when the connection interval is 125 ms and slave latency is zero, both master and slave node have 
-approximately equal \gls{rdc} of 1.32 to 1.37\%. By using a slave latency of 3 and the same connection interval, the slave nodes were able to sleep for longer duration leading to the reduction of \gls{rdc} to around 0.6\%.
-
-\paragraph{Latency vs Energy Consumption}
 
 Figure \ref{fig:RR-l-ec} clearly showcases the flexibility available in BLE in configuring the link layer dynamically. The parameter that allows that is slave latency. A symmetric connection is created when the slave latency is zero, causing slave to respond to the master in every connection interval. This scenario will result in the latency for a read response from either the master or the slave being almost equal. Also the \gls{rdc} of the master and slave device will be similar. In this case there is a direct relation between the latency and connection interval, which means that if lower latency is required then more energy is consumed. This scenario is useful when the latency requirement for any communication started by the master is greater than that of the slave. An example for this scenario is a \gls{hid} that also provides feedback to the user, like as a game controller as a slave communicating with a gaming console as master. In this case there needs to be low latency for both the commands sent from the controller to the console, as well for the vibration feedback sent to the controller from the console. The test case that represent this in figure \ref{fig:RR-l-ec} are the ones with 7.5 ms connection interval and zero slave latency to achieve near instantaneous response.
 
 By using a non-zero slave latency, the slave node can be sleepy by not having the responsibility to respond in every connection event. As figure \ref{fig:RR-l-ec} shows, this asymmetric connection creates a situation where the communication started from the slave has a latency as if the slave latency parameter was zero, since the master is communicating in all connection events. On the other hand, communication started by the master can experience high latency, since it has to wait till the master responds. This can be seen in the case \texttt{7.5\_65\_i} where the slave can communicate with 14 ms latency with the master while having a \gls{rdc} of only 0.54\%, although the master's radio needs to be on for about 21.5\% of the time. This scenario is useful with \gls{hid} devices such as keyboards where there is usually no feedback to be the sleepy slave devices. This will allow them to have low latency to communicate the keys pressed while allowing them to sleep when the keyboard isn't used, hence extending battery life.
 
+\vspace{7pt}
+\noindent\textbf{Results and Comparison}
+
+\begin{easylist}[itemize]
+& In cases where low latency is required BLE had much better performance than 802.15.4's Null-RDC both in terms of latency (14 ms vs 24 ms) and energy consumption (22\% vs 100\%).
+& Comparing ContikiMAC with the cases with 125 ms connection interval we can see that while BLE needs radio on for lesser time the latency is larger than 802.15.4.
+& Use cases where low latency is required for data to communicated from the master to slave, the slave latency value used must be close to zero. In other cases large slave latency values can be used. The provision for dynamic update of the link layer parameters of a BLE connection is useful in optimizing these parameters for different scenarios.
+& This can be illustrated cases with optimal and non-optimal configurations in BLE. 7.6\_65\_i is an optimal configuration where the slave node is requesting for data resulting in latency of 16 ms. 7.6\_65\_r is an non-optimal configuration where the master node is requesting for data resulting in latency of 736 ms. Both these cases had \gls{rdc} of 22\% and 0.6\% in master and slave node respectively.
+\end{easylist}
+
 \section{Evaluation with existing research} \label{7Eval}
 \paragraph{Data Rate}
-Considering the research that looked into the data rate achievable, the data rate achieved in this project falls well within the maximum data rate achievable\cite{Gomez2011} of 236.7 kbps. The data rate in experiments have looked at the data rate from the link layer\cite{Mikhaylov2013} or application layer\cite{Gomez2012}\cite{Mackensen2012}\cite{Kindt2014}, all of them by sending notification packets. To equalize the result with this experiment, the data rate is compared in terms of packets per second and presented in table \ref{tbl:dataRate}.
+Considering the research that looked into the data rate achievable, the data rate achieved in this project falls well within the maximum data rate achievable\cite{Gomez2011} of 236.7 kbps. The data rate in experiments have looked at the data rate from the link layer\cite{Mikhaylov2013} or application layer\cite{Gomez2012}\cite{Mackensen2012}\cite{Kindt2014}, all of them by sending notification packets. To equalize the result with this experiment, the data rate is compared in terms of packets per second and is presented in table \ref{tbl:dataRate}.
 
 \begin{table}[h]
 \centering
@@ -150,7 +217,7 @@ Considering the research that looked into the data rate achievable, the data rat
     \cite{Kindt2014} & 637.5 & Bluegiga BLE112 to BLE112 & Bluegiga stack \cite{MikkoSavolainen} \\ \hline
     \cite{Mikhaylov2013} & 567.6 & CC2540 to CC2540 (dev board) & TI BLE Stack v1.21 \\ \hline
     \end{tabular}
-    \caption{Comparison of \gls{ble} data rate achieved}
+    \caption{Comparison of \gls{ble} data rate achieved with available literature}
     \vspace{-10pt}
     \label{tbl:dataRate}
 \end{table}

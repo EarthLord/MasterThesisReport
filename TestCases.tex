@@ -88,6 +88,7 @@ To verify that the interference was created and to know which frequency range wa
 %\includegraphics[width=\textwidth]{layout}
 \caption{Test setup for \gls{ht} test cases}
 \label{fig:layout}
+\vspace{-10pt}
 \end{figure}
 
 \begin{wrapfigure}{r}{0.53\textwidth}
@@ -104,16 +105,17 @@ To verify that the interference was created and to know which frequency range wa
 
 The number of packets sent and received at the \gls{att} layer in the two nodes are logged to calculate the \gls{pdr}. Also by logging the number of times the radio was switched on, the number of packets actually transmitted can be inferred, by which the \gls{prr} can be calculated.
 
-\gls{ble}  specification tells that a master device must change the channel map of a connection according the 2.4 GHz environment so as to not face any interference. This is the \emph{adaptive} part of \gls{afh}, which requires the master device to have information about the activity in the frequency spectrum used by \gls{ble} . S120 SoftDevice used for the central \gls{ble}  stack by default uses the complete channel map and has an option for configuring it manually, but the channel map does not change automatically based on external interference. So in the tests without WiFi interference, the channel map consisted of all the channels. When WiFi interference was introduced, one test had the complete channel map and another had a \emph{WiFi free} map of channels (0 to 6) and (20 to 36), which is 2404 to 2416 MHz and 2446 to 2478 MHz. This map was based on the interference noticed in figure \ref{fig:Intf}.
+\gls{ble}  specification tells that a master device must change the channel map of a connection according the 2.4 GHz environment so as to not face any interference. This is the \emph{adaptive} part of \gls{afh}, which requires the master device to have information about the activity in the frequency spectrum used by \gls{ble} . S120 SoftDevice used for the central \gls{ble}  stack by default uses the complete channel map and has an option for configuring it manually, but the channel map does not change automatically based on external interference. So in the tests without WiFi interference, the channel map consisted of all the channels. When WiFi interference was introduced, one test had the complete channel map and another had a \emph{WiFi free} map of channels (0 to 6) and (20 to 36), which is 2404 to 2416 MHz and 2446 to 2478 MHz. This map was based on the interference noticed in figure \ref{fig:Intf}. There was one test to measure data rate with an Android device as the receiving master node.
 
 \paragraph{802.15.4} In case of 802.15.4, Null-RDC layer was modified to send packets with maximum payload size as soon as possible. One node is configured as transmitter and the other as receiver, with the data rate measured at the receiver. A payload of 110 byte was necessary for the link layer to achieve the maximum 127 byte packet size.
 
-Three tests were designed to measure the data rate achievable with 802.15.4. In the first test without WiFi interference, channel 26 (2480 MHz) of 802.15.4 was used. In the second test with WiFi interference, channel 15 (2425 MHz) of 802.15.4 was used. In the third test, the \gls{cca} was disabled, so that the transmitting node ignores the external environment.
+Four tests were designed to measure the data rate achievable with 802.15.4. In two tests \gls{cca} was disabled to measure the effect of \gls{cca} on data rate. In one test there was interfering WiFi in the channel used and the other test didn't have any interference. In the third test, the channel used was 26 (2480 MHz), which does not interfere with the WiFi interference present. In the last test, the channel used was 15 (2425 MHz), which does interfere with the WiFi interference present. In the last two tests \gls{cca} was enabled. 
 
 The various test cases conducted in the \gls{ht} test suite are 
 \vspace{-5 pt}
 \begin{multicols}{2}
 \begin{itemize} \itemsep1pt \parskip0pt \parsep0pt
+\item sky\_sky\_Y\_!CCA
 \item sky\_sky\_N\_!CCA
 \item sky\_sky\_Y\_26
 \item sky\_sky\_Y\_15
@@ -121,7 +123,6 @@ The various test cases conducted in the \gls{ht} test suite are
 \item nrf\_nrf\_Y\_all
 \item nrf\_nrf\_Y\_!Wifi
 \item nrf\_N4\_N
-\item nrf\_N7\_N
 \end{itemize}
 \end{multicols}
 
@@ -131,8 +132,8 @@ The legend of the naming of the test cases is
 \hspace{12pt}\texttt{\{source\}\_\{destination\}\_\{presence of WiFi interference(Y/N)\}\_\{other conditions\}}
 
 Where,
-sky = Tmote-Sky;	nrf = nrf51822;	N4 = Nexus4; 		N7 = Nexus7;
-!CCA = CCA disabled; 26,15 = channel used; all = All 40 \gls{ble}  channels;	!WiFi = WiFi free channels in \gls{ble} 
+sky = Tmote-Sky;	nrf = nrf51822;	N4 = Nexus4; 
+!CCA = CCA disabled; 26,15 = channel used; all = All 40 \gls{ble}  channels;	!WiFi = WiFi free channels in \gls{ble}.
 
 
 % % % % % % % % % % % % SECTION % % % % % % % % % % % % 
@@ -141,9 +142,11 @@ The \gls{rr} test aims to determine the latency for reading data from another no
 
 \begin{figure}[h]
 \centering
+\vspace{-5pt}
 \includegraphics[scale=1.1]{RRTest}
 \caption{Illustration of the RR Test operation}
 \label{fig:RRTest}
+\vspace{-5pt}
 \end{figure}
 
 In all the tests performed, there is a \emph{requester} node and a \emph{responder} node. As explained in the latency paragraph in section \ref{6Metrics}, the latency is measured in the requester node. It is defined as the time from when the requester node \emph{needs} data from a responder to the time the responder node sends the requested data. This is better illustrated in the design of the test for both the protocols in figure \ref{fig:RRTest}. This figure shows the perspective of the requester node where the latency measurement takes place. A latency measurement is done in every 1.5 second period, repeated thousand times. The link layer is sent a `read-request' packet from its upper layer after a random time in the first 0.5 second slot of this 1.5 second period, represented by `\#' in figure \ref{fig:RRTest}. This randomization of the issuing of the read request (`\#' event) ensures that if there is any periodic communication between the nodes, the thousand measurements of latency will provide the range of values that can expected with a particular scenario along with the power consumption. In figure \ref{fig:RRTest}, the latency measurement is the difference of the time between the `\&' and `\#' events.
@@ -156,13 +159,13 @@ In case of \gls{ble} , the use case for the latency test is a central device whi
 	\vspace{10 pt}
 	\begin{subfigure}[t]{0.49\linewidth}
 		\centering
-		\includegraphics{RR_Read}
+		\includegraphics[scale=1.06]{RR_Read}
 		\subcaption{Read-response test case}
 		\label{fig:RR_Read}
 	\end{subfigure}
 	\begin{subfigure}[t]{0.49\linewidth}
 		\centering
-		\includegraphics{RR_Indicate}
+		\includegraphics[scale=1.06]{RR_Indicate}
 		\subcaption{Indicate-acknowledge test case}
 		\label{fig:RR_Indicate}
 	\end{subfigure}
@@ -195,6 +198,6 @@ In case of \gls{ble} , the use case for the latency test is a central device whi
 In all the tests, the complete payload of 20 bytes for the \gls{att} layer was used, which corresponds to 27 byte in the link layer. Two connection intervals of 7.5 ms and 125 ms were used for the tests. For each 'connection interval', tests were conducted with two different `slave latency' parameter. The table \ref{tbl:RRTestsBLE} shows these values and the configuration for all the test cases in \gls{rr} test using \gls{ble}. The intent here is to find the effect of the link layer configuration on the latency. By using different slave latency values, the energy consumption of the asymmetric connecting devices can be evaluated. The value of these configurations is decided such that the worst case theoretical latency in a error free environment is less than one second. This is the reason for choosing the `supervision timeout' of 1.5 s.
 
 \paragraph{802.15.4}
-In the case of 802.15.4, one node is configured to send unicast messages and another is configured to receive these and send a response. The latency was measured using both ContikiMAC and Null-RDC. ContikiMAC uses the default 125 ms wake up interval for the receiver. For payload size is same as in the test cases with \gls{ble}  for comparing the latency for the same payload. The \gls{ble} test cases are designed such that the 7.5 \si{\milli\second} connection interval tests can compare with Null-RDC test of 802.15.4 while the 125 \si{\milli\second} connection interval tests can compare with the ContikiMAC test of 802.15.4.
+In the case of 802.15.4, one node is configured to send unicast messages and another is configured to receive these and send a response. The latency was measured using both ContikiMAC and Null-RDC. ContikiMAC uses the default 125 ms wake up interval for the receiver. The phase lock mechanism of ContikiMAC is disabled so that the latency decreases when communicating with an always on node i.e. the unconstrained node. The payload size is same as in the test cases with \gls{ble} for comparing the latency in the same scenario. The \gls{ble} test cases are designed such that the 7.5 \si{\milli\second} connection interval tests can compare with Null-RDC test of 802.15.4 while the 125 \si{\milli\second} connection interval tests can compare with the ContikiMAC test of 802.15.4.
 
 The sending of the unicast packet and getting its response followed the same thousand iterations of 1.5 s intervals containing a 0.5 s period where the packet was randomly requested to be sent. The latency measurement happens as illustrated by figure \ref{fig:LatencyDef} used to define the term latency in section \ref{6Metrics}.
