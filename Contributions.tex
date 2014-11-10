@@ -14,7 +14,7 @@ During the exploration phase of the thesis, the plan was to implement the requir
 
 \section[Firmware for an Alarm Device]{Firmware for an Alarm Device\footnote{Available at \url{https://github.com/EarthLord/contiki/tree/master/examples/PCA10000-nrf/Pillar}}}
 
-A demonstration application was developed to test the port of Contiki on the nrf51822 platform. This application consisted of an alarm device controlled by a mobile application. The PCA10000 platform was used for this development too. The operations of setting of the next alarm time, canceling the alarm and also silencing the alarm can be done from a mobile application. The \emph{Master Control Panel} application by Nordic Semiconductor was used to test all the functionality.
+A demonstration application was developed to test the port of Contiki on the nrf51822 platform. This application consisted of an alarm device controlled by a mobile application. The PCA10000 platform was used for this development too. The operations of setting of the next alarm time, canceling the alarm and  silencing the alarm can be done from a mobile application. The \emph{Master Control Panel} application by Nordic Semiconductor was used to test all the functionality.
 
 The functioning of the alarm device with the mobile \emph{App} controlling it from a user's perspective can be seen in the state diagram in figure \ref{fig:AlarmAppDev}
 
@@ -60,4 +60,4 @@ To achieve this a custom \emph{service} was created to contain two custom \emph{
 \label{fig:AlarmChar}
 \end{figure}
 
-Apart from these characteristics, Contiki etimers and Contiki serial-line module from the Contiki port to nrf51822 are used for this alarm. Since the PCA10000 platform is used for this alarm device's development, the `ringing' of the alarm is done by flashing the \gls{led} on board and `silencing' the alarm is done by sending a string through the serial port. The state diagram in figure \ref{fig:AlarmChar} shows the implementation done for this alarm device. Note that (§) and (¶) represent the characteristics described above.
+Apart from these characteristics, Contiki etimers and Contiki serial-line module from the Contiki port to nrf51822 were used for this alarm. Since the PCA10000 platform was used for this alarm device's development, the `ringing' of the alarm was done by flashing the \gls{led} on board and `silencing' the alarm was done by sending a string through the serial port. The state diagram in figure \ref{fig:AlarmChar} shows the implementation done for this alarm device. Note that (§) and (¶) represent the characteristics described above.

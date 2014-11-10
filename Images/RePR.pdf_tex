@@ -36,7 +36,7 @@
   }%
   \providecommand\rotatebox[2]{#2}%
   \ifx\svgwidth\undefined%
-    \setlength{\unitlength}{419.01708984bp}%
+    \setlength{\unitlength}{419.95927734bp}%
     \ifx\svgscale\undefined%
       \relax%
     \else%
@@ -48,29 +48,29 @@
   \global\let\svgwidth\undefined%
   \global\let\svgscale\undefined%
   \makeatother%
-  \begin{picture}(1,0.80569506)%
+  \begin{picture}(1,0.80388747)%
     \put(0,0){\includegraphics[width=\unitlength]{RePR.pdf}}%
-    \put(0.43810654,0.662238){\makebox(0,0)[lb]{\smash{Choose a BLE hardware platform}}}%
-    \put(0.2620826,0.61265778){\makebox(0,0)[lb]{\smash{— Define the criteria that the platform must satisfy}}}%
-    \put(0.2620826,0.58598812){\makebox(0,0)[lb]{\smash{— Make an exhaustive list of available platforms to choose one}}}%
-    \put(0.4701291,0.49995345){\makebox(0,0)[lb]{\smash{Port Contiki to the chosen platform}}}%
-    \put(0.2620826,0.45037322){\makebox(0,0)[lb]{\smash{— Develop the peripheral drivers as required by Contiki}}}%
-    \put(0.2620826,0.42370357){\makebox(0,0)[lb]{\smash{— Integrate these drivers in the Contiki project structure}}}%
-    \put(0.2620826,0.3970341){\makebox(0,0)[lb]{\smash{— Evaluate the port with an example}}}%
-    \put(0.37568923,0.30903045){\makebox(0,0)[lb]{\smash{Compare BLE and 802.15.4 at the link layer}}}%
-    \put(0.2620826,0.25945025){\makebox(0,0)[lb]{\smash{— Define the performance metrics evaluated}}}%
-    \put(0.2620826,0.23278057){\makebox(0,0)[lb]{\smash{— Develop the test suite}}}%
-    \put(0.2620826,0.20611113){\makebox(0,0)[lb]{\smash{— Perform the tests to collect the data}}}%
-    \put(0.32238372,0.11810745){\makebox(0,0)[lb]{\smash{Find pros, cons and applications of BLE and 802.15.4}}}%
-    \put(0.2620826,0.06852725){\makebox(0,0)[lb]{\smash{— Summarize the data acquired with graphical representations}}}%
-    \put(0.2620826,0.04185757){\makebox(0,0)[lb]{\smash{— Draw conclusions }}}%
-    \put(0.46690156,0.75385126){\makebox(0,0)[lb]{\smash{Study of the state of the art}}}%
-    \put(0.06056165,0.71950898){\makebox(0,0)[lb]{\smash{Literature}}}%
-    \put(0.07551857,0.69283952){\makebox(0,0)[lb]{\smash{Review}}}%
-    \put(0.0875028,0.25664729){\makebox(0,0)[lb]{\smash{Testing}}}%
-    \put(-0.00224857,0.40577838){\makebox(0,0)[lb]{\smash{Implementation}}}%
-    \put(0.09245515,0.54162125){\makebox(0,0)[lb]{\smash{Design}}}%
-    \put(0.09034985,0.09685794){\makebox(0,0)[lb]{\smash{Analysis}}}%
-    \put(0.0890634,0.07018844){\makebox(0,0)[lb]{\smash{\& Result}}}%
+    \put(0.43936716,0.66075225){\makebox(0,0)[lb]{\smash{Choose a BLE hardware platform}}}%
+    \put(0.26373814,0.61128327){\makebox(0,0)[lb]{\smash{— Define the criteria that the platform must satisfy}}}%
+    \put(0.26373814,0.58467345){\makebox(0,0)[lb]{\smash{— Make an exhaustive list of available platforms to choose one}}}%
+    \put(0.47131787,0.49883179){\makebox(0,0)[lb]{\smash{Port Contiki to the chosen platform}}}%
+    \put(0.26373814,0.4493628){\makebox(0,0)[lb]{\smash{— Develop the peripheral drivers as required by Contiki}}}%
+    \put(0.26373814,0.42275299){\makebox(0,0)[lb]{\smash{— Integrate these drivers in the Contiki project structure}}}%
+    \put(0.26373814,0.39614335){\makebox(0,0)[lb]{\smash{— Evaluate the port with an example}}}%
+    \put(0.37708989,0.30833713){\makebox(0,0)[lb]{\smash{Compare BLE and 802.15.4 at the link layer}}}%
+    \put(0.26373814,0.25886816){\makebox(0,0)[lb]{\smash{— Define the performance metrics evaluated}}}%
+    \put(0.26373814,0.23225832){\makebox(0,0)[lb]{\smash{— Develop the test suite}}}%
+    \put(0.26373814,0.20564872){\makebox(0,0)[lb]{\smash{— Perform the tests to collect the data}}}%
+    \put(0.32390397,0.11784247){\makebox(0,0)[lb]{\smash{Find pros, cons and applications of BLE and 802.15.4}}}%
+    \put(0.26373814,0.0683735){\makebox(0,0)[lb]{\smash{— Summarize the data acquired with graphical representations}}}%
+    \put(0.26373814,0.04176366){\makebox(0,0)[lb]{\smash{— Draw conclusions }}}%
+    \put(0.46809758,0.75215997){\makebox(0,0)[lb]{\smash{Study of the state of the art}}}%
+    \put(0.0626693,0.71789475){\makebox(0,0)[lb]{\smash{Literature}}}%
+    \put(0.07759266,0.69128512){\makebox(0,0)[lb]{\smash{Review}}}%
+    \put(0.08955001,0.25607149){\makebox(0,0)[lb]{\smash{Testing}}}%
+    \put(0,0.4086779){\makebox(0,0)[lb]{\smash{ Implementation}}}%
+    \put(0.09449125,0.54040611){\makebox(0,0)[lb]{\smash{Design}}}%
+    \put(0.09239067,0.09664064){\makebox(0,0)[lb]{\smash{Analysis}}}%
+    \put(0.09110711,0.07003097){\makebox(0,0)[lb]{\smash{\& Result}}}%
   \end{picture}%
 \endgroup%
