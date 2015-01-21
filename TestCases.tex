@@ -12,15 +12,15 @@ In this section the four key performance metrics measured for both the wireless 
 Data rate at the link layer is defined as the maximum amount of data transmitted per second for a protocol with packets containing the maximum allowed payload for the link layer. The data rate is expressed as both kilobits per second and packets per second.
 
 \paragraph{Latency}  \label{6para:latency}
-\begin{wrapfigure}{r}{0.52\textwidth}
-	\vspace{-10pt}
+\begin{figure}
+%	\vspace{-10pt}
 	\centering
 	\capstart
 	\includegraphics{LatencyDef}
 	\caption{Illustration of latency measurement}
-	\vspace{-10pt}
+%	\vspace{-10pt}
 	\label{fig:LatencyDef}
-\end{wrapfigure}
+\end{figure}
 In this test the aim is to measure the effect of the link layer architecture and configuration on the latency observed by an layer on top when requesting data from another node. Latency is defined as the time from which the layer(s) above the link layer provides it the packet which asks for data from another node to the time the data from the other node is received. This is better understood by a generic illustration in figure \ref{fig:LatencyDef}.
 
 \paragraph{Reliability}
@@ -91,15 +91,15 @@ To verify that the interference was created and to know which frequency range wa
 \vspace{-10pt}
 \end{figure}
 
-\begin{wrapfigure}{r}{0.53\textwidth}
-	\vspace{-20pt}
+\begin{figure}
+	\vspace{-10pt}
 	\centering
 	\capstart
 	\includegraphics{DataRateSetup.pdf}
 	\caption{Setup to measure data rate with \gls{ble}}
     \label{fig:DataRateSetup}
-%   	\vspace{-15pt}
-\end{wrapfigure}
+   	\vspace{-10pt}
+\end{figure}
 
 \paragraph{\texorpdfstring{\gls{ble}}{BLE}} As shown in figure \ref{fig:DataRateSetup}, the data rate is measured by sending data from the server to the client using \emph{Notifications}, which are packets which are not acknowledged in the \gls{att} layer. Since the link layer is not accessible with the SoftDevice used, a 20 byte payload was sent at the \gls{gatt} layer as notification so that 27 byte data for the link layer's playload is achieved. The data rate is measured at the receiver i.e the Master device. 
 
